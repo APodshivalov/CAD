@@ -1,8 +1,8 @@
 .tab-pane {
-  -fx-tab-min-width:100px;
+  -fx-tab-min-width:40px;
   -fx-tab-max-width:100px;
-  -fx-tab-min-height:100px;
-  -fx-tab-max-height:100px;
+  -fx-tab-min-height:20px;
+  -fx-tab-max-height:40px;
 }
 
 .tab {
@@ -16,5 +16,11 @@
 .tab:selected {
     -fx-focus-color: transparent;
 	-fx-background-color: #7E8F7C;
-	
+}
+
+.toggle-button {
+    -fx-border-radius: 0 0 0 0;
+    -fx-focus-color: #3B3738;
+    -fx-faint-focus-color: #3B3738;
+    -fx-border-color: #3B3738;
 }

@@ -10,21 +10,32 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller">
    <tabs>
-       <Tab>
-           <graphic>
-               <ImageView fitHeight="57.0" fitWidth="57.0" opacity="0.94" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                      <Image url="@images/draw.png" />
-                  </image>
-               </ImageView>
-           </graphic>
+       <Tab closable="false" text="Модель">
           <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ToolBar prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <ToggleButton fx:id="drawMode" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEntredDraw" onMouseExited="#onMouseExitedDraw" text="ToggleButton" />
+                        <ToggleButton fx:id="reactionSupport" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEntredSupport" onMouseExited="#onMouseExitedSupport" text="ToggleButton" />
+                    </items>
+                  </ToolBar>
+                  <SplitPane dividerPositions="0.9158878504672897" layoutY="40.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane maxHeight="20.0" minHeight="20.0" minWidth="0.0" prefHeight="20.0" prefWidth="160.0">
+                           <children>
+                              <Label fx:id="labelTest" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
           </content>
        </Tab>
-       <Tab text="Untitled Tab 2">
+       <Tab closable="false" text="Untitled Tab 2">
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
