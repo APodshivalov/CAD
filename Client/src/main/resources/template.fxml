@@ -16,16 +16,24 @@
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ToolBar prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.9158878504672897, 0.5" layoutY="8.0" orientation="VERTICAL" prefHeight="361.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                        <ToggleButton fx:id="drawButton" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw" text="Стержни" />
-                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" text="Опоры" />
-                        <ToggleButton fx:id="materialButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" text="Материал" />
-                        <ToggleButton fx:id="forceButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" text="Нагрузки" />
-                    </items>
-                  </ToolBar>
-                  <SplitPane dividerPositions="0.9158878504672897" layoutY="40.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-                    <items>
+                        <ToolBar prefHeight="52.0" prefWidth="598.0">
+                          <items>
+                              <ToggleButton fx:id="drawButton" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
+                                 <graphic>
+                                    <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/draw.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" text="Опоры" />
+                              <ToggleButton fx:id="materialButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" text="Материал" />
+                              <ToggleButton fx:id="forceButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" text="Нагрузки" />
+                          </items>
+                        </ToolBar>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                       <AnchorPane maxHeight="20.0" minHeight="20.0" minWidth="0.0" prefHeight="20.0" prefWidth="160.0">
                            <children>
