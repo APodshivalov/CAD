@@ -16,19 +16,24 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable{
 
     @FXML
-    private ToggleButton drawMode;
+    private ToggleButton drawButton;
     @FXML
-    private ToggleButton reactionSupport;
+    private ToggleButton reactionSupportButton;
+    @FXML
+    private ToggleButton materialButton;
+    @FXML
+    private ToggleButton forceButton;
     @FXML
     private Label labelTest;
 
     private Controllable controller;
 
-
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup modelGroup = new ToggleGroup();
-        drawMode.setToggleGroup(modelGroup);
-        reactionSupport.setToggleGroup(modelGroup);
+        drawButton.setToggleGroup(modelGroup);
+        reactionSupportButton.setToggleGroup(modelGroup);
+        materialButton.setToggleGroup(modelGroup);
+        forceButton.setToggleGroup(modelGroup);
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -43,7 +48,7 @@ public class Controller implements Initializable{
         return labelTest;
     }
 
-    public void onMouseEntredDraw(MouseEvent mouseEvent) {
+    public void onMouseEnteredDraw(MouseEvent mouseEvent) {
         labelTest.setText("Рисование");
     }
 
@@ -51,11 +56,27 @@ public class Controller implements Initializable{
         labelTest.setText("");
     }
 
-    public void onMouseEntredSupport(MouseEvent mouseEvent) {
+    public void onMouseEnteredSupport(MouseEvent mouseEvent) {
         labelTest.setText("Опоры");
     }
 
     public void onMouseExitedSupport(MouseEvent mouseEvent) {
+        labelTest.setText("");
+    }
+
+    public void onMouseEnteredMaterial(MouseEvent mouseEvent) {
+        labelTest.setText("Материалы");
+    }
+
+    public void onMouseExitedMaterial(MouseEvent mouseEvent) {
+        labelTest.setText("");
+    }
+
+    public void onMouseEnteredForce(MouseEvent mouseEvent) {
+        labelTest.setText("Нагрузки");
+    }
+
+    public void onMouseExitedForce(MouseEvent mouseEvent) {
         labelTest.setText("");
     }
 }

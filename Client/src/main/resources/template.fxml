@@ -18,8 +18,10 @@
                <children>
                   <ToolBar prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                        <ToggleButton fx:id="drawMode" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEntredDraw" onMouseExited="#onMouseExitedDraw" text="ToggleButton" />
-                        <ToggleButton fx:id="reactionSupport" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEntredSupport" onMouseExited="#onMouseExitedSupport" text="ToggleButton" />
+                        <ToggleButton fx:id="drawButton" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw" text="Стержни" />
+                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" text="Опоры" />
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" text="Материал" />
+                        <ToggleButton fx:id="forceButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" text="Нагрузки" />
                     </items>
                   </ToolBar>
                   <SplitPane dividerPositions="0.9158878504672897" layoutY="40.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">

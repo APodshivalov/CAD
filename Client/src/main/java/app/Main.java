@@ -11,7 +11,7 @@ public class Main extends Application {
     @SuppressWarnings("all")
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("template.fxml"));
         primaryStage.setTitle("Клиент ну очень тонкий");
         primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
