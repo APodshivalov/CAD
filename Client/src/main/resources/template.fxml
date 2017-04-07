@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -16,36 +17,65 @@
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.9158878504672897, 0.5" layoutY="8.0" orientation="VERTICAL" prefHeight="361.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                        <ToolBar prefHeight="52.0" prefWidth="598.0">
-                          <items>
-                              <ToggleButton fx:id="drawButton" focusTraversable="false" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
-                                 <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/draw.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </ToggleButton>
-                              <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" text="Опоры" />
-                              <ToggleButton fx:id="materialButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" text="Материал" />
-                              <ToggleButton fx:id="forceButton" focusTraversable="false" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" text="Нагрузки" />
-                          </items>
-                        </ToolBar>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                      <AnchorPane maxHeight="20.0" minHeight="20.0" minWidth="0.0" prefHeight="20.0" prefWidth="160.0">
-                           <children>
-                              <Label fx:id="labelTest" />
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                  <Pane fx:id="controlPanel" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="7.0" layoutY="5.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Draw.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="75.0" layoutY="5.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Support.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="sectionButton" layoutX="143.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Section.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="211.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Material.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="279.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Force.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+                  <Pane maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label fx:id="helperLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
+                     </children>
+                  </Pane>
                </children></AnchorPane>
           </content>
        </Tab>
-       <Tab closable="false" text="Untitled Tab 2">
+       <Tab closable="false" text="Рассчет">
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>

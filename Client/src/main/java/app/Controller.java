@@ -20,11 +20,13 @@ public class Controller implements Initializable{
     @FXML
     private ToggleButton reactionSupportButton;
     @FXML
+    private ToggleButton sectionButton;
+    @FXML
     private ToggleButton materialButton;
     @FXML
     private ToggleButton forceButton;
     @FXML
-    private Label labelTest;
+    private Label helperLabel;
 
     private Controllable controller;
 
@@ -34,6 +36,7 @@ public class Controller implements Initializable{
         reactionSupportButton.setToggleGroup(modelGroup);
         materialButton.setToggleGroup(modelGroup);
         forceButton.setToggleGroup(modelGroup);
+        sectionButton.setToggleGroup(modelGroup);
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -44,39 +47,43 @@ public class Controller implements Initializable{
         controller = ControllerFactory.getReactionSupportController(this);
     }
 
-    public Label getLabel() {
-        return labelTest;
-    }
-
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
-        labelTest.setText("Рисование");
+        helperLabel.setText("Рисование");
     }
 
     public void onMouseExitedDraw(MouseEvent mouseEvent) {
-        labelTest.setText("");
+        helperLabel.setText("");
     }
 
     public void onMouseEnteredSupport(MouseEvent mouseEvent) {
-        labelTest.setText("Опоры");
+        helperLabel.setText("Опоры");
     }
 
     public void onMouseExitedSupport(MouseEvent mouseEvent) {
-        labelTest.setText("");
+        helperLabel.setText("");
     }
 
     public void onMouseEnteredMaterial(MouseEvent mouseEvent) {
-        labelTest.setText("Материалы");
+        helperLabel.setText("Материалы");
     }
 
     public void onMouseExitedMaterial(MouseEvent mouseEvent) {
-        labelTest.setText("");
+        helperLabel.setText("");
     }
 
     public void onMouseEnteredForce(MouseEvent mouseEvent) {
-        labelTest.setText("Нагрузки");
+        helperLabel.setText("Нагрузки");
     }
 
     public void onMouseExitedForce(MouseEvent mouseEvent) {
-        labelTest.setText("");
+        helperLabel.setText("");
+    }
+
+    public void onMouseEnteredSection(MouseEvent mouseEvent) {
+        helperLabel.setText("Поперечное сечение стержня");
+    }
+
+    public void onMouseExitedSection(MouseEvent mouseEvent) {
+        helperLabel.setText("");
     }
 }
