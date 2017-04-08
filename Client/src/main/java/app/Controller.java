@@ -5,6 +5,8 @@ import app.interfaces.Controllable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -27,6 +29,9 @@ public class Controller implements Initializable{
     private ToggleButton forceButton;
     @FXML
     private Label statusLabel;
+    @FXML
+    private Canvas canvas;
+    private GraphicsContext gc;
 
     private Controllable controller;
 
@@ -37,8 +42,10 @@ public class Controller implements Initializable{
         materialButton.setToggleGroup(modelGroup);
         forceButton.setToggleGroup(modelGroup);
         sectionButton.setToggleGroup(modelGroup);
+        gc = canvas.getGraphicsContext2D();
     }
 
+    // TODO обработать повторное нажатие на ту же плитку
     public void drawOn(ActionEvent actionEvent) {
         controller = ControllerFactory.getDrawController(this);
     }
@@ -85,5 +92,13 @@ public class Controller implements Initializable{
 
     public void onMouseExitedSection(MouseEvent mouseEvent) {
         statusLabel.setText("");
+    }
+
+    public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
+        controller.onMouseClickedOverCanvas(mouseEvent);
+    }
+
+    public GraphicsContext getGraphicsContext() {
+        return gc;
     }
 }
