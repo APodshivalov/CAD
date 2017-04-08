@@ -67,9 +67,9 @@
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-                  <Pane maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Pane fx:id="statusBar" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Label fx:id="helperLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
+                        <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
                      </children>
                   </Pane>
                </children></AnchorPane>

@@ -26,7 +26,7 @@ public class Controller implements Initializable{
     @FXML
     private ToggleButton forceButton;
     @FXML
-    private Label helperLabel;
+    private Label statusLabel;
 
     private Controllable controller;
 
@@ -48,42 +48,42 @@ public class Controller implements Initializable{
     }
 
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
-        helperLabel.setText("Рисование");
+        statusLabel.setText("Рисование");
     }
 
     public void onMouseExitedDraw(MouseEvent mouseEvent) {
-        helperLabel.setText("");
+        statusLabel.setText("");
     }
 
     public void onMouseEnteredSupport(MouseEvent mouseEvent) {
-        helperLabel.setText("Опоры");
+        statusLabel.setText("Опоры");
     }
 
     public void onMouseExitedSupport(MouseEvent mouseEvent) {
-        helperLabel.setText("");
+        statusLabel.setText("");
     }
 
     public void onMouseEnteredMaterial(MouseEvent mouseEvent) {
-        helperLabel.setText("Материалы");
+        statusLabel.setText("Материалы");
     }
 
     public void onMouseExitedMaterial(MouseEvent mouseEvent) {
-        helperLabel.setText("");
+        statusLabel.setText("");
     }
 
     public void onMouseEnteredForce(MouseEvent mouseEvent) {
-        helperLabel.setText("Нагрузки");
+        statusLabel.setText("Нагрузки");
     }
 
     public void onMouseExitedForce(MouseEvent mouseEvent) {
-        helperLabel.setText("");
+        statusLabel.setText("");
     }
 
     public void onMouseEnteredSection(MouseEvent mouseEvent) {
-        helperLabel.setText("Поперечное сечение стержня");
+        statusLabel.setText("Поперечное сечение стержня");
     }
 
     public void onMouseExitedSection(MouseEvent mouseEvent) {
-        helperLabel.setText("");
+        statusLabel.setText("");
     }
 }
