@@ -17,4 +17,9 @@ public class ReactionSupportController implements Controllable {
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
 
     }
+
+    @Override
+    public void onMouseMoved(MouseEvent mouseEvent) {
+
+    }
 }

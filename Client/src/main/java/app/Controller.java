@@ -34,7 +34,6 @@ public class Controller implements Initializable{
     private Label statusLabel;
 
     private ResizableCanvas canvas;
-    private GraphicsContext gc;
     private Model model;
     private Controllable controller;
 
@@ -51,8 +50,6 @@ public class Controller implements Initializable{
         sectionButton.setToggleGroup(modelGroup);
 
         canvas = new ResizableCanvas(this);
-        gc = canvas.getGraphicsContext2D();
-
         model = new Model(this);
     }
 
@@ -117,8 +114,8 @@ public class Controller implements Initializable{
         controller.onMouseClickedOverCanvas(mouseEvent);
     }
 
-    public GraphicsContext getGraphicsContext() {
-        return gc;
+    public void onMouseMoved(MouseEvent mouseEvent) {
+        controller.onMouseMoved(mouseEvent);
     }
 
     public AnchorPane getCanvasPane() {

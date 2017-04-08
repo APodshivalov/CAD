@@ -8,4 +8,5 @@ import javafx.scene.input.MouseEvent;
  */
 public interface Controllable {
     void onMouseClickedOverCanvas(MouseEvent mouseEvent);
+    void onMouseMoved(MouseEvent mouseEvent);
 }

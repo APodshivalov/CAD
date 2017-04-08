@@ -22,7 +22,7 @@ public class Model {
      * Отрисовка модели
      */
     public void draw(){
-        bars.forEach(bar -> bar.draw(controller.getGraphicsContext()));
+        bars.forEach(bar -> bar.draw(controller.getCanvas().getGraphicsContext2D()));
     }
 
     /**

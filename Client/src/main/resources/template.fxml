@@ -68,9 +68,9 @@
                         <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
                      </children>
                   </Pane>
-                  <AnchorPane fx:id="canvasPane" onMouseClicked="#onMouseClickedOverCanvas" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                  <AnchorPane fx:id="canvasPane" onMouseClicked="#onMouseClickedOverCanvas" onMouseMoved="#onMouseMoved" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                      <cursor>
-                        <Cursor fx:constant="MOVE" />
+                        <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </AnchorPane>
                </children>

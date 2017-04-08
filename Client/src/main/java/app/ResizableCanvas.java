@@ -2,6 +2,7 @@ package app;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -10,10 +11,12 @@ import javafx.scene.layout.Pane;
  */
 public class ResizableCanvas extends Canvas{
     private Controller controller;
+    private GraphicsContext gc;
     private Pane pane;
 
     public ResizableCanvas(Controller controller) {
         this.controller = controller;
+        gc = this.getGraphicsContext2D();
         pane = controller.getCanvasPane();
         pane.getChildren().add(this);
         pane.widthProperty().addListener(evt -> this.redraw());
@@ -26,7 +29,6 @@ public class ResizableCanvas extends Canvas{
     public void redraw() {
         this.setWidth(pane.getWidth());
         this.setHeight(pane.getHeight());
-        GraphicsContext gc = this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
     }

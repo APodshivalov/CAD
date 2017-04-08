@@ -39,4 +39,13 @@ public class DrawController implements Controllable {
             controller.getCanvas().redraw();
         }
     }
+
+    @Override
+    public void onMouseMoved(MouseEvent mouseEvent) {
+        if (firstPoint != null){
+            controller.getCanvas().redraw();
+            controller.getCanvas().getGraphicsContext2D().strokeLine(firstPoint.getX(), firstPoint.getY(),
+                    mouseEvent.getX(), mouseEvent.getY());
+        }
+    }
 }
