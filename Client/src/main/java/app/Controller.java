@@ -2,21 +2,24 @@ package app;
 
 import app.controllers.ControllerFactory;
 import app.interfaces.Controllable;
+import app.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
+    @FXML
+    private AnchorPane canvasPane;
     @FXML
     private ToggleButton drawButton;
     @FXML
@@ -29,11 +32,15 @@ public class Controller implements Initializable{
     private ToggleButton forceButton;
     @FXML
     private Label statusLabel;
-    @FXML
-    private Canvas canvas;
-    private GraphicsContext gc;
 
+    private ResizableCanvas canvas;
+    private GraphicsContext gc;
+    private Model model;
     private Controllable controller;
+
+    public ResizableCanvas getCanvas() {
+        return canvas;
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup modelGroup = new ToggleGroup();
@@ -42,16 +49,28 @@ public class Controller implements Initializable{
         materialButton.setToggleGroup(modelGroup);
         forceButton.setToggleGroup(modelGroup);
         sectionButton.setToggleGroup(modelGroup);
+
+        canvas = new ResizableCanvas(this);
         gc = canvas.getGraphicsContext2D();
+
+        model = new Model(this);
     }
 
-    // TODO обработать повторное нажатие на ту же плитку
     public void drawOn(ActionEvent actionEvent) {
-        controller = ControllerFactory.getDrawController(this);
+        if(drawButton.isSelected()){
+            controller = ControllerFactory.getDrawController(this);
+        } else {
+            controller = null;
+        }
     }
 
     public void reactionSupportOn(ActionEvent actionEvent) {
-        controller = ControllerFactory.getReactionSupportController(this);
+        if(reactionSupportButton.isSelected()){
+            controller = ControllerFactory.getReactionSupportController(this);
+        } else {
+            controller = null;
+        }
+
     }
 
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
@@ -100,5 +119,13 @@ public class Controller implements Initializable{
 
     public GraphicsContext getGraphicsContext() {
         return gc;
+    }
+
+    public AnchorPane getCanvasPane() {
+        return canvasPane;
+    }
+
+    public Model getModel() {
+        return model;
     }
 }
