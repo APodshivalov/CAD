@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.canvas.*?>
@@ -66,6 +67,22 @@
                   <Pane fx:id="statusBar" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
+                        <ToggleButton fx:id="orto" layoutX="451.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Орто" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+                           <font>
+                              <Font name="Arial" size="9.0" />
+                           </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="pivot" layoutX="387.0" maxHeight="21.0" maxWidth="55.0" minHeight="21.0" minWidth="55.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Привязка" textAlignment="CENTER" visible="false">
+                           <font>
+                              <Font name="Arial" size="9.0" />
+                           </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
+                           <font>
+                              <Font name="Arial" size="9.0" />
+                           </font>
+                        </ToggleButton>
+                        <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="1.0" maxWidth="100.0" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" />
                      </children>
                   </Pane>
                   <AnchorPane fx:id="canvasPane" onMouseClicked="#onMouseClickedOverCanvas" onMouseMoved="#onMouseMoved" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

@@ -27,4 +27,9 @@ public class ReactionSupportController implements Controllable {
     public void disable() {
         controller.getCanvas().redraw();
     }
+
+    @Override
+    public void enable() {
+
+    }
 }

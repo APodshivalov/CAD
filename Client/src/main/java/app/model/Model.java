@@ -1,6 +1,7 @@
 package app.model;
 
 import app.Controller;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.List;
 public class Model {
     private List<Bar> bars;
     private Controller controller;
+    private GraphicsContext gc;
 
     public Model(Controller controller){
         this.controller = controller;
+        gc = controller.getCanvas().getGraphicsContext2D();
         bars = new ArrayList<>();
     }
 
@@ -23,6 +26,17 @@ public class Model {
      */
     public void draw(){
         bars.forEach(bar -> bar.draw(controller.getCanvas().getGraphicsContext2D()));
+        drawCoordinates();
+    }
+
+    private void drawCoordinates() {
+        double height = controller.getCanvas().getHeight() - 20;
+        gc.strokeLine(20, height, 20, height - 80);
+        gc.strokeLine(20, height, 100, height);
+        gc.strokeLine(100, height, 90, height-5);
+        gc.strokeLine(100, height, 90, height+5);
+        gc.strokeLine(20, height-80, 25, height-70);
+        gc.strokeLine(20, height-80, 15, height-70);
     }
 
     /**

@@ -52,5 +52,15 @@ public class DrawController implements Controllable {
     @Override
     public void disable() {
         controller.getCanvas().redraw();
+        controller.getPivot().setVisible(false);
+        controller.getOrto().setVisible(false);
+        controller.getNet().setVisible(false);
+    }
+
+    @Override
+    public void enable() {
+        controller.getPivot().setVisible(true);
+        controller.getOrto().setVisible(true);
+        controller.getNet().setVisible(true);
     }
 }
