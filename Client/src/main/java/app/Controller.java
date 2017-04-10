@@ -6,7 +6,6 @@ import app.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -35,7 +34,7 @@ public class Controller implements Initializable{
 
     private ResizableCanvas canvas;
     private Model model;
-    private Controllable controller;
+    private Controllable currentEventListener;
 
     public ResizableCanvas getCanvas() {
         return canvas;
@@ -50,24 +49,30 @@ public class Controller implements Initializable{
         sectionButton.setToggleGroup(modelGroup);
 
         canvas = new ResizableCanvas(this);
+        canvasPane.getChildren().add(canvas);
+        canvasPane.widthProperty().addListener(evt -> canvas.redraw());
+        canvasPane.heightProperty().addListener(evt -> canvas.redraw());
+
         model = new Model(this);
     }
 
     public void drawOn(ActionEvent actionEvent) {
-        if(drawButton.isSelected()){
-            controller = ControllerFactory.getDrawController(this);
+        changeEventListener(drawButton, ControllerFactory.getDrawController(this));
+    }
+
+    private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
+        if(currentEventListener != null){
+            currentEventListener.disable();
+        }
+        if(toggleButton.isSelected()){
+            currentEventListener = eventListener;
         } else {
-            controller = null;
+            currentEventListener = null;
         }
     }
 
     public void reactionSupportOn(ActionEvent actionEvent) {
-        if(reactionSupportButton.isSelected()){
-            controller = ControllerFactory.getReactionSupportController(this);
-        } else {
-            controller = null;
-        }
-
+        changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this));
     }
 
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
@@ -111,11 +116,11 @@ public class Controller implements Initializable{
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        controller.onMouseClickedOverCanvas(mouseEvent);
+        currentEventListener.onMouseClickedOverCanvas(mouseEvent);
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        controller.onMouseMoved(mouseEvent);
+        currentEventListener.onMouseMoved(mouseEvent);
     }
 
     public AnchorPane getCanvasPane() {

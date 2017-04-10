@@ -48,4 +48,9 @@ public class DrawController implements Controllable {
                     mouseEvent.getX(), mouseEvent.getY());
         }
     }
+
+    @Override
+    public void disable() {
+        controller.getCanvas().redraw();
+    }
 }

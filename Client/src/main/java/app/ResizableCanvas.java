@@ -12,23 +12,18 @@ import javafx.scene.layout.Pane;
 public class ResizableCanvas extends Canvas{
     private Controller controller;
     private GraphicsContext gc;
-    private Pane pane;
 
     public ResizableCanvas(Controller controller) {
         this.controller = controller;
         gc = this.getGraphicsContext2D();
-        pane = controller.getCanvasPane();
-        pane.getChildren().add(this);
-        pane.widthProperty().addListener(evt -> this.redraw());
-        pane.heightProperty().addListener(evt -> this.redraw());
     }
 
     /**
      * Перерисовка канваса
      */
     public void redraw() {
-        this.setWidth(pane.getWidth());
-        this.setHeight(pane.getHeight());
+        this.setWidth(controller.getCanvasPane().getWidth());
+        this.setHeight(controller.getCanvasPane().getHeight());
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
     }

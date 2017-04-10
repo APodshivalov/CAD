@@ -22,4 +22,9 @@ public class ReactionSupportController implements Controllable {
     public void onMouseMoved(MouseEvent mouseEvent) {
 
     }
+
+    @Override
+    public void disable() {
+        controller.getCanvas().redraw();
+    }
 }
