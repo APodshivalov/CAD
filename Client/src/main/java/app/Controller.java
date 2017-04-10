@@ -3,6 +3,7 @@ package app;
 import app.controllers.ControllerFactory;
 import app.interfaces.Controllable;
 import app.model.Model;
+import app.utils.CoordinateUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,12 +47,16 @@ public class Controller implements Initializable{
     private ResizableCanvas canvas;
     private Model model;
     private Controllable currentEventListener;
+    private CoordinateUtils coordinateUtils;
+    private double scale;
 
     public ResizableCanvas getCanvas() {
         return canvas;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        scale = 1;
+
         ToggleGroup modelGroup = new ToggleGroup();
         drawButton.setToggleGroup(modelGroup);
         reactionSupportButton.setToggleGroup(modelGroup);
@@ -66,6 +71,7 @@ public class Controller implements Initializable{
         statusBar.widthProperty().addListener(evt -> organizeStatusBar());
 
         model = new Model(this);
+        coordinateUtils = new CoordinateUtils(this);
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -133,15 +139,16 @@ public class Controller implements Initializable{
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        coordinatesLabel.setText("x: " + (mouseEvent.getX() - 20) + ", y: " + (canvas.getHeight() - mouseEvent.getY() - 20));
+        coordinatesLabel.setText("x: " + coordinateUtils.toRealX(mouseEvent.getX()) +
+                ", y: " + coordinateUtils.toRealY(mouseEvent.getY()));
         currentEventListener.onMouseMoved(mouseEvent);
     }
 
     private void organizeStatusBar() {
-        coordinatesLabel.setLayoutX(statusBar.getWidth()-100);
-        net.setLayoutX(statusBar.getWidth()-150);
-        orto.setLayoutX(statusBar.getWidth()-190);
-        pivot.setLayoutX(statusBar.getWidth()-245);
+        coordinatesLabel.setLayoutX(statusBar.getWidth()-110);
+        net.setLayoutX(statusBar.getWidth()-170);
+        orto.setLayoutX(statusBar.getWidth()-210);
+        pivot.setLayoutX(statusBar.getWidth()-265);
     }
 
     public AnchorPane getCanvasPane() {
@@ -162,5 +169,17 @@ public class Controller implements Initializable{
 
     public ToggleButton getNet() {
         return net;
+    }
+
+    public double getScale() {
+        return scale;
+    }
+
+    public CoordinateUtils getCoordinateUtils() {
+        return coordinateUtils;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 }

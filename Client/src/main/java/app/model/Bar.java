@@ -1,5 +1,7 @@
 package app.model;
 
+import app.Controller;
+import app.utils.CoordinateUtils;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -14,7 +16,9 @@ public class Bar {
         this.secondPoint = second;
     }
 
-    public void draw(GraphicsContext gc) {
-        gc.strokeLine(firstPoint.getX(), firstPoint.getY(), secondPoint.getX(), secondPoint.getY());
+    public void draw(Controller controller) {
+        CoordinateUtils utils = controller.getCoordinateUtils();
+        controller.getCanvas().getGraphicsContext2D().strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
+                utils.fromRealX(secondPoint.getX()), utils.fromRealY(secondPoint.getY()));
     }
 }

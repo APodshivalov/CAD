@@ -25,7 +25,7 @@ public class Model {
      * Отрисовка модели
      */
     public void draw(){
-        bars.forEach(bar -> bar.draw(controller.getCanvas().getGraphicsContext2D()));
+        bars.forEach(bar -> bar.draw(controller));
         drawCoordinates();
     }
 
