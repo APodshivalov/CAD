@@ -26,17 +26,6 @@ public class Model {
      */
     public void draw(){
         bars.forEach(bar -> bar.draw(controller));
-        drawCoordinates();
-    }
-
-    private void drawCoordinates() {
-        double height = controller.getCanvas().getHeight() - 20;
-        gc.strokeLine(20, height, 20, height - 80);
-        gc.strokeLine(20, height, 100, height);
-        gc.strokeLine(100, height, 90, height-5);
-        gc.strokeLine(100, height, 90, height+5);
-        gc.strokeLine(20, height-80, 25, height-70);
-        gc.strokeLine(20, height-80, 15, height-70);
     }
 
     /**

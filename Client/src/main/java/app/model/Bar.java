@@ -2,7 +2,6 @@ package app.model;
 
 import app.Controller;
 import app.utils.CoordinateUtils;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Created by podsh on 08.04.2017.

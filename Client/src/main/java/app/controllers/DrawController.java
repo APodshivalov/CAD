@@ -8,6 +8,7 @@ import app.model.Point;
 import app.utils.CoordinateUtils;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 
@@ -16,6 +17,9 @@ import javafx.scene.input.MouseEvent;
  * Created by APodshivalov on 29.03.2017.
  */
 public class DrawController implements Controllable {
+    private double x;
+    private double y;
+
     private Controller controller;
     private GraphicsContext gc;
     private CoordinateUtils utils;
@@ -36,8 +40,17 @@ public class DrawController implements Controllable {
      * @param mouseEvent Эвент клика
      */
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            drawNewElements(mouseEvent);
+        }
+        if(mouseEvent.getButton() == MouseButton.SECONDARY){
+            firstPoint = null;
+        }
+    }
+
+    private void drawNewElements(MouseEvent mouseEvent) {
         if (firstPoint == null) {
-            firstPoint = new Point(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+            firstPoint = new Point(utils.toRealX(x), utils.toRealY(y));
         } else {
             Point newPoint = new Point(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
             model.addBar(new Bar(firstPoint, newPoint));
@@ -48,6 +61,8 @@ public class DrawController implements Controllable {
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
+        x = mouseEvent.getX();
+        y = mouseEvent.getY();
         controller.getCanvas().redraw();
         if (firstPoint != null) {
             gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
@@ -70,6 +85,7 @@ public class DrawController implements Controllable {
         controller.getOrto().setVisible(false);
         controller.getNet().setVisible(false);
         controller.getCanvas().setCursor(Cursor.DEFAULT);
+        firstPoint = null;
     }
 
     @Override

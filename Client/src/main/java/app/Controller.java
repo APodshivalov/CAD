@@ -182,4 +182,8 @@ public class Controller implements Initializable{
     public void setScale(int scale) {
         this.scale = scale;
     }
+
+    public void onMouseExited(MouseEvent mouseEvent) {
+        canvas.redraw();
+    }
 }
