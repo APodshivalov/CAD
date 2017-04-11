@@ -6,6 +6,8 @@ import app.model.Bar;
 import app.model.Model;
 import app.model.Point;
 import app.utils.CoordinateUtils;
+import javafx.scene.Cursor;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
 
@@ -15,12 +17,14 @@ import javafx.scene.input.MouseEvent;
  */
 public class DrawController implements Controllable {
     private Controller controller;
+    private GraphicsContext gc;
     private CoordinateUtils utils;
     private Model model;
     private Point firstPoint;
 
     public DrawController(Controller controller) {
         this.controller = controller;
+        gc = controller.getCanvas().getGraphicsContext2D();
         utils = controller.getCoordinateUtils();
         firstPoint = null;
         model = controller.getModel();
@@ -44,12 +48,19 @@ public class DrawController implements Controllable {
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
+        controller.getCanvas().redraw();
         if (firstPoint != null) {
-            controller.getCanvas().redraw();
-            controller.getCanvas().getGraphicsContext2D().strokeLine(
-                    utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
+            gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
                     mouseEvent.getX(), mouseEvent.getY());
         }
+        drawCursor(mouseEvent);
+    }
+
+    private void drawCursor(MouseEvent e) {
+        gc.strokeLine(e.getX(), e.getY() + 3, e.getX(), e.getY() + 8);
+        gc.strokeLine(e.getX() + 3, e.getY(), e.getX() + 8, e.getY());
+        gc.strokeLine(e.getX(), e.getY() - 3, e.getX(), e.getY() - 8);
+        gc.strokeLine(e.getX() - 3, e.getY(), e.getX() - 8, e.getY());
     }
 
     @Override
@@ -58,6 +69,7 @@ public class DrawController implements Controllable {
         controller.getPivot().setVisible(false);
         controller.getOrto().setVisible(false);
         controller.getNet().setVisible(false);
+        controller.getCanvas().setCursor(Cursor.DEFAULT);
     }
 
     @Override
@@ -65,5 +77,6 @@ public class DrawController implements Controllable {
         controller.getPivot().setVisible(true);
         controller.getOrto().setVisible(true);
         controller.getNet().setVisible(true);
+        controller.getCanvas().setCursor(Cursor.NONE);
     }
 }
