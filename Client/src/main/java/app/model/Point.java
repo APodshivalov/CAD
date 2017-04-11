@@ -23,4 +23,8 @@ public class Point {
     public boolean near(double x, double y) {
         return (Math.abs(x - this.x) < 5) && (Math.abs(y - this.y) < 5);
     }
+
+    public boolean equals(double x, double y) {
+        return this.x == x && this.y == y;
+    }
 }

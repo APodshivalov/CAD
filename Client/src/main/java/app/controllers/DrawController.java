@@ -38,20 +38,20 @@ public class DrawController implements Controllable {
      * @param mouseEvent Эвент клика
      */
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            drawNewElements(mouseEvent);
+        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            drawNewElements();
         }
-        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+        if(mouseEvent.getButton() == MouseButton.SECONDARY){
             firstPoint = null;
         }
     }
 
-    private void drawNewElements(MouseEvent mouseEvent) {
-        Point pivot = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+    private void drawNewElements() {
+        Point pointAtThisCoordinate = model.findPoint(utils.toRealX(controller.getX()), utils.toRealY(controller.getY()));
         if (firstPoint == null) {
-            firstPoint = pivot == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pivot;
+            firstPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pointAtThisCoordinate;
         } else {
-            Point newPoint = pivot == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pivot;
+            Point newPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pointAtThisCoordinate;
             model.addBar(new Bar(firstPoint, newPoint));
             firstPoint = newPoint;
             controller.getCanvas().redraw();
@@ -60,13 +60,15 @@ public class DrawController implements Controllable {
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
-        if (controller.getPivot().isSelected()) {
+        // Привязка курсора к точкам
+        if (controller.getPivot().isSelected()){
             Point p = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
-            if (p != null) {
+            if (p != null){
                 controller.setY(utils.fromRealY(p.getY()));
                 controller.setX(utils.fromRealX(p.getX()));
             }
         }
+        // Перерисовка модели
         controller.getCanvas().redraw();
         if (firstPoint != null) {
             gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),

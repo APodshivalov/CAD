@@ -34,17 +34,29 @@ public class Model {
      * @param bar Стержень
      */
     public void addBar(Bar bar) {
-        if(bars.stream().noneMatch(bar::equals)) {
+        if (bars.stream().noneMatch(bar::equals)) {
             bars.add(bar);
         }
     }
 
     public Point findNearbyPoint(double x, double y) {
         for (Bar bar : bars) {
-            if (bar.getFirstPoint().near(x,y)){
+            if (bar.getFirstPoint().near(x, y)) {
                 return bar.getFirstPoint();
             }
-            if (bar.getSecondPoint().near(x,y)){
+            if (bar.getSecondPoint().near(x, y)) {
+                return bar.getSecondPoint();
+            }
+        }
+        return null;
+    }
+
+    public Point findPoint(double x, double y) {
+        for (Bar bar : bars) {
+            if (bar.getFirstPoint().equals(x, y)) {
+                return bar.getFirstPoint();
+            }
+            if (bar.getSecondPoint().equals(x, y)) {
                 return bar.getSecondPoint();
             }
         }
