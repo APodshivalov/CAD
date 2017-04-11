@@ -19,4 +19,8 @@ public class Point {
     public double getY() {
         return y;
     }
+
+    public boolean near(double x, double y) {
+        return (Math.abs(x - this.x) < 5) && (Math.abs(y - this.y) < 5);
+    }
 }

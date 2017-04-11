@@ -17,8 +17,6 @@ import javafx.scene.input.MouseEvent;
  * Created by APodshivalov on 29.03.2017.
  */
 public class DrawController implements Controllable {
-    private double x;
-    private double y;
 
     private Controller controller;
     private GraphicsContext gc;
@@ -40,19 +38,20 @@ public class DrawController implements Controllable {
      * @param mouseEvent Эвент клика
      */
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             drawNewElements(mouseEvent);
         }
-        if(mouseEvent.getButton() == MouseButton.SECONDARY){
+        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             firstPoint = null;
         }
     }
 
     private void drawNewElements(MouseEvent mouseEvent) {
+        Point pivot = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
         if (firstPoint == null) {
-            firstPoint = new Point(utils.toRealX(x), utils.toRealY(y));
+            firstPoint = pivot == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pivot;
         } else {
-            Point newPoint = new Point(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+            Point newPoint = pivot == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pivot;
             model.addBar(new Bar(firstPoint, newPoint));
             firstPoint = newPoint;
             controller.getCanvas().redraw();
@@ -61,21 +60,28 @@ public class DrawController implements Controllable {
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
-        x = mouseEvent.getX();
-        y = mouseEvent.getY();
+        if (controller.getPivot().isSelected()) {
+            Point p = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+            if (p != null) {
+                controller.setY(utils.fromRealY(p.getY()));
+                controller.setX(utils.fromRealX(p.getX()));
+            }
+        }
         controller.getCanvas().redraw();
         if (firstPoint != null) {
             gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
-                    mouseEvent.getX(), mouseEvent.getY());
+                    controller.getX(), controller.getY());
         }
-        drawCursor(mouseEvent);
+        drawCursor();
     }
 
-    private void drawCursor(MouseEvent e) {
-        gc.strokeLine(e.getX(), e.getY() + 3, e.getX(), e.getY() + 8);
-        gc.strokeLine(e.getX() + 3, e.getY(), e.getX() + 8, e.getY());
-        gc.strokeLine(e.getX(), e.getY() - 3, e.getX(), e.getY() - 8);
-        gc.strokeLine(e.getX() - 3, e.getY(), e.getX() - 8, e.getY());
+    private void drawCursor() {
+        double x = controller.getX();
+        double y = controller.getY();
+        gc.strokeLine(x, y + 3, x, y + 8);
+        gc.strokeLine(x + 3, y, x + 8, y);
+        gc.strokeLine(x, y - 3, x, y - 8);
+        gc.strokeLine(x - 3, y, x - 8, y);
     }
 
     @Override

@@ -49,6 +49,8 @@ public class Controller implements Initializable{
     private Controllable currentEventListener;
     private CoordinateUtils coordinateUtils;
     private double scale;
+    private double x;
+    private double y;
 
     public ResizableCanvas getCanvas() {
         return canvas;
@@ -139,9 +141,15 @@ public class Controller implements Initializable{
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        coordinatesLabel.setText("x: " + coordinateUtils.toRealX(mouseEvent.getX()) +
-                ", y: " + coordinateUtils.toRealY(mouseEvent.getY()));
+        x = mouseEvent.getX();
+        y = mouseEvent.getY();
         currentEventListener.onMouseMoved(mouseEvent);
+        coordinatesLabel.setText("x: " + coordinateUtils.toRealX(x) +
+                ", y: " + coordinateUtils.toRealY(y));
+    }
+
+    public void onMouseExited(MouseEvent mouseEvent) {
+        canvas.redraw();
     }
 
     private void organizeStatusBar() {
@@ -179,11 +187,24 @@ public class Controller implements Initializable{
         return coordinateUtils;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public void setScale(int scale) {
         this.scale = scale;
     }
 
-    public void onMouseExited(MouseEvent mouseEvent) {
-        canvas.redraw();
-    }
 }
