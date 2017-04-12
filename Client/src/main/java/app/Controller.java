@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -41,6 +43,15 @@ public class Controller implements Initializable{
     private ToggleButton orto;
     @FXML
     private ToggleButton net;
+
+    public Label getCoordinatesLabel() {
+        return coordinatesLabel;
+    }
+
+    public Controllable getCurrentEventListener() {
+        return currentEventListener;
+    }
+
     @FXML
     private Label coordinatesLabel;
 
@@ -49,8 +60,6 @@ public class Controller implements Initializable{
     private Controllable currentEventListener;
     private CoordinateUtils coordinateUtils;
     private double scale;
-    private double x;
-    private double y;
 
     public ResizableCanvas getCanvas() {
         return canvas;
@@ -141,11 +150,7 @@ public class Controller implements Initializable{
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        x = mouseEvent.getX();
-        y = mouseEvent.getY();
-        currentEventListener.onMouseMoved(mouseEvent);
-        coordinatesLabel.setText("x: " + coordinateUtils.toRealX(x) +
-                ", y: " + coordinateUtils.toRealY(y));
+        coordinateUtils.onMouseMoved(mouseEvent);
     }
 
     public void onMouseExited(MouseEvent mouseEvent) {
@@ -187,24 +192,17 @@ public class Controller implements Initializable{
         return coordinateUtils;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     public void setScale(int scale) {
         this.scale = scale;
     }
 
+    public void onMouseDrag(MouseEvent mouseEvent) {
+        coordinateUtils.onMouseDrag(mouseEvent);
+    }
+
+    public void onMouseReleased(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() == MouseButton.MIDDLE){
+            coordinateUtils.onMouseReleased();
+        }
+    }
 }

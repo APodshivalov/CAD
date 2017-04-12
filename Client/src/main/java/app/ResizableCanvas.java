@@ -1,5 +1,6 @@
 package app;
 
+import app.utils.CoordinateUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -28,13 +29,14 @@ public class ResizableCanvas extends Canvas{
     }
 
     private void drawCoordinates() {
-        double height = controller.getCanvas().getHeight() - 20;
-        gc.strokeLine(20, height, 20, height - 80);
-        gc.strokeLine(20, height, 100, height);
-        gc.strokeLine(100, height, 90, height-5);
-        gc.strokeLine(100, height, 90, height+5);
-        gc.strokeLine(20, height-80, 25, height-70);
-        gc.strokeLine(20, height-80, 15, height-70);
+        double x0 = controller.getCoordinateUtils().fromRealX(0);
+        double y0 = controller.getCoordinateUtils().fromRealY(0);
+        gc.strokeLine(x0, y0, x0, y0 - 80);
+        gc.strokeLine(x0, y0, x0 + 80, y0);
+        gc.strokeLine(x0 + 80, y0, x0 + 70, y0-5);
+        gc.strokeLine(x0 + 80, y0, x0 + 70, y0+5);
+        gc.strokeLine(x0, y0-80, x0 + 5, y0-70);
+        gc.strokeLine(x0, y0-80, x0 - 5, y0-70);
     }
 
 }

@@ -47,11 +47,11 @@ public class DrawController implements Controllable {
     }
 
     private void drawNewElements() {
-        Point pointAtThisCoordinate = model.findPoint(utils.toRealX(controller.getX()), utils.toRealY(controller.getY()));
+        Point pointAtThisCoordinate = model.findPoint(utils.toRealX(), utils.toRealY());
         if (firstPoint == null) {
-            firstPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pointAtThisCoordinate;
+            firstPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(), utils.toRealY()) : pointAtThisCoordinate;
         } else {
-            Point newPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(controller.getX()), utils.toRealY(controller.getY())) : pointAtThisCoordinate;
+            Point newPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(), utils.toRealY()) : pointAtThisCoordinate;
             model.addBar(new Bar(firstPoint, newPoint));
             firstPoint = newPoint;
             controller.getCanvas().redraw();
@@ -64,22 +64,33 @@ public class DrawController implements Controllable {
         if (controller.getPivot().isSelected()){
             Point p = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
             if (p != null){
-                controller.setY(utils.fromRealY(p.getY()));
-                controller.setX(utils.fromRealX(p.getX()));
+                utils.setY(utils.fromRealY(p.getY()));
+                utils.setX(utils.fromRealX(p.getX()));
             }
+        }
+        if(controller.getOrto().isSelected() && firstPoint != null){
+            drawOrto(mouseEvent);
         }
         // Перерисовка модели
         controller.getCanvas().redraw();
         if (firstPoint != null) {
             gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
-                    controller.getX(), controller.getY());
+                    utils.getX(), utils.getY());
         }
         drawCursor();
     }
 
-    private void drawCursor() {
-        double x = controller.getX();
-        double y = controller.getY();
+    private void drawOrto(MouseEvent mouseEvent) {
+        if(Math.abs(mouseEvent.getX()-utils.fromRealX(firstPoint.getX()))> Math.abs(mouseEvent.getY()-utils.fromRealY(firstPoint.getY()))){
+            utils.setY(utils.fromRealY(firstPoint.getY()));
+        } else {
+            utils.setX(utils.fromRealX(firstPoint.getX()));
+        }
+    }
+
+    public void drawCursor() {
+        double x = utils.getX();
+        double y = utils.getY();
         gc.strokeLine(x, y + 3, x, y + 8);
         gc.strokeLine(x + 3, y, x + 8, y);
         gc.strokeLine(x, y - 3, x, y - 8);
