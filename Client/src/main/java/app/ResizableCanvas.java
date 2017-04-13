@@ -1,5 +1,6 @@
 package app;
 
+import app.controllers.DrawController;
 import app.utils.CoordinateUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -26,6 +27,13 @@ public class ResizableCanvas extends Canvas{
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
         drawCoordinates();
+        if (controller.getCurrentEventListener() instanceof DrawController){
+            DrawController drawController = (DrawController) controller.getCurrentEventListener();
+            if (controller.getNet().isSelected()){
+                drawController.drawDots();
+            }
+            drawController.drawCursor();
+        }
     }
 
     private void drawCoordinates() {

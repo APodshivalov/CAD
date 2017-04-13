@@ -77,15 +77,16 @@
                               <Font name="Arial" size="9.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
+                        <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" onAction="#onNetAction" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
                            <font>
                               <Font name="Arial" size="9.0" />
                            </font>
                         </ToggleButton>
-                        <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="1.0" maxWidth="120.0" minWidth="120.0" prefHeight="20.0" prefWidth="120.0" />
+                        <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
+                        <Label fx:id="scaleLabel" layoutX="286.0" layoutY="2.0" />
                      </children>
                   </Pane>
-                  <AnchorPane fx:id="canvasPane" onMouseClicked="#onMouseClickedOverCanvas" onMouseDragged="#onMouseDrag" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" onMousePressed="#onMouseReleased" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                  <AnchorPane fx:id="canvasPane" onMouseClicked="#onMouseClickedOverCanvas" onMouseDragged="#onMouseDrag" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" onMousePressed="#onMouseReleased" onScroll="#onScroll" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>

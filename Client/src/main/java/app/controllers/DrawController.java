@@ -38,10 +38,10 @@ public class DrawController implements Controllable {
      * @param mouseEvent Эвент клика
      */
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             drawNewElements();
         }
-        if(mouseEvent.getButton() == MouseButton.SECONDARY){
+        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             firstPoint = null;
         }
     }
@@ -61,15 +61,18 @@ public class DrawController implements Controllable {
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
         // Привязка курсора к точкам
-        if (controller.getPivot().isSelected()){
+        if (controller.getPivot().isSelected()) {
             Point p = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
-            if (p != null){
+            if (p != null) {
                 utils.setY(utils.fromRealY(p.getY()));
                 utils.setX(utils.fromRealX(p.getX()));
             }
         }
-        if(controller.getOrto().isSelected() && firstPoint != null){
+        if (controller.getOrto().isSelected() && firstPoint != null) {
             drawOrto(mouseEvent);
+        }
+        if (controller.getNet().isSelected()) {
+            drawNet(mouseEvent);
         }
         // Перерисовка модели
         controller.getCanvas().redraw();
@@ -80,8 +83,29 @@ public class DrawController implements Controllable {
         drawCursor();
     }
 
+    private void drawNet(MouseEvent mouseEvent) {
+        double x = utils.toRealX() % 100;
+        double y = utils.toRealY() % 100;
+        utils.setX(utils.fromRealX(utils.toRealX(utils.getX()) - x));
+        utils.setY(utils.fromRealY(utils.toRealY(utils.getY()) - y));
+    }
+
+    public void drawDots() {
+        double x = utils.toRealX(0);
+        x = utils.fromRealX(x - x%100);
+        while (x < controller.getCanvas().getWidth()){
+            double y = utils.toRealY(0);
+            y = utils.fromRealY(y - y%100);
+            while (y < controller.getCanvas().getHeight()){
+                controller.getCanvas().getGraphicsContext2D().strokeLine(x,y,x,y);
+                y = utils.fromRealY(utils.toRealY(y) - 100);
+            }
+            x = utils.fromRealX(utils.toRealX(x) + 100);
+        }
+    }
+
     private void drawOrto(MouseEvent mouseEvent) {
-        if(Math.abs(mouseEvent.getX()-utils.fromRealX(firstPoint.getX()))> Math.abs(mouseEvent.getY()-utils.fromRealY(firstPoint.getY()))){
+        if (Math.abs(mouseEvent.getX() - utils.fromRealX(firstPoint.getX())) > Math.abs(mouseEvent.getY() - utils.fromRealY(firstPoint.getY()))) {
             utils.setY(utils.fromRealY(firstPoint.getY()));
         } else {
             utils.setX(utils.fromRealX(firstPoint.getX()));

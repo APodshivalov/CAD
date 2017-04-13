@@ -13,6 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -21,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
+    @FXML
+    private Label scaleLabel;
     @FXML
     private AnchorPane canvasPane;
     @FXML
@@ -59,15 +62,12 @@ public class Controller implements Initializable{
     private Model model;
     private Controllable currentEventListener;
     private CoordinateUtils coordinateUtils;
-    private double scale;
 
     public ResizableCanvas getCanvas() {
         return canvas;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        scale = 1;
-
         ToggleGroup modelGroup = new ToggleGroup();
         drawButton.setToggleGroup(modelGroup);
         reactionSupportButton.setToggleGroup(modelGroup);
@@ -83,6 +83,8 @@ public class Controller implements Initializable{
 
         model = new Model(this);
         coordinateUtils = new CoordinateUtils(this);
+        scaleLabel.setText("M 1:1");
+        coordinatesLabel.setText(String.format("x: %-6.2f, y: %-6.2f", coordinateUtils.toRealX(), coordinateUtils.toRealY()));
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -158,10 +160,11 @@ public class Controller implements Initializable{
     }
 
     private void organizeStatusBar() {
-        coordinatesLabel.setLayoutX(statusBar.getWidth()-110);
-        net.setLayoutX(statusBar.getWidth()-170);
-        orto.setLayoutX(statusBar.getWidth()-210);
-        pivot.setLayoutX(statusBar.getWidth()-265);
+        scaleLabel.setLayoutX(statusBar.getWidth() - 50);
+        coordinatesLabel.setLayoutX(statusBar.getWidth()-180);
+        net.setLayoutX(statusBar.getWidth()-230);
+        orto.setLayoutX(statusBar.getWidth()-270);
+        pivot.setLayoutX(statusBar.getWidth()-325);
     }
 
     public AnchorPane getCanvasPane() {
@@ -184,16 +187,8 @@ public class Controller implements Initializable{
         return net;
     }
 
-    public double getScale() {
-        return scale;
-    }
-
     public CoordinateUtils getCoordinateUtils() {
         return coordinateUtils;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
     }
 
     public void onMouseDrag(MouseEvent mouseEvent) {
@@ -204,5 +199,19 @@ public class Controller implements Initializable{
         if (mouseEvent.getButton() == MouseButton.MIDDLE){
             coordinateUtils.onMouseReleased();
         }
+    }
+
+    public void onScroll(ScrollEvent scrollEvent) {
+        if(scrollEvent.getDeltaY() < 0){
+            coordinateUtils.prevScale();
+        } else {
+            coordinateUtils.nextScale();
+        }
+        scaleLabel.setText(coordinateUtils.getScale());
+        canvas.redraw();
+    }
+
+    public void onNetAction(ActionEvent actionEvent) {
+        canvas.redraw();
     }
 }

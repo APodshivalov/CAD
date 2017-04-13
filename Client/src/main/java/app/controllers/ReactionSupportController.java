@@ -15,7 +15,6 @@ public class ReactionSupportController implements Controllable {
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        controller.setScale(10);
     }
 
     @Override
