@@ -25,6 +25,8 @@
     -fx-border-color: #3B3738;
     -fx-background-color: #D7CEC7;
     -fx-background-insets: 1px;
+    -fx-background-position: center;
+    -fx-padding: 5 5 5 5;
 }
 
 .toggle-button:selected {

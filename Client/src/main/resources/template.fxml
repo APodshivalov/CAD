@@ -18,7 +18,7 @@
                <children>
                   <Pane fx:id="controlPanel" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
+                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -27,7 +27,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="74.0" layoutY="5.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport">
+                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="68.0" layoutY="4.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -36,7 +36,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="sectionButton" layoutX="142.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
+                        <ToggleButton fx:id="sectionButton" layoutX="130.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -45,7 +45,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="210.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="192.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -54,7 +54,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="278.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce">
+                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="254.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -92,38 +92,38 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Pane fx:id="sideMenu" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane fx:id="sideMenu" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ToggleButton layoutX="20.0" layoutY="20.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 1" textAlignment="CENTER" wrapText="true">
+                              <ToggleButton layoutX="19.0" layoutY="20.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" textAlignment="CENTER">
                                  <graphic>
-                                    <ImageView fitHeight="107.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/reac1.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="120.0" layoutY="20.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 2">
+                              <ToggleButton layoutX="19.0" layoutY="120.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 2">
                                  <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/reac2.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="20.0" layoutY="120.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 3">
+                              <ToggleButton layoutX="19.0" layoutY="220.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 3">
                                  <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/reac3.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="120.0" layoutY="120.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 4">
+                              <ToggleButton layoutX="19.0" layoutY="320.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 4">
                                  <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/reac4.png" />
                                        </image>
