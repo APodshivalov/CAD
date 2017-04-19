@@ -39,6 +39,8 @@
 
 #controlPanel {
     -fx-background-color: #D7CEC7;
+    -fx-border-color: #C09F80;
+    -fx-border-width: 0 0 1 0;
 }
 
 #statusBar {
@@ -47,8 +49,16 @@
     -fx-border-width: 1 0 0 0;
 }
 
+#sideMenu {
+    -fx-background-color: #D7CEC7;
+    -fx-border-color: #C09F80;
+    -fx-border-width: 0 1 0 0;
+}
+
 .tab-header-background {
     -fx-border-color: #3B3738;
     -fx-background-color: white;
     -fx-border-width: 0 0 2 0;
 }
+
+#76323F

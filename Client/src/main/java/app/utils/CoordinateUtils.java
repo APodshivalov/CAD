@@ -48,7 +48,7 @@ public class CoordinateUtils {
     }
 
     public double toRealY(double y) {
-        return (controller.getCanvas().getHeight() - y - 20 + tempDelY+ delY) * scale;
+        return (controller.getCanvas().getHeight() - y - 20 + tempDelY + delY) * scale;
     }
 
     public double fromRealX(double x) {
@@ -60,7 +60,7 @@ public class CoordinateUtils {
     }
 
     public void onMouseDrag(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() == MouseButton.MIDDLE){
+        if (mouseEvent.getButton() == MouseButton.MIDDLE) {
             tempDelX = mouseEvent.getX() - x;
             tempDelY = mouseEvent.getY() - y;
             controller.getCanvas().redraw();
@@ -77,6 +77,8 @@ public class CoordinateUtils {
     public void onMouseReleased() {
         delX += tempDelX;
         delY += tempDelY;
+        tempDelX = 0;
+        tempDelY = 0;
     }
 
     public double toRealY() {
@@ -105,26 +107,30 @@ public class CoordinateUtils {
 
     public void prevScale() {
         int index = scalesList.indexOf(scale);
-        if(index < scalesList.size() - 1){
+        if (index < scalesList.size() - 1) {
             scale = scalesList.get(++index);
         }
     }
 
     public void nextScale() {
         int index = scalesList.indexOf(scale);
-        if(index > 0){
+        if (index > 0) {
             scale = scalesList.get(--index);
         }
     }
 
     public String getScale() {
-        if (scale<1){
-            return String.format("M %.0f:1",1/scale);
+        if (scale < 1) {
+            return String.format("M %.0f:1", 1 / scale);
         } else {
-            if(scale == (long) scale)
-                return String.format("M 1:%d",(long)scale);
+            if (scale == (long) scale)
+                return String.format("M 1:%d", (long) scale);
             else
-                return String.format("M 1:%s",scale);
+                return String.format("M 1:%s", scale);
         }
+    }
+
+    public void addDelX(double x) {
+        delX += x;
     }
 }

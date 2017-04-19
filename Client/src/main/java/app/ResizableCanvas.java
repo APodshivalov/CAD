@@ -12,17 +12,25 @@ import javafx.scene.canvas.GraphicsContext;
 public class ResizableCanvas extends Canvas{
     private Controller controller;
     private GraphicsContext gc;
+    private double xLayout;
 
     public ResizableCanvas(Controller controller) {
         this.controller = controller;
         gc = this.getGraphicsContext2D();
+        setOnMouseMoved(controller::onMouseMoved);
+        setOnMouseDragged(controller::onMouseDrag);
+        setOnMouseReleased(controller::onMouseReleased);
+        setOnScroll(controller::onScroll);
+        setOnMouseExited(controller::onMouseExited);
+        setOnMouseClicked(controller::onMouseClickedOverCanvas);
     }
 
     /**
      * Перерисовка канваса
      */
     public void redraw() {
-        this.setWidth(controller.getCanvasPane().getWidth());
+        this.setLayoutX(xLayout);
+        this.setWidth(controller.getCanvasPane().getWidth()-xLayout);
         this.setHeight(controller.getCanvasPane().getHeight());
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
@@ -47,4 +55,11 @@ public class ResizableCanvas extends Canvas{
         gc.strokeLine(x0, y0-80, x0 - 5, y0-70);
     }
 
+    public double getXLayout() {
+        return xLayout;
+    }
+
+    public void setXLayout(double xLayout) {
+        this.xLayout = xLayout;
+    }
 }

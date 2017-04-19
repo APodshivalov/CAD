@@ -43,6 +43,7 @@ public class DrawController implements Controllable {
         }
         if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             firstPoint = null;
+            controller.getCanvas().redraw();
         }
     }
 

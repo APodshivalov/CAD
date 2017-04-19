@@ -15,6 +15,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -22,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
+    @FXML
+    private Pane sideMenu;
     @FXML
     private Label scaleLabel;
     @FXML
@@ -213,5 +216,9 @@ public class Controller implements Initializable{
 
     public void onNetAction(ActionEvent actionEvent) {
         canvas.redraw();
+    }
+
+    public Pane getSideMenu() {
+        return sideMenu;
     }
 }
