@@ -7,6 +7,7 @@ public class Point {
     private double x;
     private double y;
     private boolean isSelected;
+    private double near = 10;
 
     public Point(double x, double y) {
         this.x = x;
@@ -23,7 +24,7 @@ public class Point {
     }
 
     public boolean near(double x, double y) {
-        return (Math.abs(x - this.x) < 5) && (Math.abs(y - this.y) < 5);
+        return (Math.abs(x - this.x) < near) && (Math.abs(y - this.y) < near);
     }
 
     public boolean equals(double x, double y) {

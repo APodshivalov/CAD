@@ -4,6 +4,7 @@ import app.Controller;
 import app.interfaces.Controllable;
 import app.interfaces.ReactButton;
 import app.model.Model;
+import app.model.Point;
 import app.reactions.Lock;
 import app.reactions.ReactFactory;
 import app.utils.CoordinateUtils;
@@ -26,12 +27,13 @@ public class ReactionSupportController implements Controllable {
     public ReactionSupportController(Controller controller) {
         this.controller = controller;
         model = controller.getModel();
+        utils = controller.getCoordinateUtils();
         reac1 = controller.getReac1();
         reac1.setOnAction(event -> setActive(Lock.class));
     }
 
     private void setActive(Class<Lock> lockClass) {
-        activeButton = ReactFactory.getInstance(lockClass);
+        activeButton = ReactFactory.getInstance(lockClass, controller);
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
@@ -39,8 +41,11 @@ public class ReactionSupportController implements Controllable {
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
-        if (model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY())) == null) {
-
+        Point reactPoint = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+        if (reactPoint != null) {
+            activeButton.draw(reactPoint, mouseEvent);
+        } else {
+            controller.getCanvas().redraw();
         }
     }
 
