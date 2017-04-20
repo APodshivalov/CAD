@@ -60,11 +60,9 @@ public class CoordinateUtils {
     }
 
     public void onMouseDrag(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() == MouseButton.MIDDLE) {
-            tempDelX = mouseEvent.getX() - x;
-            tempDelY = mouseEvent.getY() - y;
-            controller.getCanvas().redraw();
-        }
+        tempDelX = mouseEvent.getX() - x;
+        tempDelY = mouseEvent.getY() - y;
+        controller.getCanvas().redraw();
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {

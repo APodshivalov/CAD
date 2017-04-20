@@ -10,7 +10,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller">
    <tabs>
       <Tab closable="false" text="Модель">
          <content>
@@ -18,7 +18,7 @@
                <children>
                   <Pane fx:id="controlPanel" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw">
+                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw" prefHeight="62.0" prefWidth="62.0">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -27,7 +27,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="68.0" layoutY="4.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport">
+                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="73.0" layoutY="4.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -36,7 +36,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="sectionButton" layoutX="130.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
+                        <ToggleButton fx:id="sectionButton" layoutX="137.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -45,7 +45,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="192.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="201.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -54,7 +54,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="254.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce">
+                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="265.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -70,17 +70,17 @@
                         <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
                         <ToggleButton fx:id="orto" layoutX="451.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Орто" textAlignment="CENTER" textOverrun="CLIP" visible="false">
                            <font>
-                              <Font name="Arial" size="9.0" />
+                              <Font name="Arial" size="8.0" />
                            </font>
                         </ToggleButton>
                         <ToggleButton fx:id="pivot" layoutX="387.0" maxHeight="21.0" maxWidth="55.0" minHeight="21.0" minWidth="55.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Привязка" textAlignment="CENTER" visible="false">
                            <font>
-                              <Font name="Arial" size="9.0" />
+                              <Font name="Arial" size="8.0" />
                            </font>
                         </ToggleButton>
                         <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" onAction="#onNetAction" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
                            <font>
-                              <Font name="Arial" size="9.0" />
+                              <Font name="Arial" size="8.0" />
                            </font>
                         </ToggleButton>
                         <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
@@ -92,9 +92,9 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Pane fx:id="sideMenu" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane fx:id="sideMenu" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ToggleButton layoutX="19.0" layoutY="20.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" textAlignment="CENTER">
+                              <ToggleButton fx:id="reac1" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -103,7 +103,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="19.0" layoutY="120.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 2">
+                              <ToggleButton fx:id="reac2" layoutX="9.0" layoutY="79.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -112,7 +112,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="19.0" layoutY="220.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 3">
+                              <ToggleButton fx:id="reac3" layoutX="9.0" layoutY="149.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -121,7 +121,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="19.0" layoutY="320.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Опора 4">
+                              <ToggleButton fx:id="reac4" layoutX="9.0" layoutY="219.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -130,6 +130,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
+                              <TextArea layoutX="9.0" layoutY="289.0" prefHeight="100.0" prefWidth="62.0" />
                            </children>
                         </Pane>
                      </children>

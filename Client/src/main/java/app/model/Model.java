@@ -1,7 +1,7 @@
 package app.model;
 
 import app.Controller;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class Model {
     private List<Bar> bars;
+    private List<Point> points;
     private Controller controller;
-    private GraphicsContext gc;
 
     public Model(Controller controller) {
         this.controller = controller;
-        gc = controller.getCanvas().getGraphicsContext2D();
         bars = new ArrayList<>();
+        points = new ArrayList<>();
     }
 
     /**
@@ -40,26 +40,30 @@ public class Model {
     }
 
     public Point findNearbyPoint(double x, double y) {
-        for (Bar bar : bars) {
-            if (bar.getFirstPoint().near(x, y)) {
-                return bar.getFirstPoint();
-            }
-            if (bar.getSecondPoint().near(x, y)) {
-                return bar.getSecondPoint();
+        for (Point p : points) {
+            if (p.near(x, y)) {
+                return p;
             }
         }
         return null;
     }
 
     public Point findPoint(double x, double y) {
-        for (Bar bar : bars) {
-            if (bar.getFirstPoint().equals(x, y)) {
-                return bar.getFirstPoint();
-            }
-            if (bar.getSecondPoint().equals(x, y)) {
-                return bar.getSecondPoint();
+        for (Point p : points) {
+            if (p.equals(x, y)) {
+                return p;
             }
         }
         return null;
+    }
+
+    public void addPoint(Point point) {
+        points.add(point);
+    }
+
+    public void select(double x, double y, double x1, double y1) {
+        for (Bar bar : bars) {
+            bar.setIsSelected(bar.between(x, y, x1, y1));
+        }
     }
 }

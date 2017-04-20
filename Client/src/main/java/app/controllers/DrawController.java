@@ -50,9 +50,20 @@ public class DrawController implements Controllable {
     private void drawNewElements() {
         Point pointAtThisCoordinate = model.findPoint(utils.toRealX(), utils.toRealY());
         if (firstPoint == null) {
-            firstPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(), utils.toRealY()) : pointAtThisCoordinate;
+            if (pointAtThisCoordinate == null) {
+                firstPoint = new Point(utils.toRealX(), utils.toRealY());
+                model.addPoint(firstPoint);
+            } else {
+                firstPoint = pointAtThisCoordinate;
+            }
         } else {
-            Point newPoint = pointAtThisCoordinate == null ? new Point(utils.toRealX(), utils.toRealY()) : pointAtThisCoordinate;
+            Point newPoint;
+            if (pointAtThisCoordinate == null) {
+                newPoint = new Point(utils.toRealX(), utils.toRealY());
+                model.addPoint(newPoint);
+            } else {
+                newPoint = pointAtThisCoordinate;
+            }
             model.addBar(new Bar(firstPoint, newPoint));
             firstPoint = newPoint;
             controller.getCanvas().redraw();

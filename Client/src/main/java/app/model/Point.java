@@ -6,10 +6,12 @@ package app.model;
 public class Point {
     private double x;
     private double y;
+    private boolean isSelected;
 
-    public Point(double x, double y){
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
+        isSelected = false;
     }
 
     public double getX() {
@@ -26,5 +28,18 @@ public class Point {
 
     public boolean equals(double x, double y) {
         return this.x == x && this.y == y;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean between(double x1, double y1, double x2, double y2) {
+        isSelected = x1 <= x && x <= x2 && y2 <= y && y <= y1;
+        return isSelected;
     }
 }
