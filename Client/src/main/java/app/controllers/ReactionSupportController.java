@@ -1,13 +1,14 @@
 package app.controllers;
 
 import app.Controller;
+import app.ReactionFactory;
 import app.interfaces.Controllable;
 import app.interfaces.ReactButton;
 import app.model.Model;
 import app.model.Point;
 import app.reactions.Lock;
-import app.reactions.ReactFactory;
 import app.utils.CoordinateUtils;
+import javafx.event.ActionEvent;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
@@ -29,23 +30,34 @@ public class ReactionSupportController implements Controllable {
         model = controller.getModel();
         utils = controller.getCoordinateUtils();
         reac1 = controller.getReac1();
-        reac1.setOnAction(event -> setActive(Lock.class));
+        reac2 = controller.getReac2();
+        reac3 = controller.getReac3();
+        reac4 = controller.getReac4();
+        reac1.setOnAction(event -> setAction(reac1, Lock.class));
     }
 
-    private void setActive(Class<Lock> lockClass) {
-        activeButton = ReactFactory.getInstance(lockClass, controller);
+    private void setAction(ToggleButton button, Class<? extends ReactButton> lockClass) {
+        if (button.isSelected()){
+            activeButton = ReactionFactory.getInstance(lockClass, controller);
+        }
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
+        Point reactPoint = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+        if (reactPoint != null) {
+            activeButton.setRotation(activeButton.getRotation(reactPoint, mouseEvent));
+            reactPoint.setReaction(activeButton);
+        }
+        controller.getCanvas().redraw();
+        activeButton = ReactionFactory.getInstance(activeButton.getClass(), controller);
     }
 
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
+        controller.getCanvas().redraw(mouseEvent);
         Point reactPoint = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
         if (reactPoint != null) {
             activeButton.draw(reactPoint, mouseEvent);
-        } else {
-            controller.getCanvas().redraw();
         }
     }
 

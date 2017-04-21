@@ -1,9 +1,11 @@
 package app;
 
 import app.controllers.DrawController;
+import app.controllers.ReactionSupportController;
 import app.utils.CoordinateUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Наследник обычного канваса с обработкой изменения экрана и его перерисовкой
@@ -61,5 +63,14 @@ public class ResizableCanvas extends Canvas{
 
     public void setXLayout(double xLayout) {
         this.xLayout = xLayout;
+    }
+
+    public void redraw(MouseEvent mouseEvent) {
+        this.setLayoutX(xLayout);
+        this.setWidth(controller.getCanvasPane().getWidth()-xLayout);
+        this.setHeight(controller.getCanvasPane().getHeight());
+        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+        controller.getModel().draw(mouseEvent);
+        drawCoordinates();
     }
 }

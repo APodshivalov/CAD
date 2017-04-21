@@ -25,6 +25,7 @@ public class Model {
      * Отрисовка модели
      */
     public void draw() {
+        points.forEach(point -> point.draw(controller));
         bars.forEach(bar -> bar.draw(controller));
     }
 
@@ -65,5 +66,10 @@ public class Model {
         for (Bar bar : bars) {
             bar.setIsSelected(bar.between(x, y, x1, y1));
         }
+    }
+
+    public void draw(MouseEvent mouseEvent) {
+        points.forEach(point -> point.draw(controller, mouseEvent));
+        bars.forEach(bar -> bar.draw(controller));
     }
 }
