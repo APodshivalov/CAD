@@ -65,25 +65,16 @@ public class Point {
     public void draw(Controller controller) {
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
-        if (isSelected) {
-            gc.setStroke(Color.RED);
-        }
         gc.fillOval(utils.fromRealX(x) - 1, utils.fromRealY(y) - 1, 3 ,3);
-        gc.setStroke(Color.BLACK);
         reaction.draw(this);
     }
 
     public void draw(Controller controller, MouseEvent mouseEvent) {
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
-        if (isSelected) {
-            gc.setStroke(Color.RED);
-        }
         gc.fillOval(utils.fromRealX(x) - 1, utils.fromRealY(y) - 1, 3 ,3);
-        gc.setStroke(Color.BLACK);
-        if (this.near(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()))){
-            reaction.draw(this, mouseEvent);
-        } else {
+        if (controller.getReactButtons().getSelectedToggle() == null ||
+                !this.near(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()))){
             reaction.draw(this);
         }
     }

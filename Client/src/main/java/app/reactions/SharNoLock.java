@@ -10,17 +10,17 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 /**
- * Created by podsh on 20.04.2017.
+ * Created by podsh on 23.04.2017.
  */
-public class Lock implements ReactButton {
+public class SharNoLock implements ReactButton {
     private Controller controller;
     private GraphicsContext gc;
     private String imageName;
     private int rotation;
 
-    public Lock(Controller controller) {
+    public SharNoLock(Controller controller) {
         this.controller = controller;
-        imageName = "Reac1";
+        imageName = "Reac3";
         gc = controller.getCanvas().getGraphicsContext2D();
     }
 
@@ -31,7 +31,6 @@ public class Lock implements ReactButton {
                 controller.getCoordinateUtils().fromRealY(reactPoint.getY() + 20));
     }
 
-
     @Override
     public void draw(Point point) {
         double x = controller.getCoordinateUtils().fromRealX(point.getX());
@@ -39,6 +38,7 @@ public class Lock implements ReactButton {
         gc.drawImage(ImageFactory.getImage(imageName, rotation), x - 20, y - 20);
     }
 
+    @Override
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }

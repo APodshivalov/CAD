@@ -111,6 +111,10 @@ public class Controller implements Initializable {
         changeEventListener(drawButton, ControllerFactory.getDrawController(this));
     }
 
+    public void reactionSupportOn(ActionEvent actionEvent) {
+        changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this));
+    }
+
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
         if (currentEventListener != null) {
             currentEventListener.disable();
@@ -121,10 +125,6 @@ public class Controller implements Initializable {
         } else {
             currentEventListener = null;
         }
-    }
-
-    public void reactionSupportOn(ActionEvent actionEvent) {
-        changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this));
     }
 
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
@@ -275,5 +275,9 @@ public class Controller implements Initializable {
 
     public ToggleGroup getReactButtons() {
         return reactButtons;
+    }
+
+    public void setStatus(String s) {
+        statusLabel.setText(s);
     }
 }

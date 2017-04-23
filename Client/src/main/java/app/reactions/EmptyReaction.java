@@ -22,9 +22,4 @@ public class EmptyReaction implements ReactButton {
     public void setRotation(int rotation) {
 
     }
-
-    @Override
-    public int getRotation(Point reactPoint, MouseEvent mouseEvent) {
-        return 0;
-    }
 }

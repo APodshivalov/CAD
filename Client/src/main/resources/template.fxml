@@ -130,7 +130,6 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <TextArea layoutX="9.0" layoutY="289.0" prefHeight="100.0" prefWidth="62.0" />
                            </children>
                         </Pane>
                      </children>

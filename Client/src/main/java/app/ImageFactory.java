@@ -7,6 +7,6 @@ import javafx.scene.image.Image;
  */
 public class ImageFactory {
     public static Image getImage(String imageName, int i) {
-        return new Image("images/reactions/mini" + imageName + "grad" + i + ".png", 40,40,true,false);
+        return new Image("images/reactions/mini" + imageName + "grad" + i + ".png", 40,40,true,true);
     }
 }

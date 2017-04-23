@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
  * Наследник обычного канваса с обработкой изменения экрана и его перерисовкой
  * Created by podsh on 08.04.2017.
  */
-public class ResizableCanvas extends Canvas{
+public class ResizableCanvas extends Canvas {
     private Controller controller;
     private GraphicsContext gc;
     private double xLayout;
@@ -32,14 +32,14 @@ public class ResizableCanvas extends Canvas{
      */
     public void redraw() {
         this.setLayoutX(xLayout);
-        this.setWidth(controller.getCanvasPane().getWidth()-xLayout);
+        this.setWidth(controller.getCanvasPane().getWidth() - xLayout);
         this.setHeight(controller.getCanvasPane().getHeight());
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
         drawCoordinates();
-        if (controller.getCurrentEventListener() instanceof DrawController){
+        if (controller.getCurrentEventListener() instanceof DrawController) {
             DrawController drawController = (DrawController) controller.getCurrentEventListener();
-            if (controller.getNet().isSelected()){
+            if (controller.getNet().isSelected()) {
                 drawController.drawDots();
             }
             drawController.drawCursor();
@@ -51,10 +51,10 @@ public class ResizableCanvas extends Canvas{
         double y0 = controller.getCoordinateUtils().fromRealY(0);
         gc.strokeLine(x0, y0, x0, y0 - 80);
         gc.strokeLine(x0, y0, x0 + 80, y0);
-        gc.strokeLine(x0 + 80, y0, x0 + 70, y0-5);
-        gc.strokeLine(x0 + 80, y0, x0 + 70, y0+5);
-        gc.strokeLine(x0, y0-80, x0 + 5, y0-70);
-        gc.strokeLine(x0, y0-80, x0 - 5, y0-70);
+        gc.strokeLine(x0 + 80, y0, x0 + 70, y0 - 5);
+        gc.strokeLine(x0 + 80, y0, x0 + 70, y0 + 5);
+        gc.strokeLine(x0, y0 - 80, x0 + 5, y0 - 70);
+        gc.strokeLine(x0, y0 - 80, x0 - 5, y0 - 70);
     }
 
     public double getXLayout() {
@@ -67,7 +67,7 @@ public class ResizableCanvas extends Canvas{
 
     public void redraw(MouseEvent mouseEvent) {
         this.setLayoutX(xLayout);
-        this.setWidth(controller.getCanvasPane().getWidth()-xLayout);
+        this.setWidth(controller.getCanvasPane().getWidth() - xLayout);
         this.setHeight(controller.getCanvasPane().getHeight());
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw(mouseEvent);

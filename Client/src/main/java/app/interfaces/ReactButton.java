@@ -12,7 +12,5 @@ public interface ReactButton {
     void draw(Point point);
 
     void setRotation(int rotation);
-
-    int getRotation(Point reactPoint, MouseEvent mouseEvent);
 }
 
