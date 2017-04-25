@@ -1,5 +1,7 @@
 package server;
 
+import model.Material;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,9 +14,13 @@ import javax.ws.rs.core.Response;
 @Path("/")
 public class Service {
     @GET
-    @Path("/get")
+    @Path("/material")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response get() {
-        return Response.ok("response").build();
+        Material m = new Material();
+        m.setId("1");
+        m.setName("Steel");
+        m.setE(2_000_000);
+        return Response.ok(m).build();
     }
 }
