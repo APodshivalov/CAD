@@ -7,6 +7,7 @@ import app.utils.CoordinateUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -25,6 +26,12 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
+    private ToggleButton woodButton;
+    @FXML
+    private ChoiceBox materialChoiceBox;
+    @FXML
+    private Pane cutSideMenu;
+    @FXML
     private ToggleButton reac1;
     @FXML
     private ToggleButton reac2;
@@ -33,7 +40,7 @@ public class Controller implements Initializable {
     @FXML
     private ToggleButton reac4;
     @FXML
-    private Pane sideMenu;
+    private Pane reacSideMenu;
     @FXML
     private Label scaleLabel;
     @FXML
@@ -45,7 +52,7 @@ public class Controller implements Initializable {
     @FXML
     private ToggleButton reactionSupportButton;
     @FXML
-    private ToggleButton sectionButton;
+    private ToggleButton cutButton;
     @FXML
     private ToggleButton materialButton;
     @FXML
@@ -86,7 +93,7 @@ public class Controller implements Initializable {
         reactionSupportButton.setToggleGroup(modelGroup);
         materialButton.setToggleGroup(modelGroup);
         forceButton.setToggleGroup(modelGroup);
-        sectionButton.setToggleGroup(modelGroup);
+        cutButton.setToggleGroup(modelGroup);
 
         reactButtons = new ToggleGroup();
         reac1.setToggleGroup(reactButtons);
@@ -113,6 +120,10 @@ public class Controller implements Initializable {
 
     public void reactionSupportOn(ActionEvent actionEvent) {
         changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this));
+    }
+
+    public void cutButtonOn(ActionEvent actionEvent) {
+        changeEventListener(cutButton, ControllerFactory.getCutController(this));
     }
 
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
@@ -253,8 +264,8 @@ public class Controller implements Initializable {
         canvas.redraw();
     }
 
-    public Pane getSideMenu() {
-        return sideMenu;
+    public Pane getReacSideMenu() {
+        return reacSideMenu;
     }
 
     public ToggleButton getReac1() {
@@ -279,5 +290,17 @@ public class Controller implements Initializable {
 
     public void setStatus(String s) {
         statusLabel.setText(s);
+    }
+
+    public Pane getCutSideMenu() {
+        return cutSideMenu;
+    }
+
+    public ToggleButton getWoodButton() {
+        return woodButton;
+    }
+
+    public ChoiceBox getMaterialChoiceBox() {
+        return materialChoiceBox;
     }
 }

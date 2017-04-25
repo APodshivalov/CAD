@@ -85,15 +85,15 @@ public class ReactionSupportController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getSideMenu().setVisible(false);
+        controller.getReacSideMenu().setVisible(false);
         controller.getCanvas().setXLayout(0);
         controller.getCanvas().redraw();
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getSideMenu().getWidth());
-        controller.getSideMenu().setVisible(true);
+        controller.getCanvas().setXLayout(controller.getReacSideMenu().getWidth());
+        controller.getReacSideMenu().setVisible(true);
         controller.getCanvas().redraw();
     }
 }

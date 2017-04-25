@@ -51,7 +51,13 @@
     -fx-border-width: 1 0 0 0;
 }
 
-#sideMenu {
+#reacSideMenu{
+    -fx-background-color: #D7CEC7;
+    -fx-border-color: #C09F80;
+    -fx-border-width: 0 1 0 0;
+}
+
+#cutSideMenu {
     -fx-background-color: #D7CEC7;
     -fx-border-color: #C09F80;
     -fx-border-width: 0 1 0 0;
@@ -61,6 +67,15 @@
     -fx-border-color: #3B3738;
     -fx-background-color: white;
     -fx-border-width: 0 0 2 0;
+}
+
+#materialChoiceBox{
+    -fx-background-radius: 0px;
+    -fx-faint-focus-color: #3B3738;
+    -fx-border-color: #3B3738;
+    -fx-background-color: #D7CEC7;
+    -fx-background-insets: 1px;
+    -fx-background-position: center;
 }
 
 #76323F

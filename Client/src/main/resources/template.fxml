@@ -36,7 +36,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="sectionButton" layoutX="137.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
+                        <ToggleButton fx:id="cutButton" layoutX="137.0" layoutY="4.0" mnemonicParsing="false" onAction="#cutButtonOn" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -92,7 +92,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Pane fx:id="sideMenu" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane fx:id="reacSideMenu" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ToggleButton fx:id="reac1" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
                                  <graphic>
@@ -130,6 +130,29 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="cutSideMenu" layoutX="10.0" layoutY="10.0" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ToggleButton fx:id="woodButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/wood.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <ToggleButton fx:id="reac21" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                 <graphic>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/metal.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <ChoiceBox fx:id="materialChoiceBox" layoutX="9.0" layoutY="87.0" prefWidth="126.0" />
                            </children>
                         </Pane>
                      </children>

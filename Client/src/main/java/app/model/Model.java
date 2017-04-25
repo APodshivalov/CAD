@@ -13,6 +13,7 @@ import java.util.List;
 public class Model {
     private List<Bar> bars;
     private List<Point> points;
+    private List<Material> materials;
     private Controller controller;
 
     public Model(Controller controller) {

@@ -9,6 +9,7 @@ import app.interfaces.Controllable;
 public class ControllerFactory {
     private static DrawController drawController;
     private static ReactionSupportController reactionSupportController;
+    private static CutController cutController;
 
     public static Controllable getDrawController(Controller controller) {
         if (drawController == null) {
@@ -22,5 +23,12 @@ public class ControllerFactory {
             reactionSupportController = new ReactionSupportController(controller);
         }
         return reactionSupportController;
+    }
+
+    public static Controllable getCutController(Controller controller) {
+        if (cutController == null) {
+            cutController = new CutController(controller);
+        }
+        return cutController;
     }
 }
