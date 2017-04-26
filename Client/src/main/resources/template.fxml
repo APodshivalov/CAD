@@ -85,6 +85,16 @@
                         </ToggleButton>
                         <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
                         <Label fx:id="scaleLabel" layoutX="286.0" layoutY="2.0" />
+                        <ToggleButton fx:id="materialView" layoutX="540.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="М">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </ToggleButton>
+                        <ToggleButton layoutX="523.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="С">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </ToggleButton>
                      </children>
                   </Pane>
                   <AnchorPane fx:id="canvasPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

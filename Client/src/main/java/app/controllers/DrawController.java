@@ -10,6 +10,7 @@ import javafx.scene.Cursor;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -103,6 +104,7 @@ public class DrawController implements Controllable {
     }
 
     public void drawDots() {
+        gc.setStroke(Color.BLACK);
         double x = utils.toRealX(0);
         x = utils.fromRealX(x - x%100);
         while (x < controller.getCanvas().getWidth()){
@@ -127,6 +129,7 @@ public class DrawController implements Controllable {
     public void drawCursor() {
         double x = utils.getX();
         double y = utils.getY();
+        gc.setStroke(Color.BLACK);
         gc.strokeLine(x, y + 3, x, y + 8);
         gc.strokeLine(x + 3, y, x + 8, y);
         gc.strokeLine(x, y - 3, x, y - 8);

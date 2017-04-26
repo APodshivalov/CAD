@@ -1,12 +1,11 @@
 package app.model;
 
 import app.Controller;
+import app.utils.Colors;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by podsh on 08.04.2017.
@@ -15,7 +14,7 @@ import java.util.Set;
 public class Model {
     private List<Bar> bars;
     private List<Point> points;
-    private Set<Material> materials;
+    private ArrayOfMaterial arrayOfMaterial;
     private Controller controller;
     private Material currentMaterial;
 
@@ -23,7 +22,7 @@ public class Model {
         this.controller = controller;
         bars = new ArrayList<>();
         points = new ArrayList<>();
-        materials = new HashSet<>();
+        arrayOfMaterial = new ArrayOfMaterial();
     }
 
     /**
@@ -42,6 +41,7 @@ public class Model {
     public void addBar(Bar bar) {
         if (bars.stream().noneMatch(bar::equals)) {
             bars.add(bar);
+            bar.setMaterial(currentMaterial);
         }
     }
 
@@ -84,6 +84,10 @@ public class Model {
             bar.setIsSelected(false);
         });
         currentMaterial = selectedItem;
-        materials.add(selectedItem);
+        arrayOfMaterial.add(selectedItem);
+    }
+
+    public ArrayOfMaterial getArrayOfMaterial() {
+        return arrayOfMaterial;
     }
 }

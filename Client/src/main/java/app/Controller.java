@@ -26,7 +26,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-
+    @FXML
+    private ToggleButton materialView;
     @FXML
     private Button acceptMaterial;
     @FXML
@@ -118,6 +119,8 @@ public class Controller implements Initializable {
         scaleLabel.setText("M 1:1");
         coordinatesLabel.setText(String.format("x: %-6.2f, y: %-6.2f", coordinateUtils.toRealX(), coordinateUtils
                 .toRealY()));
+
+        materialView.setOnAction(event -> canvas.redraw());
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -320,5 +323,9 @@ public class Controller implements Initializable {
 
     public Button getAcceptMaterial() {
         return acceptMaterial;
+    }
+
+    public ToggleButton getMaterialView() {
+        return materialView;
     }
 }

@@ -1,11 +1,12 @@
 package app;
 
 import app.controllers.DrawController;
-import app.controllers.ReactionSupportController;
-import app.utils.CoordinateUtils;
+import app.model.Material;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Наследник обычного канваса с обработкой изменения экрана и его перерисовкой
@@ -44,11 +45,27 @@ public class ResizableCanvas extends Canvas {
             }
             drawController.drawCursor();
         }
+        if (controller.getMaterialView().isSelected()){
+            drawPalette();
+        }
+    }
+
+    private void drawPalette() {
+        double x = controller.getCanvas().getWidth() - 40;
+        double y = 20;
+        for (Material m : controller.getModel().getArrayOfMaterial().getItem()){
+            gc.setFill(m.getColor());
+            gc.fillRect(x, y, 20, 20);
+            gc.setTextAlign(TextAlignment.RIGHT);
+            gc.strokeText(m.getName(), x - 5, y + 14);
+            y += 25;
+        }
     }
 
     private void drawCoordinates() {
         double x0 = controller.getCoordinateUtils().fromRealX(0);
         double y0 = controller.getCoordinateUtils().fromRealY(0);
+        gc.setStroke(Color.BLACK);
         gc.strokeLine(x0, y0, x0, y0 - 80);
         gc.strokeLine(x0, y0, x0 + 80, y0);
         gc.strokeLine(x0 + 80, y0, x0 + 70, y0 - 5);

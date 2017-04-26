@@ -21,14 +21,38 @@ public class Bar {
     }
 
     public void draw(Controller controller) {
+
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
         if (isSelected) {
             gc.setStroke(Color.RED);
+            draw(gc, utils);
+        } else {
+            if (controller.getMaterialView().isSelected()){
+                drawWithColors(gc, utils);
+            } else {
+                drawWithoutColors(gc, utils);
+            }
         }
+    }
+
+    private void drawWithoutColors(GraphicsContext gc, CoordinateUtils utils) {
+        gc.setStroke(Color.BLACK);
+        draw(gc, utils);
+    }
+
+    private void draw(GraphicsContext gc, CoordinateUtils utils) {
         gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
                 utils.fromRealX(secondPoint.getX()), utils.fromRealY(secondPoint.getY()));
-        gc.setStroke(Color.BLACK);
+    }
+
+    private void drawWithColors(GraphicsContext gc, CoordinateUtils utils) {
+        if (material == null){
+            gc.setStroke(Color.BLACK);
+        } else {
+            gc.setStroke(material.getColor());
+        }
+        draw(gc, utils);
     }
 
     public boolean between(double x1, double y1, double x2, double y2) {

@@ -100,4 +100,17 @@
     -fx-background-color: #C09F80;
 }
 
+#acceptMaterial {
+    -fx-background-radius: 0px;
+    -fx-faint-focus-color: #3B3738;
+    -fx-border-color: #3B3738;
+    -fx-background-color: #D7CEC7;
+}
+
+#acceptMaterial:hover {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: #C09F80;
+}
+
 #76323F
