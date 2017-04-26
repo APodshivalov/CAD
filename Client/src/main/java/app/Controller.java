@@ -7,7 +7,9 @@ import app.utils.CoordinateUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -26,9 +28,13 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    private ToggleButton woodButton;
+    private Button acceptMaterial;
     @FXML
-    private ChoiceBox materialChoiceBox;
+    private ComboBox materialComboBox;
+    @FXML
+    private ToggleButton steelButton;
+    @FXML
+    private ToggleButton woodButton;
     @FXML
     private Pane cutSideMenu;
     @FXML
@@ -124,6 +130,10 @@ public class Controller implements Initializable {
 
     public void cutButtonOn(ActionEvent actionEvent) {
         changeEventListener(cutButton, ControllerFactory.getCutController(this));
+    }
+
+    public void materialButtonOn(ActionEvent actionEvent) {
+        changeEventListener(materialButton, ControllerFactory.getMaterialController(this));
     }
 
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
@@ -300,7 +310,15 @@ public class Controller implements Initializable {
         return woodButton;
     }
 
-    public ChoiceBox getMaterialChoiceBox() {
-        return materialChoiceBox;
+    public ToggleButton getSteelButton() {
+        return steelButton;
+    }
+
+    public ComboBox getMaterialComboBox() {
+        return materialComboBox;
+    }
+
+    public Button getAcceptMaterial() {
+        return acceptMaterial;
     }
 }

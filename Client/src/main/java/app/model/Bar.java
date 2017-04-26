@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 public class Bar {
     private Point firstPoint;
     private Point secondPoint;
+    private Material material;
     private boolean isSelected;
 
     public Bar(Point first, Point second){
@@ -49,5 +50,17 @@ public class Bar {
 
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 }

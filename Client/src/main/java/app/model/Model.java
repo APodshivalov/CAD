@@ -4,7 +4,9 @@ import app.Controller;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by podsh on 08.04.2017.
@@ -13,13 +15,15 @@ import java.util.List;
 public class Model {
     private List<Bar> bars;
     private List<Point> points;
-    private List<Material> materials;
+    private Set<Material> materials;
     private Controller controller;
+    private Material currentMaterial;
 
     public Model(Controller controller) {
         this.controller = controller;
         bars = new ArrayList<>();
         points = new ArrayList<>();
+        materials = new HashSet<>();
     }
 
     /**
@@ -72,5 +76,14 @@ public class Model {
     public void draw(MouseEvent mouseEvent) {
         points.forEach(point -> point.draw(controller, mouseEvent));
         bars.forEach(bar -> bar.draw(controller));
+    }
+
+    public void setCurrentMaterial(Material selectedItem) {
+        bars.stream().filter(Bar::isSelected).forEach(bar -> {
+            bar.setMaterial(selectedItem);
+            bar.setIsSelected(false);
+        });
+        currentMaterial = selectedItem;
+        materials.add(selectedItem);
     }
 }

@@ -69,13 +69,35 @@
     -fx-border-width: 0 0 2 0;
 }
 
-#materialChoiceBox{
+#materialComboBox{
     -fx-background-radius: 0px;
     -fx-faint-focus-color: #3B3738;
     -fx-border-color: #3B3738;
     -fx-background-color: #D7CEC7;
     -fx-background-insets: 1px;
     -fx-background-position: center;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #3B3738, #D7CEC7;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0;
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-background-color: #D7CEC7;
+}
+
+.combo-box-popup .list-view .list-cell:selected
+{
+    -fx-background-color: #76323F;
+}
+
+.combo-box-popup .list-view .list-cell:hover
+{
+    -fx-background-color: #C09F80;
 }
 
 #76323F

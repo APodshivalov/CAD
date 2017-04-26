@@ -10,6 +10,7 @@ public class ControllerFactory {
     private static DrawController drawController;
     private static ReactionSupportController reactionSupportController;
     private static CutController cutController;
+    private static MaterialController materialController;
 
     public static Controllable getDrawController(Controller controller) {
         if (drawController == null) {
@@ -30,5 +31,12 @@ public class ControllerFactory {
             cutController = new CutController(controller);
         }
         return cutController;
+    }
+
+    public static Controllable getMaterialController(Controller controller) {
+        if (materialController == null) {
+            materialController = new MaterialController(controller);
+        }
+        return materialController;
     }
 }

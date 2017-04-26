@@ -10,7 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by APodshivalov on 25.04.2017.
@@ -18,18 +17,26 @@ import java.util.List;
 @Path("/")
 public class Service {
     @GET
-    @Path("/material")
-    @Produces({(MediaType.APPLICATION_JSON + ";charset=utf-8")})
-    @Consumes({(MediaType.APPLICATION_JSON + ";charset=utf-8")})
-    public Response get() {
-        Material m = new Material();
-        m.setId("1");
-        m.setName("Сталь-3");
-        m.setE(2_000_000);
-        Material q = new Material();
-        q.setId("2");
-        q.setName("Сталь легированая");
-        q.setE(2_000_000);
+    @Path("/material/wood")
+    @Produces({(MediaType.APPLICATION_JSON)})
+    @Consumes({(MediaType.APPLICATION_JSON)})
+    public Response getWood() {
+        Material m = new Material("1", "Wood1", 2_000_000);
+        Material q = new Material("2", "Wood2", 2_000_000);
+        ArrayOfMaterial arrayOfMaterial = new ArrayOfMaterial();
+        arrayOfMaterial.setItem(new ArrayList<>());
+        arrayOfMaterial.getItem().add(m);
+        arrayOfMaterial.getItem().add(q);
+        return Response.ok(arrayOfMaterial).build();
+    }
+
+    @GET
+    @Path("/material/steel")
+    @Produces({(MediaType.APPLICATION_JSON)})
+    @Consumes({(MediaType.APPLICATION_JSON)})
+    public Response getSteel() {
+        Material m = new Material("1", "Steel1", 2_000_000);
+        Material q = new Material("2", "Steel2", 2_000_000);
         ArrayOfMaterial arrayOfMaterial = new ArrayOfMaterial();
         arrayOfMaterial.setItem(new ArrayList<>());
         arrayOfMaterial.getItem().add(m);

@@ -26,6 +26,12 @@ public class Material {
 
     public Material(){}
 
+    public Material(String s, String wood1, int i) {
+        id = s;
+        name = wood1;
+        e = i;
+    }
+
     public String getId() {
         return id;
     }

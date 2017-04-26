@@ -45,7 +45,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="201.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="201.0" layoutY="4.0" mnemonicParsing="false" onAction="#materialButtonOn" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -143,7 +143,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton fx:id="reac21" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                              <ToggleButton fx:id="steelButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -152,7 +152,8 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ChoiceBox fx:id="materialChoiceBox" layoutX="9.0" layoutY="87.0" prefWidth="126.0" />
+                              <ComboBox fx:id="materialComboBox" layoutX="9.0" layoutY="87.0" prefWidth="126.0" />
+                              <Button fx:id="acceptMaterial" layoutX="9.0" layoutY="130.0" mnemonicParsing="false" prefWidth="126.0" text="Применить" />
                            </children>
                         </Pane>
                      </children>
