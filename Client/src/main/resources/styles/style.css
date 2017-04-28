@@ -51,13 +51,7 @@
     -fx-border-width: 1 0 0 0;
 }
 
-#reacSideMenu{
-    -fx-background-color: #D7CEC7;
-    -fx-border-color: #C09F80;
-    -fx-border-width: 0 1 0 0;
-}
-
-#cutSideMenu {
+#materialPane, #cutPane {
     -fx-background-color: #D7CEC7;
     -fx-border-color: #C09F80;
     -fx-border-width: 0 1 0 0;

@@ -16,7 +16,6 @@ public class Point {
     private double y;
     private boolean isSelected;
     private ReactButton reaction;
-    private double near = 30;
 
     public Point(double x, double y) {
         this.x = x;
@@ -31,10 +30,6 @@ public class Point {
 
     public double getY() {
         return y;
-    }
-
-    public boolean near(double x, double y) {
-        return (Math.abs(x - this.x) < near) && (Math.abs(y - this.y) < near);
     }
 
     public boolean equals(double x, double y) {
@@ -74,7 +69,7 @@ public class Point {
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
         gc.fillOval(utils.fromRealX(x) - 1, utils.fromRealY(y) - 1, 3 ,3);
         if (controller.getReactButtons().getSelectedToggle() == null ||
-                !this.near(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()))){
+                !controller.getCoordinateUtils().isNear(this, mouseEvent.getX(), mouseEvent.getY())){
             reaction.draw(this);
         }
     }

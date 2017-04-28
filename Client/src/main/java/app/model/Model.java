@@ -2,6 +2,7 @@ package app.model;
 
 import app.Controller;
 import app.utils.Colors;
+import app.utils.CoordinateUtils;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Model {
 
     public Point findNearbyPoint(double x, double y) {
         for (Point p : points) {
-            if (p.near(x, y)) {
+            if (controller.getCoordinateUtils().isNear(p,x,y)){
                 return p;
             }
         }

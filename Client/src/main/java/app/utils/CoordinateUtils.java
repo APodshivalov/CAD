@@ -2,6 +2,7 @@ package app.utils;
 
 import app.Controller;
 import app.controllers.DrawController;
+import app.model.Point;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
@@ -22,6 +23,7 @@ public class CoordinateUtils {
     private double delY;
     private List<Double> scalesList;
     private double scale;
+    private double near;
 
     public CoordinateUtils(Controller controller) {
         this.controller = controller;
@@ -41,6 +43,7 @@ public class CoordinateUtils {
         scalesList.add(8.0);
         scalesList.add(10.0);
         scale = 1;
+        near = 25;
     }
 
     public double toRealX(double x) {
@@ -130,5 +133,9 @@ public class CoordinateUtils {
 
     public void addDelX(double x) {
         delX += x;
+    }
+
+    public boolean isNear(Point p, double x, double y) {
+        return Math.abs(fromRealX(p.getX())-x) < near && Math.abs(fromRealY(p.getY())-y) < near;
     }
 }

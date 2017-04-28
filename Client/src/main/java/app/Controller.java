@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
+    private Pane cutPane;
+    @FXML
     private ToggleButton materialView;
     @FXML
     private Button acceptMaterial;
@@ -37,7 +39,7 @@ public class Controller implements Initializable {
     @FXML
     private ToggleButton woodButton;
     @FXML
-    private Pane cutSideMenu;
+    private Pane materialPane;
     @FXML
     private ToggleButton reac1;
     @FXML
@@ -95,6 +97,7 @@ public class Controller implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        currentEventListener = ControllerFactory.getEmpty();
         ToggleGroup modelGroup = new ToggleGroup();
         drawButton.setToggleGroup(modelGroup);
         reactionSupportButton.setToggleGroup(modelGroup);
@@ -140,15 +143,14 @@ public class Controller implements Initializable {
     }
 
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
-        if (currentEventListener != null) {
-            currentEventListener.disable();
-        }
+        currentEventListener.disable();
         if (toggleButton.isSelected()) {
             currentEventListener = eventListener;
             currentEventListener.enable();
         } else {
-            currentEventListener = null;
+            currentEventListener = ControllerFactory.getEmpty();
         }
+        canvas.redraw();
     }
 
     public void onMouseEnteredDraw(MouseEvent mouseEvent) {
@@ -305,8 +307,8 @@ public class Controller implements Initializable {
         statusLabel.setText(s);
     }
 
-    public Pane getCutSideMenu() {
-        return cutSideMenu;
+    public Pane getMaterialPane() {
+        return materialPane;
     }
 
     public ToggleButton getWoodButton() {
@@ -327,5 +329,9 @@ public class Controller implements Initializable {
 
     public ToggleButton getMaterialView() {
         return materialView;
+    }
+
+    public Pane getCutPane() {
+        return cutPane;
     }
 }

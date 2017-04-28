@@ -75,7 +75,7 @@ public class DrawController implements Controllable {
     public void onMouseMoved(MouseEvent mouseEvent) {
         // Привязка курсора к точкам
         if (controller.getPivot().isSelected()) {
-            Point p = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+            Point p = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
             if (p != null) {
                 utils.setY(utils.fromRealY(p.getY()));
                 utils.setX(utils.fromRealX(p.getX()));

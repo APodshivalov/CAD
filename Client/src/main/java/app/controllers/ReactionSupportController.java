@@ -64,7 +64,7 @@ public class ReactionSupportController implements Controllable {
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
         if (activeButton != null){
-            Point reactPoint = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+            Point reactPoint = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
             if (reactPoint != null) {
                 activeButton.setRotation(ReactionFactory.getRotation(reactPoint, mouseEvent, controller));
                 reactPoint.setReaction(activeButton);
@@ -77,7 +77,7 @@ public class ReactionSupportController implements Controllable {
     @Override
     public void onMouseMoved(MouseEvent mouseEvent) {
         controller.getCanvas().redraw(mouseEvent);
-        Point reactPoint = model.findNearbyPoint(utils.toRealX(mouseEvent.getX()), utils.toRealY(mouseEvent.getY()));
+        Point reactPoint = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
         if (reactPoint != null && activeButton != null) {
             activeButton.draw(reactPoint, mouseEvent);
         }

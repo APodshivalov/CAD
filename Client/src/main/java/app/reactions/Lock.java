@@ -14,29 +14,26 @@ import javafx.scene.input.MouseEvent;
  */
 public class Lock implements ReactButton {
     private Controller controller;
-    private GraphicsContext gc;
     private String imageName;
     private int rotation;
 
     public Lock(Controller controller) {
         this.controller = controller;
         imageName = "Reac1";
-        gc = controller.getCanvas().getGraphicsContext2D();
     }
 
     @Override
-    public void draw(Point reactPoint, MouseEvent mouseEvent) {
-        Image image = ImageFactory.getImage(imageName, ReactionFactory.getRotation(reactPoint, mouseEvent, controller));
-        gc.drawImage(image, controller.getCoordinateUtils().fromRealX(reactPoint.getX()) - 20,
-                controller.getCoordinateUtils().fromRealY(reactPoint.getY() + 20));
+    public void draw(Point point, MouseEvent mouseEvent) {
+        int rotation = ReactionFactory.getRotation(point, mouseEvent, controller);
+        Image image = ImageFactory.getImage(imageName, rotation);
+        ImageFactory.drawImage(image, controller, point);
     }
 
 
     @Override
     public void draw(Point point) {
-        double x = controller.getCoordinateUtils().fromRealX(point.getX());
-        double y = controller.getCoordinateUtils().fromRealY(point.getY());
-        gc.drawImage(ImageFactory.getImage(imageName, rotation), x - 20, y - 20);
+        Image image = ImageFactory.getImage(imageName, rotation);
+        ImageFactory.drawImage(image, controller, point);
     }
 
     public void setRotation(int rotation) {

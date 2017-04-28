@@ -9,15 +9,12 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -92,15 +89,15 @@ public class MaterialController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getCutSideMenu().setVisible(false);
+        controller.getMaterialPane().setVisible(false);
         controller.getCanvas().setXLayout(0);
         controller.getCanvas().redraw();
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getCutSideMenu().getWidth());
-        controller.getCutSideMenu().setVisible(true);
+        controller.getCanvas().setXLayout(controller.getMaterialPane().getWidth());
+        controller.getMaterialPane().setVisible(true);
         controller.getCanvas().redraw();
     }
 }
