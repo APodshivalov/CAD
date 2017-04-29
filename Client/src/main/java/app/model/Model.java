@@ -1,8 +1,6 @@
 package app.model;
 
 import app.Controller;
-import app.utils.Colors;
-import app.utils.CoordinateUtils;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -16,14 +14,17 @@ public class Model {
     private List<Bar> bars;
     private List<Point> points;
     private ArrayOfMaterial arrayOfMaterial;
+    private ArrayOfCut arrayOfCut;
     private Controller controller;
     private Material currentMaterial;
+    private Cut currentCut;
 
     public Model(Controller controller) {
         this.controller = controller;
         bars = new ArrayList<>();
         points = new ArrayList<>();
         arrayOfMaterial = new ArrayOfMaterial();
+        arrayOfCut = new ArrayOfCut();
     }
 
     /**
@@ -43,6 +44,7 @@ public class Model {
         if (bars.stream().noneMatch(bar::equals)) {
             bars.add(bar);
             bar.setMaterial(currentMaterial);
+            bar.setCut(currentCut);
         }
     }
 
@@ -88,7 +90,20 @@ public class Model {
         arrayOfMaterial.add(selectedItem);
     }
 
+    public void setCurrentCut(Cut selectedItem) {
+        bars.stream().filter(Bar::isSelected).forEach(bar -> {
+            bar.setCut(selectedItem);
+            bar.setIsSelected(false);
+        });
+        currentCut = selectedItem;
+        arrayOfCut.add(selectedItem);
+    }
+
     public ArrayOfMaterial getArrayOfMaterial() {
         return arrayOfMaterial;
+    }
+
+    public Cut getCurrentCut() {
+        return currentCut;
     }
 }

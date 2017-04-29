@@ -85,12 +85,12 @@
                         </ToggleButton>
                         <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
                         <Label fx:id="scaleLabel" layoutX="286.0" layoutY="2.0" />
-                        <ToggleButton fx:id="materialView" layoutX="540.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="М">
+                        <ToggleButton fx:id="materialView" layoutX="689.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="М">
                            <font>
                               <Font size="8.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton layoutX="523.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="С">
+                        <ToggleButton fx:id="cutView" layoutX="672.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="С">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -102,7 +102,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Pane fx:id="reacSideMenu" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane fx:id="reacPane" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ToggleButton fx:id="reac1" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
                                  <graphic>
@@ -168,7 +168,7 @@
                         </Pane>
                         <Pane fx:id="cutPane" maxWidth="145.0" minWidth="145.0" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ToggleButton layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                              <ToggleButton fx:id="iBeamButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -177,7 +177,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                              <ToggleButton fx:id="tBeamButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -186,7 +186,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                              <ToggleButton fx:id="cBeamButton" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -195,7 +195,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="73.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                              <ToggleButton fx:id="oBeamButton" layoutX="73.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -204,6 +204,14 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
+                              <ComboBox fx:id="cutComboBox" layoutX="9.0" layoutY="147.0" prefWidth="126.0" />
+                              <Button fx:id="acceptCut" layoutX="9.0" layoutY="187.0" mnemonicParsing="false" prefWidth="126.0" text="Принять" />
+                              <ImageView fx:id="bigBeamImage" fitHeight="150.0" fitWidth="126.0" layoutX="9.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="rProperty" layoutX="73.0" layoutY="433.0" />
+                              <Label fx:id="sProperty" layoutX="73.0" layoutY="416.0" />
+                              <Label fx:id="hProperty" layoutX="9.0" layoutY="416.0" />
+                              <Label fx:id="bProperty" layoutX="9.0" layoutY="433.0" />
+                              <Label fx:id="tProperty" layoutX="9.0" layoutY="450.0" />
                            </children>
                         </Pane>
                      </children>

@@ -12,9 +12,10 @@ public class Bar {
     private Point firstPoint;
     private Point secondPoint;
     private Material material;
+    private Cut cut;
     private boolean isSelected;
 
-    public Bar(Point first, Point second){
+    public Bar(Point first, Point second) {
         this.firstPoint = first;
         this.secondPoint = second;
         isSelected = false;
@@ -28,12 +29,32 @@ public class Bar {
             gc.setStroke(Color.RED);
             draw(gc, utils);
         } else {
-            if (controller.getMaterialView().isSelected()){
+            if (controller.getMaterialView().isSelected()) {
                 drawWithColors(gc, utils);
             } else {
                 drawWithoutColors(gc, utils);
             }
         }
+        if (controller.getCutView().isSelected() && cut != null) {
+            drawCutName(gc, utils);
+        }
+    }
+
+    private void drawCutName(GraphicsContext gc, CoordinateUtils utils) {
+        double x1 = utils.fromRealX(firstPoint.getX());
+        double y1 = utils.fromRealY(firstPoint.getY());
+        double x2 = utils.fromRealX(secondPoint.getX());
+        double y2 = utils.fromRealY(secondPoint.getY());
+        String shortName = cut.getFullName();
+        float width = com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(shortName, gc.getFont());
+        double xx = x1 + (x2 - x1) / 2;
+        double yy = y1 + (y2 - y1) / 2;
+        gc.setFill(Color.BLACK);
+        gc.fillRect(xx, yy, width + 8, 28);
+        gc.setFill(Color.WHITE);
+        gc.fillRect(xx+1, yy+1, width + 6, 26);
+        gc.strokeText(shortName, xx+3, yy+18);
+        gc.setFill(Color.BLACK);
     }
 
     private void drawWithoutColors(GraphicsContext gc, CoordinateUtils utils) {
@@ -42,12 +63,15 @@ public class Bar {
     }
 
     private void draw(GraphicsContext gc, CoordinateUtils utils) {
-        gc.strokeLine(utils.fromRealX(firstPoint.getX()), utils.fromRealY(firstPoint.getY()),
-                utils.fromRealX(secondPoint.getX()), utils.fromRealY(secondPoint.getY()));
+        double x1 = utils.fromRealX(firstPoint.getX());
+        double y1 = utils.fromRealY(firstPoint.getY());
+        double x2 = utils.fromRealX(secondPoint.getX());
+        double y2 = utils.fromRealY(secondPoint.getY());
+        gc.strokeLine(x1, y1, x2, y2);
     }
 
     private void drawWithColors(GraphicsContext gc, CoordinateUtils utils) {
-        if (material == null){
+        if (material == null) {
             gc.setStroke(Color.BLACK);
         } else {
             gc.setStroke(material.getColor());
@@ -56,7 +80,7 @@ public class Bar {
     }
 
     public boolean between(double x1, double y1, double x2, double y2) {
-        return firstPoint.between(x1,y1,x2,y2) && secondPoint.between(x1,y1,x2,y2);
+        return firstPoint.between(x1, y1, x2, y2) && secondPoint.between(x1, y1, x2, y2);
     }
 
     public boolean equals(Bar obj) {
@@ -86,5 +110,13 @@ public class Bar {
 
     public void setMaterial(Material material) {
         this.material = material;
+    }
+
+    public Cut getCut() {
+        return cut;
+    }
+
+    public void setCut(Cut cut) {
+        this.cut = cut;
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +27,32 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    @FXML
+    private ToggleButton cutView;
+    @FXML
+    private Button acceptCut;
+    @FXML
+    private Label rProperty;
+    @FXML
+    private Label sProperty;
+    @FXML
+    private Label hProperty;
+    @FXML
+    private Label bProperty;
+    @FXML
+    private Label tProperty;
+    @FXML
+    private ComboBox cutComboBox;
+    @FXML
+    private ImageView bigBeamImage;
+    @FXML
+    private ToggleButton iBeamButton;
+    @FXML
+    private ToggleButton tBeamButton;
+    @FXML
+    private ToggleButton cBeamButton;
+    @FXML
+    private ToggleButton oBeamButton;
     @FXML
     private Pane cutPane;
     @FXML
@@ -49,7 +76,7 @@ public class Controller implements Initializable {
     @FXML
     private ToggleButton reac4;
     @FXML
-    private Pane reacSideMenu;
+    private Pane reacPane;
     @FXML
     private Label scaleLabel;
     @FXML
@@ -211,6 +238,8 @@ public class Controller implements Initializable {
         net.setLayoutX(statusBar.getWidth() - 230);
         orto.setLayoutX(statusBar.getWidth() - 270);
         pivot.setLayoutX(statusBar.getWidth() - 325);
+        materialView.setLayoutX(statusBar.getWidth() - 344);
+        cutView.setLayoutX(statusBar.getWidth() - 361);
     }
 
     public AnchorPane getCanvasPane() {
@@ -279,8 +308,8 @@ public class Controller implements Initializable {
         canvas.redraw();
     }
 
-    public Pane getReacSideMenu() {
-        return reacSideMenu;
+    public Pane getReacPane() {
+        return reacPane;
     }
 
     public ToggleButton getReac1() {
@@ -333,5 +362,57 @@ public class Controller implements Initializable {
 
     public Pane getCutPane() {
         return cutPane;
+    }
+
+    public ToggleButton getiBeamButton() {
+        return iBeamButton;
+    }
+
+    public ToggleButton gettBeamButton() {
+        return tBeamButton;
+    }
+
+    public ToggleButton getcBeamButton() {
+        return cBeamButton;
+    }
+
+    public ToggleButton getoBeamButton() {
+        return oBeamButton;
+    }
+
+    public ImageView getBigBeamImage() {
+        return bigBeamImage;
+    }
+
+    public ComboBox getCutComboBox() {
+        return cutComboBox;
+    }
+
+    public Label getrProperty() {
+        return rProperty;
+    }
+
+    public Label getsProperty() {
+        return sProperty;
+    }
+
+    public Label gethProperty() {
+        return hProperty;
+    }
+
+    public Label getbProperty() {
+        return bProperty;
+    }
+
+    public Label gettProperty() {
+        return tProperty;
+    }
+
+    public Button getAcceptCut() {
+        return acceptCut;
+    }
+
+    public ToggleButton getCutView() {
+        return cutView;
     }
 }

@@ -11,7 +11,6 @@ import app.reactions.Lock;
 import app.reactions.SharLock;
 import app.reactions.SharNoLock;
 import app.utils.CoordinateUtils;
-import javafx.event.ActionEvent;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
@@ -21,7 +20,6 @@ import javafx.scene.input.MouseEvent;
 public class ReactionSupportController implements Controllable {
     private Controller controller;
     private Model model;
-    private CoordinateUtils utils;
     private ReactButton activeButton;
     private ToggleButton reac1;
     private ToggleButton reac2;
@@ -31,7 +29,6 @@ public class ReactionSupportController implements Controllable {
     public ReactionSupportController(Controller controller) {
         this.controller = controller;
         model = controller.getModel();
-        utils = controller.getCoordinateUtils();
         reac1 = controller.getReac1();
         reac2 = controller.getReac2();
         reac3 = controller.getReac3();
@@ -85,15 +82,15 @@ public class ReactionSupportController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getReacSideMenu().setVisible(false);
+        controller.getReacPane().setVisible(false);
         controller.getCanvas().setXLayout(0);
         controller.getCanvas().redraw();
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getReacSideMenu().getWidth());
-        controller.getReacSideMenu().setVisible(true);
+        controller.getCanvas().setXLayout(controller.getReacPane().getWidth());
+        controller.getReacPane().setVisible(true);
         controller.getCanvas().redraw();
     }
 }

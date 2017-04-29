@@ -16,4 +16,8 @@ public class ImageFactory {
         double y = controller.getCoordinateUtils().fromRealY(reactPoint.getY());
         controller.getCanvas().getGraphicsContext2D().drawImage(image, x - 20, y - 20);
     }
+
+    public static Image getImage(String type) {
+        return new Image("images/" + type + ".png");
+    }
 }

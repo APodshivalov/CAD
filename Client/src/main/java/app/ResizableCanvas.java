@@ -89,5 +89,8 @@ public class ResizableCanvas extends Canvas {
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw(mouseEvent);
         drawCoordinates();
+        if (controller.getMaterialView().isSelected()){
+            drawPalette();
+        }
     }
 }

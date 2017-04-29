@@ -34,10 +34,10 @@ public class MaterialController implements Controllable {
         acceptMaterial.setOnAction(event -> setNewMaterial());
 
         wood = controller.getWoodButton();
-        wood.setOnAction(event -> loadWoodFromCloud());
+        wood.setOnAction(event -> loadFromCloud("wood"));
 
         steel = controller.getSteelButton();
-        steel.setOnAction(event -> loadSteelFromCloud());
+        steel.setOnAction(event -> loadFromCloud("steel"));
         ToggleGroup tg = new ToggleGroup();
         wood.setToggleGroup(tg);
         steel.setToggleGroup(tg);
@@ -49,25 +49,11 @@ public class MaterialController implements Controllable {
         controller.getCanvas().redraw();
     }
 
-    private void loadWoodFromCloud() {
-        if(wood.isSelected()){
+    private void loadFromCloud(String material) {
+        if(wood.isSelected() || steel.isSelected()){
             ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
             Client client = Client.create(cfg);
-            WebResource webResource = client.resource("http://localhost:8080/Server-1.0/material/wood");
-
-            ArrayOfMaterial pojo = webResource
-                    .accept(MediaType.APPLICATION_JSON)
-                    .get(ArrayOfMaterial.class);
-
-            materialComboBox.getItems().setAll(pojo.getItem());
-        }
-    }
-
-    private void loadSteelFromCloud() {
-        if(steel.isSelected()) {
-            ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-            Client client = Client.create(cfg);
-            WebResource webResource = client.resource("http://localhost:8080/Server-1.0/material/steel");
+            WebResource webResource = client.resource("http://localhost:8080/Server-1.0/material/" + material);
 
             ArrayOfMaterial pojo = webResource
                     .accept(MediaType.APPLICATION_JSON)

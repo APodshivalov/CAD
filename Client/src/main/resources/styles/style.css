@@ -51,8 +51,20 @@
     -fx-border-width: 1 0 0 0;
 }
 
-#materialPane, #cutPane {
+#reacPane {
     -fx-background-color: #D7CEC7;
+    -fx-border-color: #C09F80;
+    -fx-border-width: 0 1 0 0;
+}
+
+#cutPane {
+    -fx-background-color: #D7CEC7;
+    -fx-border-color: #C09F80;
+    -fx-border-width: 0 1 0 0;
+}
+
+#materialPane {
+-fx-background-color: #D7CEC7;
     -fx-border-color: #C09F80;
     -fx-border-width: 0 1 0 0;
 }
@@ -63,7 +75,8 @@
     -fx-border-width: 0 0 2 0;
 }
 
-#materialComboBox{
+.combo-box
+{
     -fx-background-radius: 0px;
     -fx-faint-focus-color: #3B3738;
     -fx-border-color: #3B3738;
@@ -94,17 +107,19 @@
     -fx-background-color: #C09F80;
 }
 
-#acceptMaterial {
+.button {
     -fx-background-radius: 0px;
     -fx-faint-focus-color: #3B3738;
     -fx-border-color: #3B3738;
     -fx-background-color: #D7CEC7;
+    -fx-background-insets: 1px;
 }
 
-#acceptMaterial:hover {
+.button:hover {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-background-color: #C09F80;
+    -fx-background-insets: 1px;
 }
 
 #76323F
