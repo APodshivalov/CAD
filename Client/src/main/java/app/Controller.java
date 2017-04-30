@@ -7,12 +7,7 @@ import app.utils.CoordinateUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
@@ -27,6 +22,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    @FXML
+    private ToggleButton mForceButton;
+    @FXML
+    private Button acceptForce;
+    @FXML
+    private ToggleButton vForceButton;
+    @FXML
+    private ToggleButton hForceButton;
+    @FXML
+    private TextField forceTextInput;
+    @FXML
+    private Pane forcePane;
     @FXML
     private ToggleButton cutView;
     @FXML
@@ -167,6 +174,10 @@ public class Controller implements Initializable {
 
     public void materialButtonOn(ActionEvent actionEvent) {
         changeEventListener(materialButton, ControllerFactory.getMaterialController(this));
+    }
+
+    public void onForceButtonOn(ActionEvent actionEvent) {
+        changeEventListener(forceButton, ControllerFactory.getForceController(this));
     }
 
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
@@ -414,5 +425,29 @@ public class Controller implements Initializable {
 
     public ToggleButton getCutView() {
         return cutView;
+    }
+
+    public Pane getForcePane() {
+        return forcePane;
+    }
+
+    public TextField getForceTextInput() {
+        return forceTextInput;
+    }
+
+    public ToggleButton getvForceButton() {
+        return vForceButton;
+    }
+
+    public ToggleButton gethForceButton() {
+        return hForceButton;
+    }
+
+    public Button getAcceptForce() {
+        return acceptForce;
+    }
+
+    public ToggleButton getmForceButton() {
+        return mForceButton;
     }
 }

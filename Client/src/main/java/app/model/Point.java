@@ -15,6 +15,7 @@ public class Point {
     private double x;
     private double y;
     private boolean isSelected;
+    private Force force;
     private ReactButton reaction;
 
     public Point(double x, double y) {
@@ -22,6 +23,7 @@ public class Point {
         this.y = y;
         isSelected = false;
         reaction = new EmptyReaction();
+        force = new Force();
     }
 
     public double getX() {
@@ -62,6 +64,7 @@ public class Point {
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
         gc.fillOval(utils.fromRealX(x) - 1, utils.fromRealY(y) - 1, 3 ,3);
         reaction.draw(this);
+        force.draw(gc, utils, this);
     }
 
     public void draw(Controller controller, MouseEvent mouseEvent) {
@@ -72,5 +75,14 @@ public class Point {
                 !controller.getCoordinateUtils().isNear(this, mouseEvent.getX(), mouseEvent.getY())){
             reaction.draw(this);
         }
+        force.draw(gc, utils, this);
+    }
+
+    public Force getForce() {
+        return force;
+    }
+
+    public void setForce(Force force) {
+        this.force = force;
     }
 }

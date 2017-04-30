@@ -11,6 +11,7 @@ public class ControllerFactory {
     private static ReactionSupportController reactionSupportController;
     private static CutController cutController;
     private static MaterialController materialController;
+    private static ForceController forceController;
     private static EmptyController emptyController;
 
     public static Controllable getDrawController(Controller controller) {
@@ -46,5 +47,12 @@ public class ControllerFactory {
             emptyController = new EmptyController();
         }
         return emptyController;
+    }
+
+    public static Controllable getForceController(Controller controller) {
+        if (forceController == null) {
+            forceController = new ForceController(controller);
+        }
+        return forceController;
     }
 }
