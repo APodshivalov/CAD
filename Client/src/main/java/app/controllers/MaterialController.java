@@ -74,6 +74,11 @@ public class MaterialController implements Controllable {
     }
 
     @Override
+    public void redraw() {
+
+    }
+
+    @Override
     public void disable() {
         controller.getMaterialPane().setVisible(false);
         controller.getCanvas().setXLayout(0);

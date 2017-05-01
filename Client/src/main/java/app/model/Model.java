@@ -11,7 +11,7 @@ import java.util.List;
  * Стержневая модель. Отвечает за хранение информации о конструкции.
  */
 public class Model {
-    private List<Bar> bars;
+    private ArrayOfBars bars;
     private List<Point> points;
     private ArrayOfMaterial arrayOfMaterial;
     private ArrayOfCut arrayOfCut;
@@ -21,7 +21,7 @@ public class Model {
 
     public Model(Controller controller) {
         this.controller = controller;
-        bars = new ArrayList<>();
+        bars = new ArrayOfBars();
         points = new ArrayList<>();
         arrayOfMaterial = new ArrayOfMaterial();
         arrayOfCut = new ArrayOfCut();
@@ -32,7 +32,7 @@ public class Model {
      */
     public void draw() {
         points.forEach(point -> point.draw(controller));
-        bars.forEach(bar -> bar.draw(controller));
+        bars.getBars().forEach(bar -> bar.draw(controller));
     }
 
     /**
@@ -41,11 +41,7 @@ public class Model {
      * @param bar Стержень
      */
     public void addBar(Bar bar) {
-        if (bars.stream().noneMatch(bar::equals)) {
-            bars.add(bar);
-            bar.setMaterial(currentMaterial);
-            bar.setCut(currentCut);
-        }
+        bars.add(bar, currentMaterial, currentCut);
     }
 
     public Point findNearbyPoint(double x, double y) {
@@ -71,30 +67,22 @@ public class Model {
     }
 
     public void select(double x, double y, double x1, double y1) {
-        for (Bar bar : bars) {
-            bar.setIsSelected(bar.between(x, y, x1, y1));
-        }
+        bars.setSelect(x,y,x1,y1);
     }
 
     public void draw(MouseEvent mouseEvent) {
         points.forEach(point -> point.draw(controller, mouseEvent));
-        bars.forEach(bar -> bar.draw(controller));
+        bars.draw(controller);
     }
 
     public void setCurrentMaterial(Material selectedItem) {
-        bars.stream().filter(Bar::isSelected).forEach(bar -> {
-            bar.setMaterial(selectedItem);
-            bar.setIsSelected(false);
-        });
+        bars.setCurrentMaterial(selectedItem);
         currentMaterial = selectedItem;
         arrayOfMaterial.add(selectedItem);
     }
 
     public void setCurrentCut(Cut selectedItem) {
-        bars.stream().filter(Bar::isSelected).forEach(bar -> {
-            bar.setCut(selectedItem);
-            bar.setIsSelected(false);
-        });
+        bars.setCurrentCut(selectedItem);
         currentCut = selectedItem;
         arrayOfCut.add(selectedItem);
     }
@@ -105,5 +93,9 @@ public class Model {
 
     public Cut getCurrentCut() {
         return currentCut;
+    }
+
+    public ArrayOfBars getBars() {
+        return bars;
     }
 }

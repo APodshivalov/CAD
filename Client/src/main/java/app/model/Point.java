@@ -71,7 +71,7 @@ public class Point {
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
         gc.fillOval(utils.fromRealX(x) - 1, utils.fromRealY(y) - 1, 3 ,3);
-        if (controller.getReactButtons().getSelectedToggle() == null ||
+        if (controller.getReac1().getToggleGroup().getSelectedToggle() == null ||
                 !controller.getCoordinateUtils().isNear(this, mouseEvent.getX(), mouseEvent.getY())){
             reaction.draw(this);
         }

@@ -81,6 +81,11 @@ public class ReactionSupportController implements Controllable {
     }
 
     @Override
+    public void redraw() {
+
+    }
+
+    @Override
     public void disable() {
         controller.getReacPane().setVisible(false);
         controller.getCanvas().setXLayout(0);

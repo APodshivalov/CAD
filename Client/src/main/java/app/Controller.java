@@ -10,11 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -22,6 +20,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    @FXML
+    private Pane controlCalcPanel;
+    @FXML
+    private Pane controlProjectPanel;
+    @FXML
+    private ToggleButton projectButton;
+    @FXML
+    private ToggleButton modelButton;
+    @FXML
+    private Pane controlModelPanel;
+    @FXML
+    private ToggleButton calcButton;
+    @FXML
+    private AnchorPane menuPane;
     @FXML
     private ToggleButton mForceButton;
     @FXML
@@ -108,6 +120,8 @@ public class Controller implements Initializable {
     private ToggleButton orto;
     @FXML
     private ToggleButton net;
+    @FXML
+    private Label coordinatesLabel;
 
     public Label getCoordinatesLabel() {
         return coordinatesLabel;
@@ -117,14 +131,10 @@ public class Controller implements Initializable {
         return currentEventListener;
     }
 
-    @FXML
-    private Label coordinatesLabel;
-
     private ResizableCanvas canvas;
     private Model model;
     private Controllable currentEventListener;
     private CoordinateUtils coordinateUtils;
-    private ToggleGroup reactButtons;
 
     public ResizableCanvas getCanvas() {
         return canvas;
@@ -132,18 +142,6 @@ public class Controller implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         currentEventListener = ControllerFactory.getEmpty();
-        ToggleGroup modelGroup = new ToggleGroup();
-        drawButton.setToggleGroup(modelGroup);
-        reactionSupportButton.setToggleGroup(modelGroup);
-        materialButton.setToggleGroup(modelGroup);
-        forceButton.setToggleGroup(modelGroup);
-        cutButton.setToggleGroup(modelGroup);
-
-        reactButtons = new ToggleGroup();
-        reac1.setToggleGroup(reactButtons);
-        reac2.setToggleGroup(reactButtons);
-        reac3.setToggleGroup(reactButtons);
-        reac4.setToggleGroup(reactButtons);
 
         canvas = new ResizableCanvas(this);
         canvasPane.getChildren().add(canvas);
@@ -158,6 +156,16 @@ public class Controller implements Initializable {
                 .toRealY()));
 
         materialView.setOnAction(event -> canvas.redraw());
+
+        projectButton.setOnAction(event -> changeMenuButton());
+        modelButton.setOnAction(event -> changeMenuButton());
+        calcButton.setOnAction(event -> changeMenuButton());
+    }
+
+    private void changeMenuButton() {
+        controlProjectPanel.setVisible(projectButton.isSelected());
+        controlModelPanel.setVisible(modelButton.isSelected());
+        controlCalcPanel.setVisible(calcButton.isSelected());
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -240,7 +248,7 @@ public class Controller implements Initializable {
     }
 
     public void onMouseExited(MouseEvent mouseEvent) {
-        canvas.redraw();
+        canvas.redrawExit();
     }
 
     private void organizeStatusBar() {
@@ -337,10 +345,6 @@ public class Controller implements Initializable {
 
     public ToggleButton getReac4() {
         return reac4;
-    }
-
-    public ToggleGroup getReactButtons() {
-        return reactButtons;
     }
 
     public void setStatus(String s) {

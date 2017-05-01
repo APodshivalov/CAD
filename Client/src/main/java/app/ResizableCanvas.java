@@ -38,13 +38,16 @@ public class ResizableCanvas extends Canvas {
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         controller.getModel().draw();
         drawCoordinates();
-        if (controller.getCurrentEventListener() instanceof DrawController) {
-            DrawController drawController = (DrawController) controller.getCurrentEventListener();
-            if (controller.getNet().isSelected()) {
-                drawController.drawDots();
-            }
-            drawController.drawCursor();
+        controller.getCurrentEventListener().redraw();
+        if (controller.getMaterialView().isSelected()){
+            drawPalette();
         }
+    }
+
+    public void redrawExit() {
+        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+        controller.getModel().draw();
+        drawCoordinates();
         if (controller.getMaterialView().isSelected()){
             drawPalette();
         }
@@ -66,6 +69,8 @@ public class ResizableCanvas extends Canvas {
         double x0 = controller.getCoordinateUtils().fromRealX(0);
         double y0 = controller.getCoordinateUtils().fromRealY(0);
         gc.setStroke(Color.BLACK);
+        gc.strokeText("x", x0 + 72, y0 + 15);
+        gc.strokeText("y", x0 + 8, y0 - 73);
         gc.strokeLine(x0, y0, x0, y0 - 80);
         gc.strokeLine(x0, y0, x0 + 80, y0);
         gc.strokeLine(x0 + 80, y0, x0 + 70, y0 - 5);

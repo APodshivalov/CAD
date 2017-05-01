@@ -137,6 +137,10 @@ public class CutController implements Controllable {
     }
 
     @Override
+    public void redraw() {
+    }
+
+    @Override
     public void disable() {
         controller.getCutPane().setVisible(false);
         controller.getCanvas().setXLayout(0);

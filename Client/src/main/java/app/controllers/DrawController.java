@@ -96,6 +96,14 @@ public class DrawController implements Controllable {
         drawCursor();
     }
 
+    @Override
+    public void redraw() {
+            if (controller.getNet().isSelected()) {
+                this.drawDots();
+            }
+            this.drawCursor();
+    }
+
     private void drawNet(MouseEvent mouseEvent) {
         double x = utils.toRealX() % 100;
         double y = utils.toRealY() % 100;

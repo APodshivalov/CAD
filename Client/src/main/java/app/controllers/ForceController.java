@@ -107,6 +107,11 @@ public class ForceController implements Controllable {
     }
 
     @Override
+    public void redraw() {
+
+    }
+
+    @Override
     public void disable() {
         controller.getForcePane().setVisible(false);
         controller.getCanvas().setXLayout(0);

@@ -18,6 +18,11 @@ public class EmptyController implements Controllable {
     }
 
     @Override
+    public void redraw() {
+
+    }
+
+    @Override
     public void disable() {
 
     }
