@@ -8,19 +8,12 @@ import java.util.List;
 /**
  * Created by podsh on 01.05.2017.
  */
-public class ArrayOfBars {
+public class Project {
+    private ProjectInfo projectInfo;
     private List<Bar> bars;
 
-    public ArrayOfBars() {
+    public Project() {
         bars = new ArrayList<>();
-    }
-
-    public List<Bar> getBars() {
-        return bars;
-    }
-
-    public void setBars(List<Bar> bars) {
-        this.bars = bars;
     }
 
     public void add(Bar bar, Material currentMaterial, Cut currentCut) {
@@ -53,5 +46,21 @@ public class ArrayOfBars {
             bar.setCut(selectedItem);
             bar.setIsSelected(false);
         });
+    }
+
+    public List<Bar> getBars() {
+        return bars;
+    }
+
+    public void setBars(List<Bar> bars) {
+        this.bars = bars;
+    }
+
+    public ProjectInfo getProjectInfo() {
+        return projectInfo;
+    }
+
+    public void setProjectInfo(ProjectInfo projectInfo) {
+        this.projectInfo = projectInfo;
     }
 }

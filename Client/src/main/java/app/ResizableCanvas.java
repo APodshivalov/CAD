@@ -24,7 +24,7 @@ public class ResizableCanvas extends Canvas {
         setOnMouseDragged(controller::onMouseDrag);
         setOnMouseReleased(controller::onMouseReleased);
         setOnScroll(controller::onScroll);
-        setOnMouseExited(controller::onMouseExited);
+        setOnMouseExited(event -> redrawExit());
         setOnMouseClicked(controller::onMouseClickedOverCanvas);
     }
 

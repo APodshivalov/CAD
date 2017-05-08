@@ -6,12 +6,15 @@ import app.reactions.EmptyReaction;
 import app.utils.CoordinateUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+
+import java.util.UUID;
 
 /**
  * Created by podsh on 08.04.2017.
  */
 public class Point {
+    private String id;
+    private String nativeId;
     private double x;
     private double y;
     private boolean isSelected;
@@ -21,6 +24,7 @@ public class Point {
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
+        nativeId = UUID.randomUUID().toString();
         isSelected = false;
         reaction = new EmptyReaction();
         force = new Force();
@@ -84,5 +88,21 @@ public class Point {
 
     public void setForce(Force force) {
         this.force = force;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNativeId() {
+        return nativeId;
+    }
+
+    public void setNativeId(String nativeId) {
+        this.nativeId = nativeId;
     }
 }

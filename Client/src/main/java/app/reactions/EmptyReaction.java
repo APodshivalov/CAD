@@ -7,7 +7,12 @@ import javafx.scene.input.MouseEvent;
 /**
  * Created by APodshivalov on 21.04.2017.
  */
-public class EmptyReaction implements ReactButton {
+public class EmptyReaction extends ReactButton {
+    public EmptyReaction() {
+        name = "Reac0";
+        angle = 0;
+    }
+
     @Override
     public void draw(Point reactPoint, MouseEvent mouseEvent) {
 
@@ -19,7 +24,7 @@ public class EmptyReaction implements ReactButton {
     }
 
     @Override
-    public void setRotation(int rotation) {
+    public void setAngle(int angle) {
 
     }
 }

@@ -10,7 +10,6 @@ import app.reactions.EmptyReaction;
 import app.reactions.Lock;
 import app.reactions.SharLock;
 import app.reactions.SharNoLock;
-import app.utils.CoordinateUtils;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
@@ -63,7 +62,7 @@ public class ReactionSupportController implements Controllable {
         if (activeButton != null){
             Point reactPoint = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
             if (reactPoint != null) {
-                activeButton.setRotation(ReactionFactory.getRotation(reactPoint, mouseEvent, controller));
+                activeButton.setAngle(ReactionFactory.getRotation(reactPoint, mouseEvent, controller));
                 reactPoint.setReaction(activeButton);
             }
             controller.getCanvas().redraw();
@@ -87,15 +86,11 @@ public class ReactionSupportController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getReacPane().setVisible(false);
-        controller.getCanvas().setXLayout(0);
-        controller.getCanvas().redraw();
+        controller.deactivatePane(controller.getReacPane());
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getReacPane().getWidth());
-        controller.getReacPane().setVisible(true);
-        controller.getCanvas().redraw();
+        controller.activatePane(controller.getReacPane());
     }
 }

@@ -27,7 +27,6 @@ public class CutController implements Controllable {
     private ToggleButton oBeamButton;
     private ImageView bigImage;
     private ComboBox<Cut> cutComboBox;
-    private Button acceptCut;
 
     private Label rProperty;
     private Label sProperty;
@@ -40,7 +39,7 @@ public class CutController implements Controllable {
         bigImage = controller.getBigBeamImage();
         cutComboBox = controller.getCutComboBox();
         cutComboBox.setOnAction(event -> fillLabels());
-        acceptCut = controller.getAcceptCut();
+        Button acceptCut = controller.getAcceptCut();
         acceptCut.setOnAction(event -> acceptCurrentCut());
 
         rProperty = controller.getrProperty();
@@ -53,19 +52,19 @@ public class CutController implements Controllable {
 
         iBeamButton = controller.getiBeamButton();
         iBeamButton.setToggleGroup(beamButtons);
-        iBeamButton.setOnAction(event -> activate(iBeamButton, "IBeam"));
+        iBeamButton.setOnAction(event -> activate(iBeamButton, "iBeam"));
 
         cBeamButton = controller.getcBeamButton();
         cBeamButton.setToggleGroup(beamButtons);
-        cBeamButton.setOnAction(event -> activate(cBeamButton, "CBeam"));
+        cBeamButton.setOnAction(event -> activate(cBeamButton, "cBeam"));
 
         tBeamButton = controller.gettBeamButton();
         tBeamButton.setToggleGroup(beamButtons);
-        tBeamButton.setOnAction(event -> activate(tBeamButton, "TBeam"));
+        tBeamButton.setOnAction(event -> activate(tBeamButton, "tBeam"));
 
         oBeamButton = controller.getoBeamButton();
         oBeamButton.setToggleGroup(beamButtons);
-        oBeamButton.setOnAction(event -> activate(oBeamButton, "OBeam"));
+        oBeamButton.setOnAction(event -> activate(oBeamButton, "oBeam"));
     }
 
     private void acceptCurrentCut() {
@@ -117,9 +116,10 @@ public class CutController implements Controllable {
     private void loadFromCloud(String type) {
         ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
         Client client = Client.create(cfg);
-        WebResource webResource = client.resource("http://localhost:8080/Server-1.0/cuts/" + type.toLowerCase());
+        WebResource webResource = client.resource("http://localhost:8080/Server-1.0/cuts/" + type);
 
         ArrayOfCut pojo = webResource
+                .header("sessionId", controller.getCurrentUser().getSessionId())
                 .accept(MediaType.APPLICATION_JSON)
                 .get(ArrayOfCut.class);
 
@@ -142,15 +142,11 @@ public class CutController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getCutPane().setVisible(false);
-        controller.getCanvas().setXLayout(0);
-        controller.getCanvas().redraw();
+        controller.deactivatePane(controller.getCutPane());
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getCutPane().getWidth());
-        controller.getCutPane().setVisible(true);
-        controller.getCanvas().redraw();
+        controller.activatePane(controller.getCutPane());
     }
 }

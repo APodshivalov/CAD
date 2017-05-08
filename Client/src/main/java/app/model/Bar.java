@@ -45,7 +45,7 @@ public class Bar {
         double y1 = utils.fromRealY(firstPoint.getY());
         double x2 = utils.fromRealX(secondPoint.getX());
         double y2 = utils.fromRealY(secondPoint.getY());
-        String shortName = cut.getFullName();
+        String shortName = cut.getShortName();
         float width = com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(shortName, gc.getFont());
         double xx = x1 + (x2 - x1) / 2;
         double yy = y1 + (y2 - y1) / 2;

@@ -11,7 +11,7 @@ import java.util.List;
  * Стержневая модель. Отвечает за хранение информации о конструкции.
  */
 public class Model {
-    private ArrayOfBars bars;
+    private Project project;
     private List<Point> points;
     private ArrayOfMaterial arrayOfMaterial;
     private ArrayOfCut arrayOfCut;
@@ -21,7 +21,7 @@ public class Model {
 
     public Model(Controller controller) {
         this.controller = controller;
-        bars = new ArrayOfBars();
+        project = new Project();
         points = new ArrayList<>();
         arrayOfMaterial = new ArrayOfMaterial();
         arrayOfCut = new ArrayOfCut();
@@ -32,7 +32,7 @@ public class Model {
      */
     public void draw() {
         points.forEach(point -> point.draw(controller));
-        bars.getBars().forEach(bar -> bar.draw(controller));
+        project.getBars().forEach(bar -> bar.draw(controller));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Model {
      * @param bar Стержень
      */
     public void addBar(Bar bar) {
-        bars.add(bar, currentMaterial, currentCut);
+        project.add(bar, currentMaterial, currentCut);
     }
 
     public Point findNearbyPoint(double x, double y) {
@@ -67,22 +67,22 @@ public class Model {
     }
 
     public void select(double x, double y, double x1, double y1) {
-        bars.setSelect(x,y,x1,y1);
+        project.setSelect(x,y,x1,y1);
     }
 
     public void draw(MouseEvent mouseEvent) {
         points.forEach(point -> point.draw(controller, mouseEvent));
-        bars.draw(controller);
+        project.draw(controller);
     }
 
     public void setCurrentMaterial(Material selectedItem) {
-        bars.setCurrentMaterial(selectedItem);
+        project.setCurrentMaterial(selectedItem);
         currentMaterial = selectedItem;
         arrayOfMaterial.add(selectedItem);
     }
 
     public void setCurrentCut(Cut selectedItem) {
-        bars.setCurrentCut(selectedItem);
+        project.setCurrentCut(selectedItem);
         currentCut = selectedItem;
         arrayOfCut.add(selectedItem);
     }
@@ -95,7 +95,7 @@ public class Model {
         return currentCut;
     }
 
-    public ArrayOfBars getBars() {
-        return bars;
+    public Project getProject() {
+        return project;
     }
 }

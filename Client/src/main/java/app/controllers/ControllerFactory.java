@@ -12,6 +12,9 @@ public class ControllerFactory {
     private static CutController cutController;
     private static MaterialController materialController;
     private static ForceController forceController;
+    private static LoginController loginController;
+    private static CreateProjectController createProjectController;
+    private static LoadProjectController loadProjectController;
     private static EmptyController emptyController;
 
     public static Controllable getDrawController(Controller controller) {
@@ -54,5 +57,26 @@ public class ControllerFactory {
             forceController = new ForceController(controller);
         }
         return forceController;
+    }
+
+    public static Controllable getLoginController(Controller controller) {
+        if (loginController == null) {
+            loginController = new LoginController(controller);
+        }
+        return loginController;
+    }
+
+    public static Controllable getCreateProjectController(Controller controller) {
+        if (createProjectController == null) {
+            createProjectController = new CreateProjectController(controller);
+        }
+        return createProjectController;
+    }
+
+    public static Controllable getLoadProjectController(Controller controller) {
+        if (loadProjectController == null) {
+            loadProjectController = new LoadProjectController(controller);
+        }
+        return loadProjectController;
     }
 }

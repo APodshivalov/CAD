@@ -3,7 +3,16 @@ package app;
 import app.controllers.ControllerFactory;
 import app.interfaces.Controllable;
 import app.model.Model;
+import app.model.Project;
+import app.model.ProjectInfo;
+import app.model.User;
 import app.utils.CoordinateUtils;
+import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,11 +24,45 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import javax.ws.rs.core.MediaType;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    @FXML
+    private Button loadProjectInfoButton;
+    @FXML
+    private ComboBox projectsComboBox;
+    @FXML
+    private Pane loadProjectPane;
+    @FXML
+    private TextField projectNameField;
+    @FXML
+    private Button createProjectButton;
+    @FXML
+    private Pane newProjectPane;
+    @FXML
+    private ToggleButton newProjectButton;
+    @FXML
+    private ToggleButton saveProjectButton;
+    @FXML
+    private ToggleButton loadProjectButton;
+    @FXML
+    private Label userLabel;
+    @FXML
+    private TextField loginField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Button sendLogInButton;
+    @FXML
+    private Button cancelLogInButton;
+    @FXML
+    private Pane authPane;
+    @FXML
+    private ToggleButton authorizationButton;
     @FXML
     private Pane controlCalcPanel;
     @FXML
@@ -133,6 +176,7 @@ public class Controller implements Initializable {
 
     private ResizableCanvas canvas;
     private Model model;
+    private User currentUser;
     private Controllable currentEventListener;
     private CoordinateUtils coordinateUtils;
 
@@ -160,6 +204,43 @@ public class Controller implements Initializable {
         projectButton.setOnAction(event -> changeMenuButton());
         modelButton.setOnAction(event -> changeMenuButton());
         calcButton.setOnAction(event -> changeMenuButton());
+
+        saveProjectButton.setOnAction(event -> save());
+
+
+        authorizationButton.setOnAction(event -> changeEventListener(authorizationButton, ControllerFactory.getLoginController(this)));
+        newProjectButton.setOnAction(event -> changeEventListener(newProjectButton, ControllerFactory.getCreateProjectController(this)));
+        loadProjectButton.setOnAction(event -> changeEventListener(loadProjectButton, ControllerFactory.getLoadProjectController(this)));
+    }
+
+    private void save() {
+        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
+        Client client = Client.create(cfg);
+        WebResource webResource = client.resource("http://localhost:8080/Server-1.0/save");
+
+        System.out.println(model.getProject().getProjectInfo().getId());
+
+        ClientResponse response = webResource
+                .accept(MediaType.APPLICATION_JSON)
+                .entity(model.getProject())
+                .header("sessionId", currentUser.getSessionId())
+                .post(ClientResponse.class);
+
+        if (response.getStatus() == 200) {
+            System.out.println("done");
+        }
+    }
+
+    public void activatePane(Pane pane) {
+        canvas.setXLayout(pane.getWidth());
+        pane.setVisible(true);
+        canvas.redraw();
+    }
+
+    public void deactivatePane(Pane pane) {
+        pane.setVisible(false);
+        canvas.setXLayout(0);
+        canvas.redraw();
     }
 
     private void changeMenuButton() {
@@ -188,9 +269,13 @@ public class Controller implements Initializable {
         changeEventListener(forceButton, ControllerFactory.getForceController(this));
     }
 
+    public void clearEventListener() {
+        changeEventListener(null, ControllerFactory.getEmpty());
+    }
+
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
         currentEventListener.disable();
-        if (toggleButton.isSelected()) {
+        if (toggleButton != null && toggleButton.isSelected()) {
             currentEventListener = eventListener;
             currentEventListener.enable();
         } else {
@@ -245,10 +330,6 @@ public class Controller implements Initializable {
 
     public void onMouseMoved(MouseEvent mouseEvent) {
         coordinateUtils.onMouseMoved(mouseEvent);
-    }
-
-    public void onMouseExited(MouseEvent mouseEvent) {
-        canvas.redrawExit();
     }
 
     private void organizeStatusBar() {
@@ -349,6 +430,10 @@ public class Controller implements Initializable {
 
     public void setStatus(String s) {
         statusLabel.setText(s);
+    }
+
+    public Label getStatusLabel() {
+        return statusLabel;
     }
 
     public Pane getMaterialPane() {
@@ -453,5 +538,73 @@ public class Controller implements Initializable {
 
     public ToggleButton getmForceButton() {
         return mForceButton;
+    }
+
+    public Pane getAuthPane() {
+        return authPane;
+    }
+
+    public Button getSendLogInButton() {
+        return sendLogInButton;
+    }
+
+    public Button getCancelLogInButton() {
+        return cancelLogInButton;
+    }
+
+    public Label getUserLabel() {
+        return userLabel;
+    }
+
+    public TextField getLoginField() {
+        return loginField;
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public ToggleButton getNewProjectButton() {
+        return newProjectButton;
+    }
+
+    public ToggleButton getSaveProjectButton() {
+        return saveProjectButton;
+    }
+
+    public ToggleButton getLoadProjectButton() {
+        return loadProjectButton;
+    }
+
+    public void setCurrentUser(User pojo) {
+        currentUser = pojo;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public Pane getNewProjectPane() {
+        return newProjectPane;
+    }
+
+    public TextField getProjectNameField() {
+        return projectNameField;
+    }
+
+    public Button getCreateProjectButton() {
+        return createProjectButton;
+    }
+
+    public ComboBox getProjectsComboBox() {
+        return projectsComboBox;
+    }
+
+    public Pane getLoadProjectPane() {
+        return loadProjectPane;
+    }
+
+    public Button getLoadProjectInfoButton() {
+        return loadProjectInfoButton;
     }
 }

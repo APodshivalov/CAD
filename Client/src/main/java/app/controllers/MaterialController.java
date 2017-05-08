@@ -56,6 +56,7 @@ public class MaterialController implements Controllable {
             WebResource webResource = client.resource("http://localhost:8080/Server-1.0/material/" + material);
 
             ArrayOfMaterial pojo = webResource
+                    .header("sessionId", controller.getCurrentUser().getSessionId())
                     .accept(MediaType.APPLICATION_JSON)
                     .get(ArrayOfMaterial.class);
 
@@ -80,15 +81,11 @@ public class MaterialController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getMaterialPane().setVisible(false);
-        controller.getCanvas().setXLayout(0);
-        controller.getCanvas().redraw();
+        controller.deactivatePane(controller.getMaterialPane());
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getMaterialPane().getWidth());
-        controller.getMaterialPane().setVisible(true);
-        controller.getCanvas().redraw();
+        controller.activatePane(controller.getMaterialPane());
     }
 }

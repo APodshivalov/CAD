@@ -18,7 +18,6 @@ public class ForceController implements Controllable {
     private ToggleButton vForceButton;
     private ToggleButton hForceButton;
     private ToggleButton mForceButton;
-    private Button acceptForceButton;
     private Force currentForce;
 
     public ForceController(Controller controller) {
@@ -44,8 +43,7 @@ public class ForceController implements Controllable {
 
         currentForce = new Force();
 
-        acceptForceButton = controller.getAcceptForce();
-        acceptForceButton.setOnAction(event -> acceptForce());
+        controller.getAcceptForce().setOnAction(event -> acceptForce());
     }
 
     private void acceptForce() {
@@ -113,15 +111,11 @@ public class ForceController implements Controllable {
 
     @Override
     public void disable() {
-        controller.getForcePane().setVisible(false);
-        controller.getCanvas().setXLayout(0);
-        controller.getCanvas().redraw();
+        controller.deactivatePane(controller.getForcePane());
     }
 
     @Override
     public void enable() {
-        controller.getCanvas().setXLayout(controller.getForcePane().getWidth());
-        controller.getForcePane().setVisible(true);
-        controller.getCanvas().redraw();
+        controller.activatePane(controller.getForcePane());
     }
 }
