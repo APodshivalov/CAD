@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
  * Created by podsh on 30.04.2017.
  */
 public class Force {
+    private String id;
     private int x;
     private int y;
     private int m;
@@ -40,6 +41,10 @@ public class Force {
 
     public int getM() {
         return m;
+    }
+
+    public void setM(int m) {
+        this.m = m;
     }
 
     public void draw(GraphicsContext gc, CoordinateUtils utils, Point point) {
@@ -91,5 +96,13 @@ public class Force {
         if (currentForce.getM() != 0) {
             m = currentForce.getM();
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

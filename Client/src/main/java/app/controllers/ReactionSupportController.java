@@ -1,16 +1,14 @@
 package app.controllers;
 
 import app.Controller;
-import app.ReactionFactory;
+import app.ImageFactory;
+import app.ReactionHelper;
 import app.interfaces.Controllable;
-import app.interfaces.ReactButton;
 import app.model.Model;
 import app.model.Point;
-import app.reactions.EmptyReaction;
-import app.reactions.Lock;
-import app.reactions.SharLock;
-import app.reactions.SharNoLock;
+import app.model.Reaction;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -19,11 +17,11 @@ import javafx.scene.input.MouseEvent;
 public class ReactionSupportController implements Controllable {
     private Controller controller;
     private Model model;
-    private ReactButton activeButton;
     private ToggleButton reac1;
     private ToggleButton reac2;
     private ToggleButton reac3;
     private ToggleButton reac4;
+    private Reaction currentReaction;
 
     public ReactionSupportController(Controller controller) {
         this.controller = controller;
@@ -33,40 +31,40 @@ public class ReactionSupportController implements Controllable {
         reac3 = controller.getReac3();
         reac4 = controller.getReac4();
 
-        reac1.setOnAction(event -> setAction(reac1, Lock.class));
+        reac1.setOnAction(event -> setAction(reac1, "Reac1"));
         reac1.setOnMouseEntered(event -> controller.setStatus("Жесткое закрепление"));
         reac1.setOnMouseExited(event -> controller.setStatus(""));
 
-        reac2.setOnAction(event -> setAction(reac2, SharLock.class));
+        reac2.setOnAction(event -> setAction(reac2, "Reac2"));
         reac2.setOnMouseEntered(event -> controller.setStatus("Шарнирно-неподвижная опора"));
         reac2.setOnMouseExited(event -> controller.setStatus(""));
 
-        reac3.setOnAction(event -> setAction(reac3, SharNoLock.class));
+        reac3.setOnAction(event -> setAction(reac3, "Reac3"));
         reac3.setOnMouseEntered(event -> controller.setStatus("Шарнирно-подвижная опора"));
         reac3.setOnMouseExited(event -> controller.setStatus(""));
 
-        reac4.setOnAction(event -> setAction(reac4, EmptyReaction.class));
+        reac4.setOnAction(event -> setAction(reac4, "Reac0"));
         reac4.setOnMouseEntered(event -> controller.setStatus("Узел"));
         reac4.setOnMouseExited(event -> controller.setStatus(""));
     }
 
-    private void setAction(ToggleButton button, Class<? extends ReactButton> lockClass) {
+    private void setAction(ToggleButton button, String type) {
         if (button.isSelected()){
-            activeButton = ReactionFactory.getInstance(lockClass, controller);
+            currentReaction = new Reaction(type);
         } else {
-            activeButton = null;
+            currentReaction = null;
         }
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
-        if (activeButton != null){
+        if (currentReaction != null){
             Point reactPoint = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
             if (reactPoint != null) {
-                activeButton.setAngle(ReactionFactory.getRotation(reactPoint, mouseEvent, controller));
-                reactPoint.setReaction(activeButton);
+                currentReaction.setAngle(ReactionHelper.getRotation(reactPoint, mouseEvent, controller));
+                reactPoint.setReaction(currentReaction);
             }
             controller.getCanvas().redraw();
-            activeButton = ReactionFactory.getInstance(activeButton.getClass(), controller);
+            currentReaction = new Reaction(currentReaction.getName());
         }
     }
 
@@ -74,8 +72,8 @@ public class ReactionSupportController implements Controllable {
     public void onMouseMoved(MouseEvent mouseEvent) {
         controller.getCanvas().redraw(mouseEvent);
         Point reactPoint = model.findNearbyPoint(mouseEvent.getX(), mouseEvent.getY());
-        if (reactPoint != null && activeButton != null) {
-            activeButton.draw(reactPoint, mouseEvent);
+        if (reactPoint != null && currentReaction != null) {
+            currentReaction.draw(reactPoint, mouseEvent, controller);
         }
     }
 

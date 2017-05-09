@@ -63,7 +63,9 @@ public class Model {
     }
 
     public void addPoint(Point point) {
-        points.add(point);
+        if (!points.contains(point)){
+            points.add(point);
+        }
     }
 
     public void select(double x, double y, double x1, double y1) {
@@ -91,11 +93,18 @@ public class Model {
         return arrayOfMaterial;
     }
 
-    public Cut getCurrentCut() {
-        return currentCut;
+    public ArrayOfCut getArrayOfCut() {
+        return arrayOfCut;
     }
 
     public Project getProject() {
         return project;
+    }
+
+    public void clear() {
+        project = new Project();
+        points = new ArrayList<>();
+        arrayOfMaterial = new ArrayOfMaterial();
+        arrayOfCut = new ArrayOfCut();
     }
 }

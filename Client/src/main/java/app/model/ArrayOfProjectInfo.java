@@ -7,17 +7,17 @@ import java.util.List;
  * Created by podsh on 09.05.2017.
  */
 public class ArrayOfProjectInfo {
-    private List<ProjectInfo> list;
+    private List<ProjectInfo> item;
 
     public ArrayOfProjectInfo() {
-        list = new ArrayList<>();
+        item = new ArrayList<>();
     }
 
-    public List<ProjectInfo> getList() {
-        return list;
+    public List<ProjectInfo> getItem() {
+        return item;
     }
 
-    public void setList(List<ProjectInfo> list) {
-        this.list = list;
+    public void setItem(List<ProjectInfo> item) {
+        this.item = item;
     }
 }

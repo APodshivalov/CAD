@@ -10,6 +10,8 @@ public class Material {
     private String id;
     private Color color;
 
+    public Material(){}
+
     public String getName() {
         return name;
     }

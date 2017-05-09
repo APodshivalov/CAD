@@ -24,6 +24,12 @@ public class Project {
         }
     }
 
+    public void add(Bar bar) {
+        if (bars.stream().noneMatch(bar::equals)) {
+            bars.add(bar);
+        }
+    }
+
     public void setSelect(double x, double y, double x1, double y1) {
         for (Bar bar : bars) {
             bar.setIsSelected(bar.between(x, y, x1, y1));

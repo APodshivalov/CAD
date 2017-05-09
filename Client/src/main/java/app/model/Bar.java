@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
  * Created by podsh on 08.04.2017.
  */
 public class Bar {
+    private String id;
     private Point firstPoint;
     private Point secondPoint;
     private Material material;
@@ -19,6 +20,9 @@ public class Bar {
         this.firstPoint = first;
         this.secondPoint = second;
         isSelected = false;
+    }
+
+    public Bar() {
     }
 
     public void draw(Controller controller) {
@@ -88,6 +92,14 @@ public class Bar {
                 ((obj.secondPoint == firstPoint) && (obj.firstPoint == secondPoint));
     }
 
+    public void setFirstPoint(Point firstPoint) {
+        this.firstPoint = firstPoint;
+    }
+
+    public void setSecondPoint(Point secondPoint) {
+        this.secondPoint = secondPoint;
+    }
+
     public Point getFirstPoint() {
         return firstPoint;
     }
@@ -118,5 +130,13 @@ public class Bar {
 
     public void setCut(Cut cut) {
         this.cut = cut;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

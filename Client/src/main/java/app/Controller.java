@@ -218,7 +218,7 @@ public class Controller implements Initializable {
         Client client = Client.create(cfg);
         WebResource webResource = client.resource("http://localhost:8080/Server-1.0/save");
 
-        System.out.println(model.getProject().getProjectInfo().getId());
+        System.out.println(model.getProject());
 
         ClientResponse response = webResource
                 .accept(MediaType.APPLICATION_JSON)
