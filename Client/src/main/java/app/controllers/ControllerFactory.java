@@ -14,6 +14,7 @@ public class ControllerFactory {
     private static ForceController forceController;
     private static LoginController loginController;
     private static CreateProjectController createProjectController;
+    private static SaveController saveController;
     private static LoadProjectController loadProjectController;
     private static EmptyController emptyController;
 
@@ -78,5 +79,12 @@ public class ControllerFactory {
             loadProjectController = new LoadProjectController(controller);
         }
         return loadProjectController;
+    }
+
+    public static Controllable getSaveProjectController(Controller controller) {
+        if (saveController == null) {
+            saveController = new SaveController(controller);
+        }
+        return saveController;
     }
 }

@@ -32,6 +32,12 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
+    private Pane savePane;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Label saveLabel;
+    @FXML
     private Button loadProjectInfoButton;
     @FXML
     private ComboBox projectsComboBox;
@@ -205,30 +211,10 @@ public class Controller implements Initializable {
         modelButton.setOnAction(event -> changeMenuButton());
         calcButton.setOnAction(event -> changeMenuButton());
 
-        saveProjectButton.setOnAction(event -> save());
-
-
         authorizationButton.setOnAction(event -> changeEventListener(authorizationButton, ControllerFactory.getLoginController(this)));
         newProjectButton.setOnAction(event -> changeEventListener(newProjectButton, ControllerFactory.getCreateProjectController(this)));
+        saveProjectButton.setOnAction(event -> changeEventListener(saveProjectButton, ControllerFactory.getSaveProjectController(this)));
         loadProjectButton.setOnAction(event -> changeEventListener(loadProjectButton, ControllerFactory.getLoadProjectController(this)));
-    }
-
-    private void save() {
-        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-        Client client = Client.create(cfg);
-        WebResource webResource = client.resource("http://localhost:8080/Server-1.0/save");
-
-        System.out.println(model.getProject());
-
-        ClientResponse response = webResource
-                .accept(MediaType.APPLICATION_JSON)
-                .entity(model.getProject())
-                .header("sessionId", currentUser.getSessionId())
-                .post(ClientResponse.class);
-
-        if (response.getStatus() == 200) {
-            System.out.println("done");
-        }
     }
 
     public void activatePane(Pane pane) {
@@ -606,5 +592,17 @@ public class Controller implements Initializable {
 
     public Button getLoadProjectInfoButton() {
         return loadProjectInfoButton;
+    }
+
+    public Pane getSavePane() {
+        return savePane;
+    }
+
+    public Button getSaveButton() {
+        return saveButton;
+    }
+
+    public Label getSaveLabel() {
+        return saveLabel;
     }
 }
