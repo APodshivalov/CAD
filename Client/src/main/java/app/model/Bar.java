@@ -4,6 +4,7 @@ import app.Controller;
 import app.utils.CoordinateUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * Created by podsh on 08.04.2017.
@@ -57,7 +58,8 @@ public class Bar {
         gc.fillRect(xx, yy, width + 8, 28);
         gc.setFill(Color.WHITE);
         gc.fillRect(xx+1, yy+1, width + 6, 26);
-        gc.strokeText(shortName, xx+3, yy+18);
+        gc.setStroke(Color.BLACK);
+        gc.strokeText(shortName, xx+4, yy+18);
         gc.setFill(Color.BLACK);
     }
 

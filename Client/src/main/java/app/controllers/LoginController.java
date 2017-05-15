@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import javax.ws.rs.core.MediaType;
-import javax.xml.soap.Text;
 
 /**
  * Created by podsh on 07.05.2017.
@@ -48,6 +47,7 @@ public class LoginController implements Controllable {
                 .entity(loginObject)
                 .post(User.class);
 
+        controller.setTabsDisable(false);
         controller.getUserLabel().setText(pojo.getFirstName() + " " + pojo.getLastName());
         controller.setCurrentUser(pojo);
     }

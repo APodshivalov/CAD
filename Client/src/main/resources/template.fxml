@@ -25,11 +25,11 @@
                   <Insets />
                </opaqueInsets>
             </ToggleButton>
-            <ToggleButton fx:id="modelButton" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Модель" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="57.0">
+            <ToggleButton fx:id="modelButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Модель" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="57.0">
                <font>
                   <Font name="Nirmala UI" size="11.0" />
                </font></ToggleButton>
-            <ToggleButton fx:id="calcButton" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Расчёт" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="107.0">
+            <ToggleButton fx:id="calcButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Расчёт" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="107.0">
                <font>
                   <Font name="Nirmala UI" size="11.0" />
                </font></ToggleButton>
@@ -292,6 +292,7 @@
                      <children>
                         <ComboBox fx:id="projectsComboBox" layoutX="9.0" layoutY="9.0" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" />
                         <Button fx:id="loadProjectInfoButton" layoutX="9.0" layoutY="50.0" mnemonicParsing="false" prefWidth="126.0" text="Загрузить" />
+                        <Label fx:id="loadLabel" layoutX="9.0" layoutY="80.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="savePane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

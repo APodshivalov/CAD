@@ -32,11 +32,15 @@ public class ResizableCanvas extends Canvas {
      * Перерисовка канваса
      */
     public void redraw() {
+        draw();
+        controller.getModel().draw();
+    }
+
+    private void draw(){
         this.setLayoutX(xLayout);
         this.setWidth(controller.getCanvasPane().getWidth() - xLayout);
         this.setHeight(controller.getCanvasPane().getHeight());
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
-        controller.getModel().draw();
         drawCoordinates();
         controller.getCurrentEventListener().redraw();
         if (controller.getMaterialView().isSelected()){
@@ -46,11 +50,11 @@ public class ResizableCanvas extends Canvas {
 
     public void redrawExit() {
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
-        controller.getModel().draw();
         drawCoordinates();
         if (controller.getMaterialView().isSelected()){
             drawPalette();
         }
+        controller.getModel().draw();
     }
 
     private void drawPalette() {
@@ -61,6 +65,7 @@ public class ResizableCanvas extends Canvas {
             gc.fillRect(x, y, 20, 20);
             gc.setTextAlign(TextAlignment.RIGHT);
             gc.strokeText(m.getName(), x - 5, y + 14);
+            gc.setTextAlign(TextAlignment.LEFT);
             y += 25;
         }
     }
@@ -88,14 +93,7 @@ public class ResizableCanvas extends Canvas {
     }
 
     public void redraw(MouseEvent mouseEvent) {
-        this.setLayoutX(xLayout);
-        this.setWidth(controller.getCanvasPane().getWidth() - xLayout);
-        this.setHeight(controller.getCanvasPane().getHeight());
-        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+        draw();
         controller.getModel().draw(mouseEvent);
-        drawCoordinates();
-        if (controller.getMaterialView().isSelected()){
-            drawPalette();
-        }
     }
 }

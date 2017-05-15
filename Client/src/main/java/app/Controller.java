@@ -32,6 +32,12 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
+    private ToggleGroup projectGroup;
+    @FXML
+    private ToggleGroup modelGroup;
+    @FXML
+    private Label loadLabel;
+    @FXML
     private Pane savePane;
     @FXML
     private Button saveButton;
@@ -82,7 +88,7 @@ public class Controller implements Initializable {
     @FXML
     private ToggleButton calcButton;
     @FXML
-    private AnchorPane menuPane;
+    private AnchorPane menuFPane;
     @FXML
     private ToggleButton mForceButton;
     @FXML
@@ -230,6 +236,11 @@ public class Controller implements Initializable {
     }
 
     private void changeMenuButton() {
+        currentEventListener.disable();
+
+        projectGroup.selectToggle(null);
+        modelGroup.selectToggle(null);
+
         controlProjectPanel.setVisible(projectButton.isSelected());
         controlModelPanel.setVisible(modelButton.isSelected());
         controlCalcPanel.setVisible(calcButton.isSelected());
@@ -604,5 +615,14 @@ public class Controller implements Initializable {
 
     public Label getSaveLabel() {
         return saveLabel;
+    }
+
+    public Label getLoadLabel() {
+        return loadLabel;
+    }
+
+    public void setTabsDisable(boolean b) {
+        modelButton.setDisable(b);
+        calcButton.setDisable(b);
     }
 }
