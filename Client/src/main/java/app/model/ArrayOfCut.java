@@ -23,9 +23,11 @@ public class ArrayOfCut {
         this.item = item;
     }
 
-    public void add(Cut selectedItem) {
+    public boolean add(Cut selectedItem) {
         if (!item.contains(selectedItem)){
             item.add(selectedItem);
+            return true;
         }
+        return false;
     }
 }

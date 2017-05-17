@@ -51,6 +51,7 @@
     -fx-background-color: #3B3738, #D7CEC7;
     -fx-background-radius: 0px;
     -fx-border-radius: 0;
+    -fx-pref-width: 126;
 }
 
 .combo-box-popup .list-view .list-cell
@@ -91,6 +92,10 @@
     -fx-background-color: white;
     -fx-border-color: #3B3738;
     -fx-border-width: 0 0 1 0;
+}
+
+.label, .button, .combo-box {
+    -fx-font: 12px "System";
 }
 
 #76323F

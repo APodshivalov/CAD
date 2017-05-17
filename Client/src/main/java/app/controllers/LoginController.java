@@ -40,7 +40,7 @@ public class LoginController implements Controllable {
         LoginObject loginObject = new LoginObject(loginField.getText(), passwordField.getText());
         ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
         Client client = Client.create(cfg);
-        WebResource webResource = client.resource("http://localhost:8080/Server-1.0/user/login" );
+        WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/user/login" );
 
         User pojo = webResource
                 .accept(MediaType.APPLICATION_JSON)

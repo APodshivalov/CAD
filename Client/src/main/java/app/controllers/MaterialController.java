@@ -53,7 +53,7 @@ public class MaterialController implements Controllable {
         if(wood.isSelected() || steel.isSelected()){
             ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
             Client client = Client.create(cfg);
-            WebResource webResource = client.resource("http://localhost:8080/Server-1.0/material/" + material);
+            WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/material/" + material);
 
             ArrayOfMaterial pojo = webResource
                     .header("sessionId", controller.getCurrentUser().getSessionId())

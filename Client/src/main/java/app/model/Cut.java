@@ -83,6 +83,18 @@ public class Cut {
         return fullName;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (! (obj instanceof Cut)) {
+            return false;
+        }
+        Cut other = (Cut) obj;
+        return this.getId().equals(other.getId());
+    }
+
     public String getShortName() {
         return shortName;
     }

@@ -24,6 +24,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javax.ws.rs.core.MediaType;
@@ -31,6 +32,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    public static String host = "localhost";
     @FXML
     private ToggleGroup projectGroup;
     @FXML

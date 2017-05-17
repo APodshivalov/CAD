@@ -33,6 +33,18 @@ public class Material {
         return name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (! (obj instanceof Material)) {
+            return false;
+        }
+        Material other = (Material) obj;
+        return this.getId().equals(other.getId());
+    }
+
     public Color getColor() {
         return color;
     }
