@@ -136,4 +136,9 @@ public class Cut {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
+    @Override
+    public String toString() {
+        return fullName;
+    }
 }

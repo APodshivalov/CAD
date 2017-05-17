@@ -13,7 +13,10 @@ public class Server extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> set = new HashSet<>();
-        set.add(Service.class);
+        set.add(ProjectResource.class);
+        set.add(MaterialResource.class);
+        set.add(CutsResource.class);
+        set.add(UserResource.class);
         return set;
     }
 }

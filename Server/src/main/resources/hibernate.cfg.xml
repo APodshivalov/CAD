@@ -1,26 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">
-            org.hibernate.dialect.PostgresDialect
-        </property>
-        <property name="hibernate.connection.driver_class">
-            com.mysql.jdbc.Driver
-        </property>
 
-        <!-- Assume test is the database name -->
-        <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/test
-        </property>
-        <property name="hibernate.connection.username">
-            root
-        </property>
-        <property name="hibernate.connection.password">
-            root123
-        </property>
+        <!-- Connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/cad</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">1</property>
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL91Dialect</property>
+
+        <!-- Print executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create all database on startup -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Annotated entity classes -->
+        <mapping class="domain.CadUser"/>
+        <mapping class="domain.ProjectInfo"/>
+        <mapping class="domain.Material"/>
+        <mapping class="domain.Cut"/>
+        <mapping class="domain.Bar"/>
+        <mapping class="domain.Force"/>
+        <mapping class="domain.Point"/>
+        <mapping class="domain.Reaction"/>
 
     </session-factory>
 </hibernate-configuration>

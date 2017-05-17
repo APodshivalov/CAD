@@ -1,9 +1,20 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * Created by podsh on 06.05.2017.
  */
-public class LogIn {
+@XmlRootElement(name = "loginInfo")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {
+        "login",
+        "password"
+})
+public class LoginInfo {
     private String login;
     private String password;
 

@@ -1,6 +1,7 @@
 package model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class ArrayOfMaterial {
     private List<Material> item;
 
     public ArrayOfMaterial() {
+        item = new ArrayList<>();
     }
 
     public List<Material> getItem() {

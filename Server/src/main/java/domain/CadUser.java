@@ -1,34 +1,37 @@
 package domain;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created by podsh on 06.05.2017.
  */
 @Entity
-public class User implements Serializable{
-    public User() {
+@Table(name = "caduser")
+public class CadUser implements Serializable{
+    public CadUser() {
 
     }
 
-    public User(String login) {
-        nickName = login;
+    public CadUser(String login) {
+        this.login = login;
+        this.password = "qwerty";
     }
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String firstName;
     private String lastName;
-    private String nickName;
+    private String login;
+    private String password;
     private String sessionId;
 
     public String getId() {
@@ -56,11 +59,11 @@ public class User implements Serializable{
     }
 
     public String getNickName() {
-        return nickName;
+        return login;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.login = nickName;
     }
 
     public String getSessionId() {
@@ -69,5 +72,13 @@ public class User implements Serializable{
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

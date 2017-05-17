@@ -7,16 +7,19 @@ import java.util.List;
 /**
  * Created by podsh on 01.05.2017.
  */
-@XmlRootElement(name = "arrayOfCut")
+@XmlRootElement(name = "project")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
+        "projectInfo",
         "bars"
 })
-public class ArrayOfBars {
+public class Project {
+    @XmlElement
+    private ProjectInfo projectInfo;
     @XmlElement
     private List<Bar> bars;
 
-    public ArrayOfBars() {
+    public Project() {
         bars = new ArrayList<>();
     }
 
@@ -26,5 +29,13 @@ public class ArrayOfBars {
 
     public void setBars(List<Bar> bars) {
         this.bars = bars;
+    }
+
+    public ProjectInfo getProjectInfo() {
+        return projectInfo;
+    }
+
+    public void setProjectInfo(ProjectInfo projectInfo) {
+        this.projectInfo = projectInfo;
     }
 }

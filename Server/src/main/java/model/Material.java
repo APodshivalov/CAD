@@ -13,23 +13,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
         "id",
-        "name",
-        "e"
+        "name"
 })
 public class Material {
     @XmlElement
     private String id;
     @XmlElement
     private String  name;
-    @XmlElement
-    private double e;
 
     public Material(){}
 
     public Material(String s, String wood1, int i) {
         id = s;
         name = wood1;
-        e = i;
     }
 
     public String getId() {
@@ -48,11 +44,8 @@ public class Material {
         this.name = name;
     }
 
-    public double getE() {
-        return e;
-    }
-
-    public void setE(double e) {
-        this.e = e;
+    @Override
+    public String toString() {
+        return name;
     }
 }
