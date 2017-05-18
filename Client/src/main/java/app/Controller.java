@@ -214,6 +214,7 @@ public class Controller implements Initializable {
                 .toRealY()));
 
         materialView.setOnAction(event -> canvas.redraw());
+        cutView.setOnAction(event -> canvas.redraw());
 
         projectButton.setOnAction(event -> changeMenuButton());
         modelButton.setOnAction(event -> changeMenuButton());

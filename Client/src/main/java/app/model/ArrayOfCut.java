@@ -30,4 +30,12 @@ public class ArrayOfCut {
         }
         return false;
     }
+
+    public Cut getCutFromArrayOfCuts(Cut cut) {
+        if(!add(cut)) {
+            return item.get(item.indexOf(cut));
+        } else {
+            return cut;
+        }
+    }
 }

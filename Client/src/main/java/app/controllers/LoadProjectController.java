@@ -73,11 +73,13 @@ public class LoadProjectController implements Controllable {
             model.clear();
             model.getProject().setProjectInfo(project.getProjectInfo());
             for (Bar bar: project.getBars()) {
+                bar.setCut(model.getArrayOfCut().getCutFromArrayOfCuts(bar.getCut()));
+                bar.setMaterial(model.getArrayOfMaterial().getMaterialFromArrayOfMaterials(bar.getMaterial()));
                 model.addPoint(bar.getFirstPoint());
                 model.addPoint(bar.getSecondPoint());
                 model.getProject().add(bar);
-                model.getArrayOfMaterial().add(bar.getMaterial());
-                model.getArrayOfCut().add(bar.getCut());
+                //model.getArrayOfMaterial().add(bar.getMaterial());
+                //model.getArrayOfCut().add(bar.getCut());
                 model.setCurrentCut(bar.getCut());
                 model.setCurrentMaterial(bar.getMaterial());
             }

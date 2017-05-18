@@ -25,10 +25,20 @@ public class ArrayOfMaterial {
         this.item = item;
     }
 
-    public void add(Material selectedItem) {
+    public boolean add(Material selectedItem) {
         if (!item.contains(selectedItem)){
             selectedItem.setColor(Colors.getNextColor());
             item.add(selectedItem);
+            return true;
+        }
+        return false;
+    }
+
+    public Material getMaterialFromArrayOfMaterials(Material material) {
+        if(!add(material)) {
+            return item.get(item.indexOf(material));
+        } else {
+            return material;
         }
     }
 }
