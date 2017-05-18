@@ -48,6 +48,8 @@ public class CreateProjectController implements Controllable {
                 .header("sessionId", controller.getCurrentUser().getSessionId())
                 .post(ProjectInfo.class);
 
+        controller.getModel().clear();
+        controller.getCanvas().redraw();
         controller.getModel().getProject().setProjectInfo(response);
         ((Stage) createProjectButton.getScene().getWindow()).setTitle(projectInfo.getName());
     }

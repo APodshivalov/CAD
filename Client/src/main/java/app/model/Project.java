@@ -69,4 +69,9 @@ public class Project {
     public void setProjectInfo(ProjectInfo projectInfo) {
         this.projectInfo = projectInfo;
     }
+
+    public void clear() {
+        bars.clear();
+        projectInfo = null;
+    }
 }

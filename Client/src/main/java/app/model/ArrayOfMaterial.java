@@ -41,4 +41,8 @@ public class ArrayOfMaterial {
             return material;
         }
     }
+
+    public void clear() {
+        item.clear();
+    }
 }

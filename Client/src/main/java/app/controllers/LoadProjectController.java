@@ -59,7 +59,7 @@ public class LoadProjectController implements Controllable {
             }
 
             if (response.getStatus() == 200) {
-                loadLabel.setTextFill(Color.web("#3B3738"));
+                loadLabel.setTextFill(Color.web("#116611"));
                 loadLabel.setText("Проект загружен");
             }
 

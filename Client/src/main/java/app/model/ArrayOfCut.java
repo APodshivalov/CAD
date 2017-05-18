@@ -38,4 +38,8 @@ public class ArrayOfCut {
             return cut;
         }
     }
+
+    public void clear() {
+        item.clear();
+    }
 }

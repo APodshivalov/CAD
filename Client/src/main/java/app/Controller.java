@@ -34,6 +34,8 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     public static String host = "localhost";
     @FXML
+    private Label loginLabel;
+    @FXML
     private ToggleGroup projectGroup;
     @FXML
     private ToggleGroup modelGroup;
@@ -71,8 +73,6 @@ public class Controller implements Initializable {
     private PasswordField passwordField;
     @FXML
     private Button sendLogInButton;
-    @FXML
-    private Button cancelLogInButton;
     @FXML
     private Pane authPane;
     @FXML
@@ -548,10 +548,6 @@ public class Controller implements Initializable {
         return sendLogInButton;
     }
 
-    public Button getCancelLogInButton() {
-        return cancelLogInButton;
-    }
-
     public Label getUserLabel() {
         return userLabel;
     }
@@ -627,5 +623,9 @@ public class Controller implements Initializable {
     public void setTabsDisable(boolean b) {
         modelButton.setDisable(b);
         calcButton.setDisable(b);
+    }
+
+    public Label getLoginLabel() {
+        return loginLabel;
     }
 }

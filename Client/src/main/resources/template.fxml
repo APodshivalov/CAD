@@ -1,356 +1,358 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller">
-   <children>
-      <AnchorPane fx:id="menuPane" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ToggleButton fx:id="projectButton" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Проект" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menu" />
-               </toggleGroup>
-               <font>
-                  <Font name="Nirmala UI" size="11.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </ToggleButton>
-            <ToggleButton fx:id="modelButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Модель" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="57.0">
-               <font>
-                  <Font name="Nirmala UI" size="11.0" />
-               </font></ToggleButton>
-            <ToggleButton fx:id="calcButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Расчёт" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="107.0">
-               <font>
-                  <Font name="Nirmala UI" size="11.0" />
-               </font></ToggleButton>
-            <Label fx:id="userLabel" layoutX="873.0" layoutY="6.0" text="Вход не выполнен" AnchorPane.rightAnchor="10.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-         <children>
-            <Pane fx:id="controlModelPanel" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw" prefHeight="62.0" prefWidth="62.0">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/Draw.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="modelGroup" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="73.0" layoutY="4.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" toggleGroup="$modelGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/Support.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="cutButton" layoutX="137.0" layoutY="4.0" mnemonicParsing="false" onAction="#cutButtonOn" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection" toggleGroup="$modelGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/Section.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="201.0" layoutY="4.0" mnemonicParsing="false" onAction="#materialButtonOn" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" toggleGroup="$modelGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/Material.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="265.0" layoutY="4.0" mnemonicParsing="false" onAction="#onForceButtonOn" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" toggleGroup="$modelGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/Force.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-               </children>
-            </Pane>
-            <Pane fx:id="statusBar" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
-                  <ToggleButton fx:id="orto" layoutX="451.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Орто" textAlignment="CENTER" textOverrun="CLIP" visible="false">
-                     <font>
-                        <Font name="Arial" size="8.0" />
-                     </font>
-                  </ToggleButton>
-                  <ToggleButton fx:id="pivot" layoutX="387.0" maxHeight="21.0" maxWidth="55.0" minHeight="21.0" minWidth="55.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Привязка" textAlignment="CENTER" visible="false">
-                     <font>
-                        <Font name="Arial" size="8.0" />
-                     </font>
-                  </ToggleButton>
-                  <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" onAction="#onNetAction" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
-                     <font>
-                        <Font name="Arial" size="8.0" />
-                     </font>
-                  </ToggleButton>
-                  <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
-                  <Label fx:id="scaleLabel" layoutX="286.0" layoutY="2.0" />
-                  <ToggleButton fx:id="materialView" layoutX="689.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="М">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                  </ToggleButton>
-                  <ToggleButton fx:id="cutView" layoutX="672.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="С">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                  </ToggleButton>
-               </children>
-            </Pane>
-            <AnchorPane fx:id="canvasPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
-               <children>
-                  <Pane fx:id="authPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label layoutX="9.0" layoutY="9.0" text="Логин:" />
-                        <TextField fx:id="loginField" layoutX="9.0" layoutY="26.0" prefWidth="126.0" />
-                        <Label layoutX="9.0" layoutY="58.0" text="Пароль:" />
-                        <PasswordField fx:id="passwordField" layoutX="9.0" layoutY="75.0" prefWidth="126.0" />
-                        <Button fx:id="sendLogInButton" layoutX="9.0" layoutY="114.0" mnemonicParsing="false" prefWidth="126.0" text="Вход" />
-                        <Button fx:id="cancelLogInButton" layoutX="9.0" layoutY="147.0" mnemonicParsing="false" prefWidth="126.0" text="Отмена" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="reacPane" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ToggleButton fx:id="reac1" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/reac1.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="reactButtons" />
-                           </toggleGroup>
+    <children>
+        <AnchorPane fx:id="menuPane" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ToggleButton fx:id="projectButton" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Проект" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="menu" />
+                    </toggleGroup>
+                    <font>
+                        <Font name="Nirmala UI" size="11.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </ToggleButton>
+                <ToggleButton fx:id="modelButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Модель" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="57.0">
+                    <font>
+                        <Font name="Nirmala UI" size="11.0" />
+                    </font>
+                </ToggleButton>
+                <ToggleButton fx:id="calcButton" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Расчёт" toggleGroup="$menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="107.0">
+                    <font>
+                        <Font name="Nirmala UI" size="11.0" />
+                    </font>
+                </ToggleButton>
+                <Label fx:id="userLabel" layoutX="873.0" layoutY="6.0" text="Вход не выполнен" AnchorPane.rightAnchor="10.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+            <children>
+                <Pane fx:id="controlModelPanel" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ToggleButton fx:id="drawButton" focusTraversable="false" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" onAction="#drawOn" onMouseEntered="#onMouseEnteredDraw" onMouseExited="#onMouseExitedDraw" prefHeight="62.0" prefWidth="62.0">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/Draw.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="modelGroup" />
+                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton fx:id="reac2" layoutX="9.0" layoutY="79.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/reac2.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="reactionSupportButton" focusTraversable="false" layoutX="73.0" layoutY="4.0" mnemonicParsing="false" onAction="#reactionSupportOn" onMouseEntered="#onMouseEnteredSupport" onMouseExited="#onMouseExitedSupport" toggleGroup="$modelGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/Support.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="reac3" layoutX="9.0" layoutY="149.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/reac3.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="cutButton" layoutX="137.0" layoutY="4.0" mnemonicParsing="false" onAction="#cutButtonOn" onMouseEntered="#onMouseEnteredSection" onMouseExited="#onMouseExitedSection" toggleGroup="$modelGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/Section.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="reac4" layoutX="9.0" layoutY="219.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/reac4.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="materialButton" focusTraversable="false" layoutX="201.0" layoutY="4.0" mnemonicParsing="false" onAction="#materialButtonOn" onMouseEntered="#onMouseEnteredMaterial" onMouseExited="#onMouseExitedMaterial" toggleGroup="$modelGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/Material.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                     </children>
-                  </Pane>
-                  <Pane fx:id="materialPane" layoutX="10.0" layoutY="10.0" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ToggleButton fx:id="woodButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/wood.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="forceButton" focusTraversable="false" layoutX="265.0" layoutY="4.0" mnemonicParsing="false" onAction="#onForceButtonOn" onMouseEntered="#onMouseEnteredForce" onMouseExited="#onMouseExitedForce" toggleGroup="$modelGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/Force.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                        <ToggleButton fx:id="steelButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/metal.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                    </children>
+                </Pane>
+                <Pane fx:id="statusBar" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Label fx:id="statusLabel" layoutX="10.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" />
+                        <ToggleButton fx:id="orto" layoutX="451.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="40.0" text="Орто" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+                            <font>
+                                <Font name="Arial" size="8.0" />
+                            </font>
                         </ToggleButton>
-                        <ComboBox fx:id="materialComboBox" layoutX="9.0" layoutY="87.0" prefWidth="126.0" />
-                        <Button fx:id="acceptMaterial" layoutX="9.0" layoutY="130.0" mnemonicParsing="false" prefWidth="126.0" text="Применить" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="cutPane" maxWidth="145.0" minWidth="145.0" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ToggleButton fx:id="iBeamButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/beams/I.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="pivot" layoutX="387.0" maxHeight="21.0" maxWidth="55.0" minHeight="21.0" minWidth="55.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Привязка" textAlignment="CENTER" visible="false">
+                            <font>
+                                <Font name="Arial" size="8.0" />
+                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="tBeamButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/beams/T.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="net" layoutX="491.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="40.0" mnemonicParsing="false" onAction="#onNetAction" prefHeight="21.0" prefWidth="40.0" text="Сетка" textAlignment="CENTER" visible="false">
+                            <font>
+                                <Font name="Arial" size="8.0" />
+                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="cBeamButton" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/beams/C.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Label fx:id="coordinatesLabel" layoutX="531.0" layoutY="2.0" />
+                        <Label fx:id="scaleLabel" layoutX="286.0" layoutY="2.0" />
+                        <ToggleButton fx:id="materialView" layoutX="689.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="М">
+                            <font>
+                                <Font size="8.0" />
+                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="oBeamButton" layoutX="73.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/beams/O.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="cutView" layoutX="672.0" maxHeight="21.0" minHeight="21.0" mnemonicParsing="false" prefHeight="21.0" text="С">
+                            <font>
+                                <Font size="8.0" />
+                            </font>
                         </ToggleButton>
-                        <ComboBox fx:id="cutComboBox" layoutX="9.0" layoutY="147.0" prefWidth="126.0" />
-                        <Button fx:id="acceptCut" layoutX="9.0" layoutY="187.0" mnemonicParsing="false" prefWidth="126.0" text="Принять" />
-                        <ImageView fx:id="bigBeamImage" fitHeight="150.0" fitWidth="126.0" layoutX="9.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="rProperty" layoutX="73.0" layoutY="433.0" />
-                        <Label fx:id="sProperty" layoutX="73.0" layoutY="416.0" />
-                        <Label fx:id="hProperty" layoutX="9.0" layoutY="416.0" />
-                        <Label fx:id="bProperty" layoutX="9.0" layoutY="433.0" />
-                        <Label fx:id="tProperty" layoutX="9.0" layoutY="450.0" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="forcePane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ToggleButton fx:id="vForceButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/vForce.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                    </children>
+                </Pane>
+                <AnchorPane fx:id="canvasPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                    <children>
+                        <Pane fx:id="authPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Label layoutX="9.0" layoutY="9.0" text="Логин:" />
+                                <TextField fx:id="loginField" layoutX="9.0" layoutY="26.0" prefWidth="126.0" />
+                                <Label layoutX="9.0" layoutY="58.0" text="Пароль:" />
+                                <PasswordField fx:id="passwordField" layoutX="9.0" layoutY="75.0" prefWidth="126.0" />
+                                <Button fx:id="sendLogInButton" layoutX="9.0" layoutY="114.0" mnemonicParsing="false" prefWidth="126.0" text="Вход" />
+                                <Label fx:id="loginLabel" layoutX="10.0" layoutY="148.0" maxWidth="126.0" wrapText="true" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="reacPane" maxWidth="81.0" minWidth="81.0" prefWidth="81.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ToggleButton fx:id="reac1" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/reac1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="reactButtons" />
+                                    </toggleGroup>
+                                </ToggleButton>
+                                <ToggleButton fx:id="reac2" layoutX="9.0" layoutY="79.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/reac2.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="reac3" layoutX="9.0" layoutY="149.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/reac3.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="reac4" layoutX="9.0" layoutY="219.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$reactButtons">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/reac4.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                            </children>
+                        </Pane>
+                        <Pane fx:id="materialPane" layoutX="10.0" layoutY="10.0" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ToggleButton fx:id="woodButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" textAlignment="CENTER">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/wood.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="steelButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/metal.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ComboBox fx:id="materialComboBox" layoutX="9.0" layoutY="87.0" prefWidth="126.0" />
+                                <Button fx:id="acceptMaterial" layoutX="9.0" layoutY="130.0" mnemonicParsing="false" prefWidth="126.0" text="Применить" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="cutPane" maxWidth="145.0" minWidth="145.0" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ToggleButton fx:id="iBeamButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/beams/I.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="tBeamButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/beams/T.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="cBeamButton" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/beams/C.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="oBeamButton" layoutX="73.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/beams/O.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ComboBox fx:id="cutComboBox" layoutX="9.0" layoutY="147.0" prefWidth="126.0" />
+                                <Button fx:id="acceptCut" layoutX="9.0" layoutY="187.0" mnemonicParsing="false" prefWidth="126.0" text="Принять" />
+                                <ImageView fx:id="bigBeamImage" fitHeight="150.0" fitWidth="126.0" layoutX="9.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
+                                <Label fx:id="rProperty" layoutX="73.0" layoutY="433.0" />
+                                <Label fx:id="sProperty" layoutX="73.0" layoutY="416.0" />
+                                <Label fx:id="hProperty" layoutX="9.0" layoutY="416.0" />
+                                <Label fx:id="bProperty" layoutX="9.0" layoutY="433.0" />
+                                <Label fx:id="tProperty" layoutX="9.0" layoutY="450.0" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="forcePane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ToggleButton fx:id="vForceButton" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/vForce.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="hForceButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/hForce.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <TextField fx:id="forceTextInput" layoutX="9.0" layoutY="145.0" prefWidth="126.0" />
+                                <Button fx:id="acceptForce" layoutX="9.0" layoutY="180.0" mnemonicParsing="false" prefWidth="126.0" text="Применить" />
+                                <ToggleButton fx:id="mForceButton" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/mForce.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                            </children>
+                        </Pane>
+                        <Pane fx:id="newProjectPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <TextField fx:id="projectNameField" layoutX="9.0" layoutY="9.0" prefWidth="126.0" />
+                                <Button fx:id="createProjectButton" layoutX="9.0" layoutY="50.0" mnemonicParsing="false" prefWidth="126.0" text="Создать" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="loadProjectPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ComboBox fx:id="projectsComboBox" layoutX="9.0" layoutY="9.0" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" />
+                                <Button fx:id="loadProjectInfoButton" layoutX="9.0" layoutY="50.0" mnemonicParsing="false" prefWidth="126.0" text="Загрузить" />
+                                <Label fx:id="loadLabel" layoutX="9.0" layoutY="80.0" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="savePane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Button fx:id="saveButton" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" prefWidth="126.0" text="Сохранить" />
+                                <Label fx:id="saveLabel" layoutX="9.0" layoutY="45.0" maxWidth="126.0" wrapText="true" />
+                            </children>
+                        </Pane>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </AnchorPane>
+                <Pane fx:id="controlProjectPanel" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ToggleButton fx:id="authorizationButton" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/login.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="projectGroup" />
+                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton fx:id="hForceButton" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/hForce.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="newProjectButton" layoutX="73.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/new.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                        <TextField fx:id="forceTextInput" layoutX="9.0" layoutY="145.0" prefWidth="126.0" />
-                        <Button fx:id="acceptForce" layoutX="9.0" layoutY="180.0" mnemonicParsing="false" prefWidth="126.0" text="Применить" />
-                        <ToggleButton fx:id="mForceButton" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/mForce.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <ToggleButton fx:id="saveProjectButton" layoutX="137.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/save.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
                         </ToggleButton>
-                     </children>
-                  </Pane>
-                  <Pane fx:id="newProjectPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextField fx:id="projectNameField" layoutX="9.0" layoutY="9.0" prefWidth="126.0" />
-                        <Button fx:id="createProjectButton" layoutX="9.0" layoutY="50.0" mnemonicParsing="false" prefWidth="126.0" text="Создать" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="loadProjectPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ComboBox fx:id="projectsComboBox" layoutX="9.0" layoutY="9.0" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" />
-                        <Button fx:id="loadProjectInfoButton" layoutX="9.0" layoutY="50.0" mnemonicParsing="false" prefWidth="126.0" text="Загрузить" />
-                        <Label fx:id="loadLabel" layoutX="9.0" layoutY="80.0" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="savePane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Button fx:id="saveButton" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" prefWidth="126.0" text="Сохранить" />
-                        <Label fx:id="saveLabel" layoutX="9.0" layoutY="45.0" maxWidth="126.0" wrapText="true" />
-                     </children>
-                  </Pane>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </AnchorPane>
-            <Pane fx:id="controlProjectPanel" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ToggleButton fx:id="authorizationButton" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/login.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="projectGroup" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton fx:id="newProjectButton" layoutX="73.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/new.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="saveProjectButton" layoutX="137.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/save.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="loadProjectButton" layoutX="201.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/load.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-               </children>
-            </Pane>
-            <Pane fx:id="controlCalcPanel" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-   </children>
+                        <ToggleButton fx:id="loadProjectButton" layoutX="201.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$projectGroup">
+                            <graphic>
+                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/load.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                    </children>
+                </Pane>
+                <Pane fx:id="controlCalcPanel" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>
