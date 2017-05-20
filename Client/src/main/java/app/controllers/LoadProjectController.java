@@ -42,8 +42,7 @@ public class LoadProjectController implements Controllable {
 
     private void loadProjectFromCloud(ProjectInfo value) {
         if (value != null){
-            ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-            Client client = Client.create(cfg);
+            Client client = controller.getClient();
             WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/load");
 
             ClientResponse response;
@@ -89,8 +88,7 @@ public class LoadProjectController implements Controllable {
     }
 
     private void loadFromCloud(String sessionId) {
-        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-        Client client = Client.create(cfg);
+        Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/projectNames");
 
         ArrayOfProjectInfo pojo;

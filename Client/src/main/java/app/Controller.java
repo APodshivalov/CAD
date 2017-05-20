@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public static String host = "localhost";
+    private Client client;
     @FXML
     private Label loginLabel;
     @FXML
@@ -199,6 +200,9 @@ public class Controller implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
+        client = Client.create(cfg);
+
         currentEventListener = ControllerFactory.getEmpty();
 
         canvas = new ResizableCanvas(this);
@@ -627,5 +631,9 @@ public class Controller implements Initializable {
 
     public Label getLoginLabel() {
         return loginLabel;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }

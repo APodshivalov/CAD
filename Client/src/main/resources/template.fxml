@@ -351,7 +351,11 @@
                         </ToggleButton>
                     </children>
                 </Pane>
-                <Pane fx:id="controlCalcPanel" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Pane fx:id="controlCalcPanel" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ToggleButton layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" />
+                  <ToggleButton layoutX="73.0" layoutY="4.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" text="ToggleButton" />
+               </children></Pane>
             </children>
         </AnchorPane>
     </children>

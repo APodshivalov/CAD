@@ -35,8 +35,7 @@ public class SaveController implements Controllable {
     }
 
     private void save() {
-        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-        Client client = Client.create(cfg);
+        Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/save");
 
         if (controller.getCurrentUser() == null) {

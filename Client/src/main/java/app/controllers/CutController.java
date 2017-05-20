@@ -114,8 +114,7 @@ public class CutController implements Controllable {
     }
 
     private void loadFromCloud(String type) {
-        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-        Client client = Client.create(cfg);
+        Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/cuts/" + type);
 
         ArrayOfCut pojo = webResource

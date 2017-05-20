@@ -37,8 +37,7 @@ public class CreateProjectController implements Controllable {
     }
 
     private void createProject(String text) {
-        ClientConfig cfg = new DefaultClientConfig(GensonJsonConverter.class);
-        Client client = Client.create(cfg);
+        Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/create");
 
         ProjectInfo projectInfo = new ProjectInfo(text);
