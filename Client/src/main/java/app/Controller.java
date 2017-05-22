@@ -34,12 +34,33 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     public static String host = "localhost";
     private Client client;
+
+    @FXML
+    private Button calculateButton;
+    @FXML
+    private Label checkForceLabel;
+    @FXML
+    private Label checkReactionLabel;
+    @FXML
+    private Label checkCutLabel;
+    @FXML
+    private Label checkMaterialLabel;
+    @FXML
+    private Label checkFreePointsLabel;
+    @FXML
+    private Button checkModelRefreshButton;
+    @FXML
+    private Pane checkPane;
+    @FXML
+    private ToggleButton checkModelButton;
     @FXML
     private Label loginLabel;
     @FXML
     private ToggleGroup projectGroup;
     @FXML
     private ToggleGroup modelGroup;
+    @FXML
+    private ToggleGroup calcGroup;
     @FXML
     private Label loadLabel;
     @FXML
@@ -228,6 +249,8 @@ public class Controller implements Initializable {
         newProjectButton.setOnAction(event -> changeEventListener(newProjectButton, ControllerFactory.getCreateProjectController(this)));
         saveProjectButton.setOnAction(event -> changeEventListener(saveProjectButton, ControllerFactory.getSaveProjectController(this)));
         loadProjectButton.setOnAction(event -> changeEventListener(loadProjectButton, ControllerFactory.getLoadProjectController(this)));
+
+        checkModelButton.setOnAction(event -> changeEventListener(checkModelButton, ControllerFactory.getCheckModelController(this)));
     }
 
     public void activatePane(Pane pane) {
@@ -247,6 +270,7 @@ public class Controller implements Initializable {
 
         projectGroup.selectToggle(null);
         modelGroup.selectToggle(null);
+        calcGroup.selectToggle(null);
 
         controlProjectPanel.setVisible(projectButton.isSelected());
         controlModelPanel.setVisible(modelButton.isSelected());
@@ -635,5 +659,41 @@ public class Controller implements Initializable {
 
     public Client getClient() {
         return client;
+    }
+
+    public Pane getCheckPane() {
+        return checkPane;
+    }
+
+    public Button getCheckModelRefreshButton() {
+        return checkModelRefreshButton;
+    }
+
+    public Label getCheckFreePointsLabel() {
+        return checkFreePointsLabel;
+    }
+
+    public Label getCheckMaterialLabel() {
+        return checkMaterialLabel;
+    }
+
+    public Label getCheckCutLabel() {
+        return checkCutLabel;
+    }
+
+    public Label getCheckForceLabel() {
+        return checkForceLabel;
+    }
+
+    public Label getCheckReactionLabel() {
+        return checkReactionLabel;
+    }
+
+    public ToggleGroup getCalcGroup() {
+        return calcGroup;
+    }
+
+    public Button getCalculateButton() {
+        return calculateButton;
     }
 }

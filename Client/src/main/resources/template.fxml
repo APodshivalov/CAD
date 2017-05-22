@@ -303,6 +303,18 @@
                                 <Label fx:id="saveLabel" layoutX="9.0" layoutY="45.0" maxWidth="126.0" wrapText="true" />
                             </children>
                         </Pane>
+                  <Pane fx:id="checkPane" prefHeight="200.0" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="checkFreePointsLabel" layoutX="9.0" layoutY="102.0" prefWidth="126.0" text="Свободные узлы:" wrapText="true" />
+                        <Label layoutX="9.0" layoutY="9.0" text="Проверка" />
+                        <Label fx:id="checkMaterialLabel" layoutX="9.0" layoutY="30.0" text="Материалы:" />
+                        <Label fx:id="checkCutLabel" layoutX="9.0" layoutY="48.0" text="Сечения:" />
+                        <Label fx:id="checkForceLabel" layoutX="9.0" layoutY="66.0" text="Нарузки:" />
+                        <Label fx:id="checkReactionLabel" layoutX="9.0" layoutY="84.0" text="Опоры:" />
+                        <Button fx:id="checkModelRefreshButton" layoutX="9.0" layoutY="135.0" mnemonicParsing="false" prefWidth="126.0" text="Обновить" />
+                        <Button fx:id="calculateButton" disable="true" layoutX="9.0" layoutY="165.0" mnemonicParsing="false" prefWidth="126.0" text="Рассчет" />
+                     </children>
+                  </Pane>
                     </children>
                     <cursor>
                         <Cursor fx:constant="DEFAULT" />
@@ -353,8 +365,11 @@
                 </Pane>
                 <Pane fx:id="controlCalcPanel" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ToggleButton layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" />
-                  <ToggleButton layoutX="73.0" layoutY="4.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" text="ToggleButton" />
+                  <ToggleButton fx:id="checkModelButton" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="calcGroup" />
+                     </toggleGroup></ToggleButton>
+                  <ToggleButton layoutX="73.0" layoutY="4.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" text="ToggleButton" toggleGroup="$calcGroup" />
                </children></Pane>
             </children>
         </AnchorPane>

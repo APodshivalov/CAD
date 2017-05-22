@@ -31,8 +31,8 @@ public class Model {
      * Отрисовка модели
      */
     public void draw() {
-        points.forEach(point -> point.draw(controller));
         project.getBars().forEach(bar -> bar.draw(controller));
+        points.forEach(point -> point.draw(controller));
     }
 
     /**
@@ -70,11 +70,12 @@ public class Model {
 
     public void select(double x, double y, double x1, double y1) {
         project.setSelect(x,y,x1,y1);
+        points.forEach(point -> point.select(x,y,x1,y1));
     }
 
     public void draw(MouseEvent mouseEvent) {
-        points.forEach(point -> point.draw(controller, mouseEvent));
         project.draw(controller);
+        points.forEach(point -> point.draw(controller, mouseEvent));
     }
 
     public void setCurrentMaterial(Material selectedItem) {
@@ -106,5 +107,19 @@ public class Model {
         points = new ArrayList<>();
         arrayOfMaterial = new ArrayOfMaterial();
         arrayOfCut = new ArrayOfCut();
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void deleteSelected() {
+        project.getBars().removeIf(Bar::isSelected);
+        points.removeIf(Point::isSelected);
+    }
+
+    public void unselect() {
+        project.getBars().forEach(bar -> bar.setIsSelected(false));
+        points.forEach(point -> point.setSelected(false));
     }
 }

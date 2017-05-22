@@ -74,4 +74,8 @@ public class Project {
         bars.clear();
         projectInfo = null;
     }
+
+    public boolean contains(Point point) {
+        return bars.stream().anyMatch(bar -> bar.getFirstPoint().equals(point) || bar.getSecondPoint().equals(point));
+    }
 }

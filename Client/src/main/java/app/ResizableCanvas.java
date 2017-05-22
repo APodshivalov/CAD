@@ -4,6 +4,8 @@ import app.controllers.DrawController;
 import app.model.Material;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
@@ -19,6 +21,8 @@ public class ResizableCanvas extends Canvas {
 
     public ResizableCanvas(Controller controller) {
         this.controller = controller;
+        addEventFilter(MouseEvent.ANY, (e) -> this.requestFocus());
+        setOnKeyPressed(this::keyPressed);
         gc = this.getGraphicsContext2D();
         setOnMouseMoved(controller::onMouseMoved);
         setOnMouseDragged(controller::onMouseDrag);
@@ -26,6 +30,19 @@ public class ResizableCanvas extends Canvas {
         setOnScroll(controller::onScroll);
         setOnMouseExited(event -> redrawExit());
         setOnMouseClicked(controller::onMouseClickedOverCanvas);
+
+    }
+
+    private void keyPressed(KeyEvent event) {
+        System.out.println(event.getCode());
+        if (event.getCode() == KeyCode.DELETE) {
+            controller.getModel().deleteSelected();
+            redraw();
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            controller.getModel().unselect();
+            redraw();
+        }
     }
 
     /**

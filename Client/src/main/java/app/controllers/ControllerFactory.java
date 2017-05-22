@@ -17,6 +17,7 @@ public class ControllerFactory {
     private static SaveController saveController;
     private static LoadProjectController loadProjectController;
     private static EmptyController emptyController;
+    private static CheckModelController checkModelController;
 
     public static Controllable getDrawController(Controller controller) {
         if (drawController == null) {
@@ -86,5 +87,12 @@ public class ControllerFactory {
             saveController = new SaveController(controller);
         }
         return saveController;
+    }
+
+    public static Controllable getCheckModelController(Controller controller) {
+        if (checkModelController == null) {
+            checkModelController = new CheckModelController(controller);
+        }
+        return checkModelController;
     }
 }

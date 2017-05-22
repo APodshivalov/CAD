@@ -61,4 +61,8 @@ public class Reaction {
     public void setId(String id) {
         this.id = id;
     }
+
+    public boolean empty() {
+        return name.equals("Reac0");
+    }
 }

@@ -3,6 +3,7 @@ package app.model;
 import app.utils.CoordinateUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 /**
  * Created by podsh on 30.04.2017.
@@ -48,6 +49,7 @@ public class Force {
     }
 
     public void draw(GraphicsContext gc, CoordinateUtils utils, Point point) {
+        gc.setStroke(Color.BLACK);
         double xc = utils.fromRealX(point.getX());
         double yc = utils.fromRealY(point.getY());
         if (x < 0) {
@@ -104,5 +106,9 @@ public class Force {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean empty() {
+        return x == 0 && y == 0 && m == 0;
     }
 }
