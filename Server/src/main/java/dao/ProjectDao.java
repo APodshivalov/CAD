@@ -41,11 +41,8 @@ public class ProjectDao {
     }
 
     public void save(Bar bar) {
-        Point firstPoint = pointFacade.save(bar.getFirstPoint());
-        Point secondPoint = pointFacade.save(bar.getSecondPoint());
-        bar.setFirstPoint(firstPoint);
-        bar.setSecondPoint(secondPoint);
-
+        pointFacade.save(bar.getFirstPoint());
+        pointFacade.save(bar.getSecondPoint());
         barFacade.save(bar);
     }
 

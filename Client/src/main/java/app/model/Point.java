@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import javax.ws.rs.POST;
 import java.util.UUID;
 
 /**
@@ -13,7 +14,6 @@ import java.util.UUID;
  */
 public class Point {
     private String id;
-    private String nativeId;
     private double x;
     private double y;
     private boolean isSelected;
@@ -21,16 +21,28 @@ public class Point {
     private Reaction reaction;
 
     public Point(double x, double y) {
+        id = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
-        nativeId = UUID.randomUUID().toString();
         isSelected = false;
         reaction = new Reaction();
         force = new Force();
     }
 
     public Point() {
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if (obj instanceof Point) {
+            Point p = (Point) obj;
+            if (p.getId().equals(this.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getX() {
@@ -77,13 +89,13 @@ public class Point {
     public void draw(Controller controller) {
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
-        drawOval(gc,utils.fromRealX(x) - 1, utils.fromRealY(y) - 1);
+        drawOval(gc, utils.fromRealX(x) - 1, utils.fromRealY(y) - 1);
         reaction.draw(this, controller);
         force.draw(gc, utils, this);
     }
 
     private void drawOval(GraphicsContext gc, double x, double y) {
-        if (isSelected){
+        if (isSelected) {
             gc.setFill(Color.RED);
         } else {
             gc.setFill(Color.BLACK);
@@ -94,9 +106,9 @@ public class Point {
     public void draw(Controller controller, MouseEvent mouseEvent) {
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
-        drawOval(gc,utils.fromRealX(x) - 1, utils.fromRealY(y) - 1);
+        drawOval(gc, utils.fromRealX(x) - 1, utils.fromRealY(y) - 1);
         if (controller.getReac1().getToggleGroup().getSelectedToggle() == null ||
-                !controller.getCoordinateUtils().isNear(this, mouseEvent.getX(), mouseEvent.getY())){
+                !controller.getCoordinateUtils().isNear(this, mouseEvent.getX(), mouseEvent.getY())) {
             reaction.draw(this, controller);
         }
         force.draw(gc, utils, this);
@@ -116,14 +128,6 @@ public class Point {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getNativeId() {
-        return nativeId;
-    }
-
-    public void setNativeId(String nativeId) {
-        this.nativeId = nativeId;
     }
 
     public void select(double x, double y, double x1, double y1) {

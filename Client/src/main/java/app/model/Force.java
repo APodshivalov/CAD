@@ -5,6 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.util.UUID;
+
 /**
  * Created by podsh on 30.04.2017.
  */
@@ -15,13 +17,14 @@ public class Force {
     private int m;
 
     public Force(int y, int x, int m) {
+        this.id = UUID.randomUUID().toString();
         this.y = y;
         this.x = x;
         this.m = m;
     }
 
     public Force() {
-
+        this.id = UUID.randomUUID().toString();
     }
 
     public int getY() {

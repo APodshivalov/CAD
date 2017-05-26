@@ -12,17 +12,10 @@ public class PointFacade {
     public PointFacade() {
         pointDao = new PointDao();
     }
-    public Point save(Point point) {
-        if (point.getId() == null) { //Не синхронизироано с сервером
-            Point serverPoint = pointDao.loadByNativeId(point.getNativeId());
-            if (serverPoint == null){
-                pointDao.save(point);
-            } else {
-                return serverPoint;
-            }
-        } else {
-            pointDao.update(point);
-        }
-        return point;
+
+    public void save(Point point) {
+        pointDao.startSession();
+        pointDao.saveOrUpdate(point);
+        pointDao.stopSession();
     }
 }

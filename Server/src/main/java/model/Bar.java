@@ -70,4 +70,16 @@ public class Bar {
     public String toString() {
         return "Point 1: " + firstPoint + " Point 2: " + secondPoint + ". Material: " + material + ", Cut: " + cut;
     }
+
+    public double getLength() {
+        return Math.sqrt(Math.pow(firstPoint.getX()-secondPoint.getX(),2) + Math.pow(firstPoint.getY()-secondPoint.getY(),2));
+    }
+
+    public double getCos() {
+        return (secondPoint.getX() - firstPoint.getX()) / getLength();
+    }
+
+    public double getSin() {
+        return (secondPoint.getY() - firstPoint.getY()) / getLength();
+    }
 }

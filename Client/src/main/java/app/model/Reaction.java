@@ -6,6 +6,8 @@ import app.ReactionHelper;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
+import java.util.UUID;
+
 /**
  * Created by podsh on 09.05.2017.
  */
@@ -15,10 +17,12 @@ public class Reaction {
     private int angle;
 
     public Reaction() {
+        id = UUID.randomUUID().toString();
         name = "Reac0";
     }
 
     public Reaction(String type) {
+        id = UUID.randomUUID().toString();
         name = type;
     }
 

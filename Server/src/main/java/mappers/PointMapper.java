@@ -9,7 +9,6 @@ public class PointMapper {
     public static domain.Point map(Point clientPoint) {
         domain.Point serverPoint = new domain.Point();
         serverPoint.setId(clientPoint.getId());
-        serverPoint.setNativeId(clientPoint.getNativeId());
         serverPoint.setX(clientPoint.getX());
         serverPoint.setY(clientPoint.getY());
         serverPoint.setForce(ForceMapper.map(clientPoint.getForce()));
@@ -20,7 +19,6 @@ public class PointMapper {
     public static Point map(domain.Point serverPoint) {
         Point clientPoint = new Point();
         clientPoint.setId(serverPoint.getId());
-        clientPoint.setNativeId(serverPoint.getNativeId());
         clientPoint.setX(serverPoint.getX());
         clientPoint.setY(serverPoint.getY());
         clientPoint.setForce(ForceMapper.map(serverPoint.getForce()));

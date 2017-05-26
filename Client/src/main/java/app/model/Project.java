@@ -4,6 +4,7 @@ import app.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by podsh on 01.05.2017.
@@ -34,10 +35,6 @@ public class Project {
         for (Bar bar : bars) {
             bar.setIsSelected(bar.between(x, y, x1, y1));
         }
-    }
-
-    public void draw(Controller controller) {
-        bars.forEach(bar -> bar.draw(controller));
     }
 
     public void setCurrentMaterial(Material selectedItem) {

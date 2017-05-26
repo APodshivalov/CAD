@@ -30,7 +30,8 @@
     -fx-border-width: 1 0 0 0;
 }
 
-#reacPane, #cutPane, #materialPane, #forcePane, #authPane, #newProjectPane, #loadProjectPane, #savePane, #checkPane{
+#reacPane, #cutPane, #materialPane, #forcePane, #authPane, #newProjectPane,
+#loadProjectPane, #savePane, #checkPane, #resultPane{
     -fx-background-color: #D7CEC7;
     -fx-border-color: #C09F80;
     -fx-border-width: 0 1 0 0;

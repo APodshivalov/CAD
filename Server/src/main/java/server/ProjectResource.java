@@ -70,9 +70,19 @@ public class ProjectResource {
     @Consumes({(MediaType.APPLICATION_JSON)})
     public Response loadProject(ProjectInfo projectInfo) {
         Project project = projectFacade.loadProject(projectInfo);
-        for (Bar bar : project.getBars()){
-            System.out.println(bar);
-        }
         return Response.ok(project).build();
+    }
+
+    @POST
+    @Path("/calculate")
+    @Produces({(MediaType.APPLICATION_JSON)})
+    @Consumes({(MediaType.APPLICATION_JSON)})
+    public Response loadProject(@HeaderParam("sessionId") String sessionId, Project project) {
+        CadUser user = userFacade.getCadUserBySessionId(sessionId);
+        if (user != null) {
+            ArrayOfResult results = projectFacade.calculate(project);
+            return Response.ok(results).build();
+        }
+        return Response.ok().build();
     }
 }

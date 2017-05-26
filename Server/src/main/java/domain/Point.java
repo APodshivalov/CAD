@@ -11,10 +11,7 @@ import java.io.Serializable;
 @Entity
 public class Point implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private String nativeId;
     private double x;
     private double y;
     @OneToOne(cascade = {CascadeType.ALL})
@@ -62,11 +59,8 @@ public class Point implements Serializable {
         this.reaction = reaction;
     }
 
-    public String getNativeId() {
-        return nativeId;
-    }
-
-    public void setNativeId(String nativeId) {
-        this.nativeId = nativeId;
+    @Override
+    public String toString() {
+        return id;
     }
 }

@@ -313,8 +313,63 @@
                         <Label fx:id="checkReactionLabel" layoutX="9.0" layoutY="84.0" text="Опоры:" />
                         <Button fx:id="checkModelRefreshButton" layoutX="9.0" layoutY="135.0" mnemonicParsing="false" prefWidth="126.0" text="Обновить" />
                         <Button fx:id="calculateButton" disable="true" layoutX="9.0" layoutY="165.0" mnemonicParsing="false" prefWidth="126.0" text="Рассчет" />
+                        <Label fx:id="calculationResultLabel" layoutX="9.0" layoutY="199.0" />
                      </children>
                   </Pane>
+                  <Pane fx:id="resultPane" prefWidth="145.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ToggleButton fx:id="tableView" layoutX="9.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="diagrammGroup" />
+                           </toggleGroup>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/table.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="nView" layoutX="73.0" layoutY="9.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$diagrammGroup">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/letter-n-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="qView" layoutX="9.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$diagrammGroup">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/letter-q-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="mView" layoutX="73.0" layoutY="73.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$diagrammGroup">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/letter-m-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </Pane>
+                  <TableView fx:id="resultTable" focusTraversable="false" layoutX="258.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="200.0" text="id" />
+                      <TableColumn fx:id="n1Column" text="N" />
+                      <TableColumn fx:id="q1Column" text="Q" />
+                        <TableColumn fx:id="m1Column" prefWidth="100.0" text="M" />
+                        <TableColumn fx:id="n2Column" text="N" />
+                        <TableColumn fx:id="q2Column" text="Q" />
+                        <TableColumn fx:id="m2Column" prefWidth="100.0" text="M" />
+                    </columns>
+                  </TableView>
                     </children>
                     <cursor>
                         <Cursor fx:constant="DEFAULT" />
@@ -368,8 +423,22 @@
                   <ToggleButton fx:id="checkModelButton" layoutX="9.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0">
                      <toggleGroup>
                         <ToggleGroup fx:id="calcGroup" />
-                     </toggleGroup></ToggleButton>
-                  <ToggleButton layoutX="73.0" layoutY="4.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" text="ToggleButton" toggleGroup="$calcGroup" />
+                     </toggleGroup>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/calculator.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton fx:id="calculationResultButton" disable="true" layoutX="73.0" layoutY="4.0" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" toggleGroup="$calcGroup">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/result.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
                </children></Pane>
             </children>
         </AnchorPane>

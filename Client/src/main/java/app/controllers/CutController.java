@@ -5,8 +5,11 @@ import app.ImageFactory;
 import app.interfaces.Controllable;
 import app.model.ArrayOfCut;
 import app.model.Cut;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -15,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  * Created by podsh on 25.04.2017.
@@ -116,13 +120,22 @@ public class CutController implements Controllable {
     private void loadFromCloud(String type) {
         Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/cuts/" + type);
+        ObjectMapper objectMapper = new ObjectMapper()
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
-        ArrayOfCut pojo = webResource
+        ClientResponse pojo = webResource
                 .header("sessionId", controller.getCurrentUser().getSessionId())
                 .accept(MediaType.APPLICATION_JSON)
-                .get(ArrayOfCut.class);
+                .get(ClientResponse.class);
 
-        cutComboBox.getItems().setAll(pojo.getItem());
+        ArrayOfCut arrayOfCut = new ArrayOfCut();
+
+        try {
+            arrayOfCut = objectMapper.readValue(pojo.getEntityInputStream(), ArrayOfCut.class);
+        } catch (IOException ignored) {
+        }
+
+        cutComboBox.getItems().setAll(arrayOfCut.getItem());
     }
 
     @Override

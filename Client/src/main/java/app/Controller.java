@@ -2,10 +2,7 @@ package app;
 
 import app.controllers.ControllerFactory;
 import app.interfaces.Controllable;
-import app.model.Model;
-import app.model.Project;
-import app.model.ProjectInfo;
-import app.model.User;
+import app.model.*;
 import app.utils.CoordinateUtils;
 import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
@@ -35,6 +32,36 @@ public class Controller implements Initializable {
     public static String host = "localhost";
     private Client client;
 
+    @FXML
+    private ToggleButton nView;
+    @FXML
+    private ToggleButton qView;
+    @FXML
+    private ToggleButton mView;
+    @FXML
+    private Pane resultPane;
+    @FXML
+    private TableColumn<Result, String> idColumn;
+    @FXML
+    private TableColumn<Result, Number> n1Column;
+    @FXML
+    private TableColumn<Result, Number> q1Column;
+    @FXML
+    private TableColumn<Result, Number> m1Column;
+    @FXML
+    private TableColumn<Result, Number> n2Column;
+    @FXML
+    private TableColumn<Result, Number> q2Column;
+    @FXML
+    private TableColumn<Result, Number> m2Column;
+    @FXML
+    private TableView resultTable;
+    @FXML
+    private ToggleButton tableView;
+    @FXML
+    private ToggleButton calculationResultButton;
+    @FXML
+    private Label calculationResultLabel;
     @FXML
     private Button calculateButton;
     @FXML
@@ -251,6 +278,8 @@ public class Controller implements Initializable {
         loadProjectButton.setOnAction(event -> changeEventListener(loadProjectButton, ControllerFactory.getLoadProjectController(this)));
 
         checkModelButton.setOnAction(event -> changeEventListener(checkModelButton, ControllerFactory.getCheckModelController(this)));
+        calculationResultButton.setOnAction(event -> changeEventListener(calculationResultButton, ControllerFactory.getResultController(this)));
+
     }
 
     public void activatePane(Pane pane) {
@@ -268,13 +297,81 @@ public class Controller implements Initializable {
     private void changeMenuButton() {
         currentEventListener.disable();
 
+        setLabelFill();
+
         projectGroup.selectToggle(null);
         modelGroup.selectToggle(null);
         calcGroup.selectToggle(null);
 
+
+        checkFreePointsLabel.setTextFill(Color.BLACK);
+        checkMaterialLabel.setTextFill(Color.BLACK);
+        checkCutLabel.setTextFill(Color.BLACK);
+        checkForceLabel.setTextFill(Color.BLACK);
+        checkReactionLabel.setTextFill(Color.BLACK);
+        checkFreePointsLabel.setText("Свободные узлы:");
+        checkMaterialLabel.setText("Материал:");
+        checkCutLabel.setText("Сечение:");
+        checkForceLabel.setText("Нагрузки:");
+        checkReactionLabel.setText("Опоры:");
+        calculateButton.setDisable(true);
+        calculationResultButton.setDisable(true);
+        tableView.setSelected(false);
+        qView.setSelected(false);
+        nView.setSelected(false);
+        mView.setSelected(false);
+
         controlProjectPanel.setVisible(projectButton.isSelected());
         controlModelPanel.setVisible(modelButton.isSelected());
         controlCalcPanel.setVisible(calcButton.isSelected());
+
+        canvas.redraw();
+    }
+
+    private void setLabelFill() {
+        authorizationButton.setOnMouseEntered(event -> statusLabel.setText("Авторизация"));
+        authorizationButton.setOnMouseExited(event -> statusLabel.setText(""));
+        newProjectButton.setOnMouseEntered(event -> statusLabel.setText("Новый прокт"));
+        newProjectButton.setOnMouseExited(event -> statusLabel.setText(""));
+        saveProjectButton.setOnMouseEntered(event -> statusLabel.setText("Сохранение"));
+        saveProjectButton.setOnMouseExited(event -> statusLabel.setText(""));
+        loadProjectButton.setOnMouseEntered(event -> statusLabel.setText("Загрузка"));
+        loadProjectButton.setOnMouseExited(event -> statusLabel.setText(""));
+
+        iBeamButton.setOnMouseEntered(event -> statusLabel.setText("Двутавр"));
+        iBeamButton.setOnMouseExited(event -> statusLabel.setText(""));
+        tBeamButton.setOnMouseEntered(event -> statusLabel.setText("Тавр"));
+        tBeamButton.setOnMouseExited(event -> statusLabel.setText(""));
+        cBeamButton.setOnMouseEntered(event -> statusLabel.setText("Швеллер"));
+        cBeamButton.setOnMouseExited(event -> statusLabel.setText(""));
+        oBeamButton.setOnMouseEntered(event -> statusLabel.setText("Брус"));
+        oBeamButton.setOnMouseExited(event -> statusLabel.setText(""));
+
+        qView.setOnMouseEntered(event -> statusLabel.setText("Эпюра продольных сил"));
+        qView.setOnMouseExited(event -> statusLabel.setText(""));
+        nView.setOnMouseEntered(event -> statusLabel.setText("Эпюра поперечных сил"));
+        nView.setOnMouseExited(event -> statusLabel.setText(""));
+        mView.setOnMouseEntered(event -> statusLabel.setText("Эпюра изгибающего момента"));
+        mView.setOnMouseExited(event -> statusLabel.setText(""));
+        tableView.setOnMouseEntered(event -> statusLabel.setText("Таблица результатов"));
+        tableView.setOnMouseExited(event -> statusLabel.setText(""));
+
+        checkModelButton.setOnMouseEntered(event -> statusLabel.setText("Проверка модели"));
+        checkModelButton.setOnMouseExited(event -> statusLabel.setText(""));
+        calculationResultButton.setOnMouseEntered(event -> statusLabel.setText("Результат"));
+        calculationResultButton.setOnMouseExited(event -> statusLabel.setText(""));
+
+        vForceButton.setOnMouseEntered(event -> statusLabel.setText("Вертикальная нагрузка (H)"));
+        vForceButton.setOnMouseExited(event -> statusLabel.setText(""));
+        hForceButton.setOnMouseEntered(event -> statusLabel.setText("Горизонтальная нарузка (H)"));
+        hForceButton.setOnMouseExited(event -> statusLabel.setText(""));
+        mForceButton.setOnMouseEntered(event -> statusLabel.setText("Изгибающий момент (H*м)"));
+        mForceButton.setOnMouseExited(event -> statusLabel.setText(""));
+
+        woodButton.setOnMouseEntered(event -> statusLabel.setText("Дерево"));
+        woodButton.setOnMouseExited(event -> statusLabel.setText(""));
+        steelButton.setOnMouseEntered(event -> statusLabel.setText("Металл"));
+        steelButton.setOnMouseExited(event -> statusLabel.setText(""));
     }
 
     public void drawOn(ActionEvent actionEvent) {
@@ -695,5 +792,65 @@ public class Controller implements Initializable {
 
     public Button getCalculateButton() {
         return calculateButton;
+    }
+
+    public Label getCalculationResultLabel() {
+        return calculationResultLabel;
+    }
+
+    public ToggleButton getTableView() {
+        return tableView;
+    }
+
+    public TableView getResultTable() {
+        return resultTable;
+    }
+
+    public TableColumn<Result, String> getIdColumn() {
+        return idColumn;
+    }
+
+    public TableColumn<Result, Number> getN1Column() {
+        return n1Column;
+    }
+
+    public TableColumn<Result, Number> getQ1Column() {
+        return q1Column;
+    }
+
+    public TableColumn<Result, Number> getM1Column() {
+        return m1Column;
+    }
+
+    public TableColumn<Result, Number> getQ2Column() {
+        return q2Column;
+    }
+
+    public TableColumn<Result, Number> getN2Column() {
+        return n2Column;
+    }
+
+    public TableColumn<Result, Number> getM2Column() {
+        return m2Column;
+    }
+
+    public Pane getResultPane() {
+        return resultPane;
+    }
+
+    public ToggleButton getCalculationResultButton() {
+        return calculationResultButton;
+    }
+
+    public ToggleButton getnView() {
+        return nView;
+    }
+
+    public ToggleButton getqView() {
+        return qView;
+    }
+
+    public ToggleButton getmView() {
+        return mView;
     }
 }

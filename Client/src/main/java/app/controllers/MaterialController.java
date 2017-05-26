@@ -2,10 +2,14 @@ package app.controllers;
 
 import app.Controller;
 import app.interfaces.Controllable;
+import app.model.ArrayOfCut;
 import app.model.ArrayOfMaterial;
 import app.model.Material;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -16,6 +20,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  * Created by APodshivalov on 26.04.2017.
@@ -53,13 +58,22 @@ public class MaterialController implements Controllable {
         if(wood.isSelected() || steel.isSelected()){
             Client client = controller.getClient();
             WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/material/" + material);
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
-            ArrayOfMaterial pojo = webResource
+            ClientResponse pojo = webResource
                     .header("sessionId", controller.getCurrentUser().getSessionId())
                     .accept(MediaType.APPLICATION_JSON)
-                    .get(ArrayOfMaterial.class);
+                    .get(ClientResponse.class);
 
-            materialComboBox.getItems().setAll(pojo.getItem());
+            ArrayOfMaterial arrayOfMaterial = new ArrayOfMaterial();
+
+            try {
+                arrayOfMaterial = objectMapper.readValue(pojo.getEntityInputStream(), ArrayOfMaterial.class);
+            } catch (IOException ignored) {
+            }
+
+            materialComboBox.getItems().setAll(arrayOfMaterial.getItem());
         }
     }
 

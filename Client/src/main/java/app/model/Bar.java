@@ -6,6 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.util.UUID;
+
 /**
  * Created by podsh on 08.04.2017.
  */
@@ -18,6 +20,7 @@ public class Bar {
     private boolean isSelected;
 
     public Bar(Point first, Point second) {
+        this.id = UUID.randomUUID().toString();
         this.firstPoint = first;
         this.secondPoint = second;
         isSelected = false;
@@ -27,7 +30,6 @@ public class Bar {
     }
 
     public void draw(Controller controller) {
-
         CoordinateUtils utils = controller.getCoordinateUtils();
         GraphicsContext gc = controller.getCanvas().getGraphicsContext2D();
         if (isSelected) {
@@ -57,9 +59,9 @@ public class Bar {
         gc.setFill(Color.BLACK);
         gc.fillRect(xx, yy, width + 8, 28);
         gc.setFill(Color.WHITE);
-        gc.fillRect(xx+1, yy+1, width + 6, 26);
+        gc.fillRect(xx + 1, yy + 1, width + 6, 26);
         gc.setStroke(Color.BLACK);
-        gc.strokeText(shortName, xx+4, yy+18);
+        gc.strokeText(shortName, xx + 4, yy + 18);
         gc.setFill(Color.BLACK);
     }
 
@@ -140,5 +142,9 @@ public class Bar {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public double getLength() {
+        return Math.sqrt(Math.pow(firstPoint.getX() - secondPoint.getX(), 2) + Math.pow(firstPoint.getY() - secondPoint.getY(), 2));
     }
 }

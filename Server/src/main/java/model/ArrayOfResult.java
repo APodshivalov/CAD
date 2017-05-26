@@ -7,26 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by podsh on 09.05.2017.
+ * Created by podsh on 24.05.2017.
  */
-@XmlRootElement(name = "arrayOfProjectInfo")
+@XmlRootElement(name = "arrayOfResult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
         "item"
 })
-public class ArrayOfProjectInfo {
+public class ArrayOfResult {
     @XmlElement
-    private List<ProjectInfo> item;
+    private List<Result> item;
 
-    public ArrayOfProjectInfo() {
+    public ArrayOfResult() {
         item = new ArrayList<>();
     }
 
-    public List<ProjectInfo> getItem() {
+    public List<Result> getItem() {
         return item;
     }
 
-    public void setItem(List<ProjectInfo> item) {
+    public void setItem(List<Result> item) {
         this.item = item;
+    }
+
+    public void add(Result result) {
+        item.add(result);
     }
 }

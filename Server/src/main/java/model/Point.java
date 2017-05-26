@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
         "id",
-        "nativeId",
         "x",
         "y",
         "force",
@@ -18,8 +17,6 @@ import javax.xml.bind.annotation.*;
 public class Point {
     @XmlElement
     private String id;
-    @XmlElement
-    private String nativeId;
     @XmlElement
     private double x;
     @XmlElement
@@ -69,12 +66,17 @@ public class Point {
         this.reaction = reaction;
     }
 
-    public String getNativeId() {
-        return nativeId;
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
 
-    public void setNativeId(String nativeId) {
-        this.nativeId = nativeId;
+        if (obj instanceof Point) {
+            Point other = (Point) obj;
+            if (this.getId().equals(other.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

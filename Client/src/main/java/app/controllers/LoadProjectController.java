@@ -3,7 +3,11 @@ package app.controllers;
 import app.Controller;
 import app.interfaces.Controllable;
 import app.model.*;
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
@@ -19,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  * Created by podsh on 09.05.2017.
@@ -30,7 +35,7 @@ public class LoadProjectController implements Controllable {
     private Pane loadPane;
     private Label loadLabel;
 
-    public LoadProjectController(Controller controller){
+    public LoadProjectController(Controller controller) {
         this.controller = controller;
         projectInfoComboBox = controller.getProjectsComboBox();
         loadButton = controller.getLoadProjectInfoButton();
@@ -41,44 +46,41 @@ public class LoadProjectController implements Controllable {
     }
 
     private void loadProjectFromCloud(ProjectInfo value) {
-        if (value != null){
+        if (value != null) {
             Client client = controller.getClient();
             WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/load");
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
-            ClientResponse response;
+            Project project = new Project();
+
             try {
-                response = webResource
+                ClientResponse response = webResource
                         .entity(value)
                         .accept(MediaType.APPLICATION_JSON)
                         .post(ClientResponse.class);
+                project = objectMapper.readValue(response.getEntityInputStream(), Project.class);
             } catch (ClientHandlerException e) {
                 loadLabel.setTextFill(Color.web("#76323F"));
                 loadLabel.setText("Сервис недоступен");
                 return;
-            }
-
-            if (response.getStatus() == 200) {
-                loadLabel.setTextFill(Color.web("#116611"));
-                loadLabel.setText("Проект загружен");
-            }
-
-            if (response.getStatus() == 500) {
+            } catch (IOException e) {
                 loadLabel.setTextFill(Color.web("#76323F"));
-                loadLabel.setText("Внутренняя ошибка сервера");
+                loadLabel.setText("Ошибка");
             }
 
-            Project project = response.getEntity(Project.class);
+            loadLabel.setTextFill(Color.web("#116611"));
+            loadLabel.setText("Проект загружен");
+
             Model model = controller.getModel();
             model.clear();
             model.getProject().setProjectInfo(project.getProjectInfo());
-            for (Bar bar: project.getBars()) {
+            for (Bar bar : project.getBars()) {
                 bar.setCut(model.getArrayOfCut().getCutFromArrayOfCuts(bar.getCut()));
                 bar.setMaterial(model.getArrayOfMaterial().getMaterialFromArrayOfMaterials(bar.getMaterial()));
                 model.addPoint(bar.getFirstPoint());
                 model.addPoint(bar.getSecondPoint());
                 model.getProject().add(bar);
-                //model.getArrayOfMaterial().add(bar.getMaterial());
-                //model.getArrayOfCut().add(bar.getCut());
                 model.setCurrentCut(bar.getCut());
                 model.setCurrentMaterial(bar.getMaterial());
             }
@@ -90,18 +92,26 @@ public class LoadProjectController implements Controllable {
     private void loadFromCloud(String sessionId) {
         Client client = controller.getClient();
         WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/projectNames");
+        ObjectMapper objectMapper = new ObjectMapper()
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
-        ArrayOfProjectInfo pojo;
+        ArrayOfProjectInfo pojo = new ArrayOfProjectInfo();
 
         try {
-            pojo = webResource
+            ClientResponse response = webResource
                     .header("sessionId", sessionId)
                     .accept(MediaType.APPLICATION_JSON)
-                    .get(ArrayOfProjectInfo.class);
+                    .get(ClientResponse.class);
+
+            pojo = objectMapper.readValue(response.getEntityInputStream(), ArrayOfProjectInfo.class);
+
         } catch (ClientHandlerException e) {
             loadLabel.setTextFill(Color.web("#76323F"));
             loadLabel.setText("Сервис недоступен");
             return;
+        } catch (IOException e) {
+            loadLabel.setTextFill(Color.web("#76323F"));
+            loadLabel.setText("Ошибка");
         }
 
         projectInfoComboBox.getItems().setAll(pojo.getItem());
@@ -125,7 +135,7 @@ public class LoadProjectController implements Controllable {
     @Override
     public void disable() {
         controller.deactivatePane(loadPane);
-        projectInfoComboBox.getItems().clear();
+        loadLabel.setText("");
     }
 
     @Override

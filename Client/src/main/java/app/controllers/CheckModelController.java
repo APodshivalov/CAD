@@ -2,12 +2,26 @@ package app.controllers;
 
 import app.Controller;
 import app.interfaces.Controllable;
+import app.model.ArrayOfResult;
 import app.model.Model;
+import app.model.Project;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandlerException;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  * Created by podsh on 21.05.2017.
@@ -16,6 +30,8 @@ public class CheckModelController implements Controllable {
     private Controller controller;
     private Pane checkPane;
     private Button checkModelRefreshButton;
+    private ToggleButton calculationResultButton;
+    private Label calculationResultLabel;
     private Label checkFreePointsLabel;
     private Label checkMaterialLabel;
     private Label checkCutLabel;
@@ -34,6 +50,37 @@ public class CheckModelController implements Controllable {
         checkForceLabel = controller.getCheckForceLabel();
         checkReactionLabel = controller.getCheckReactionLabel();
         calculateButton = controller.getCalculateButton();
+        calculateButton.setOnAction(event -> calculateInCloud());
+        calculationResultLabel = controller.getCalculationResultLabel();
+        calculationResultButton = controller.getCalculationResultButton();
+    }
+
+    private void calculateInCloud() {
+        Client client = controller.getClient();
+        WebResource webResource = client.resource("http://" + Controller.host + ":8080/Server-1.0/calculate");
+        ObjectMapper objectMapper = new ObjectMapper()
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        ArrayOfResult arrayOfResult = new ArrayOfResult();
+        try {
+            ClientResponse response = webResource
+                    .accept(MediaType.APPLICATION_JSON)
+                    .entity(controller.getModel().getProject())
+                    .header("sessionId", controller.getCurrentUser().getSessionId())
+                    .post(ClientResponse.class);
+            arrayOfResult = objectMapper.readValue(response.getEntityInputStream(), ArrayOfResult.class);
+        } catch (ClientHandlerException e) {
+            calculationResultLabel.setTextFill(Color.web("#76323F"));
+            calculationResultLabel.setText("Сервис недоступен");
+            return;
+        } catch (IOException e) {
+            calculationResultLabel.setTextFill(Color.web("#76323F"));
+            calculationResultLabel.setText("Ошибка");
+        }
+
+        calculationResultLabel.setTextFill(Color.web("#116611"));
+        calculationResultLabel.setText("Успешно");
+        calculationResultButton.setDisable(false);
+        controller.getModel().setResult(arrayOfResult);
     }
 
     private void checkModel() {
@@ -116,6 +163,7 @@ public class CheckModelController implements Controllable {
     @Override
     public void disable() {
         controller.deactivatePane(checkPane);
+        calculationResultLabel.setText("");
     }
 
     @Override

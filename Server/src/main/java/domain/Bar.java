@@ -13,8 +13,6 @@ import java.io.Serializable;
 @Entity
 public class Bar implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private Point firstPoint;

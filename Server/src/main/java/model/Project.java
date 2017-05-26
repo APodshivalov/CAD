@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;

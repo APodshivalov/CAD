@@ -13,8 +13,6 @@ import java.io.Serializable;
 @Entity
 public class Force implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private int x;
     private int y;
