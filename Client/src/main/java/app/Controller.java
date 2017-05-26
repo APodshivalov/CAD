@@ -6,11 +6,8 @@ import app.model.*;
 import app.utils.CoordinateUtils;
 import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,10 +18,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
-import javax.ws.rs.core.MediaType;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,7 +49,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Result, Number> m2Column;
     @FXML
-    private TableView resultTable;
+    private TableView<Result> resultTable;
     @FXML
     private ToggleButton tableView;
     @FXML
@@ -99,7 +93,7 @@ public class Controller implements Initializable {
     @FXML
     private Button loadProjectInfoButton;
     @FXML
-    private ComboBox projectsComboBox;
+    private ComboBox<ProjectInfo> projectsComboBox;
     @FXML
     private Pane loadProjectPane;
     @FXML
@@ -138,8 +132,6 @@ public class Controller implements Initializable {
     private Pane controlModelPanel;
     @FXML
     private ToggleButton calcButton;
-    @FXML
-    private AnchorPane menuFPane;
     @FXML
     private ToggleButton mForceButton;
     @FXML
@@ -185,7 +177,7 @@ public class Controller implements Initializable {
     @FXML
     private Button acceptMaterial;
     @FXML
-    private ComboBox materialComboBox;
+    private ComboBox<Material> materialComboBox;
     @FXML
     private ToggleButton steelButton;
     @FXML
@@ -268,6 +260,14 @@ public class Controller implements Initializable {
         materialView.setOnAction(event -> canvas.redraw());
         cutView.setOnAction(event -> canvas.redraw());
 
+        drawButton.setOnAction(event -> changeEventListener(drawButton, ControllerFactory.getDrawController(this)));
+        reactionSupportButton.setOnAction(event -> changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this)));
+        cutButton.setOnAction(event -> changeEventListener(cutButton, ControllerFactory.getCutController(this)));
+        materialButton.setOnAction(event -> changeEventListener(materialButton, ControllerFactory.getMaterialController(this)));
+        forceButton.setOnAction(event -> changeEventListener(forceButton, ControllerFactory.getForceController(this)));
+
+        net.setOnAction(event -> canvas.redraw());
+
         projectButton.setOnAction(event -> changeMenuButton());
         modelButton.setOnAction(event -> changeMenuButton());
         calcButton.setOnAction(event -> changeMenuButton());
@@ -329,6 +329,17 @@ public class Controller implements Initializable {
     }
 
     private void setLabelFill() {
+        drawButton.setOnMouseEntered(event -> statusLabel.setText("Стержни"));
+        drawButton.setOnMouseExited(event -> statusLabel.setText(""));
+        reactionSupportButton.setOnMouseEntered(event -> statusLabel.setText("Опоры"));
+        reactionSupportButton.setOnMouseExited(event -> statusLabel.setText(""));
+        cutButton.setOnMouseEntered(event -> statusLabel.setText("Поперечное сечение"));
+        cutButton.setOnMouseExited(event -> statusLabel.setText(""));
+        materialButton.setOnMouseEntered(event -> statusLabel.setText("Материалы"));
+        materialButton.setOnMouseExited(event -> statusLabel.setText(""));
+        forceButton.setOnMouseEntered(event -> statusLabel.setText("Нагрузки"));
+        forceButton.setOnMouseExited(event -> statusLabel.setText(""));
+
         authorizationButton.setOnMouseEntered(event -> statusLabel.setText("Авторизация"));
         authorizationButton.setOnMouseExited(event -> statusLabel.setText(""));
         newProjectButton.setOnMouseEntered(event -> statusLabel.setText("Новый прокт"));
@@ -374,30 +385,6 @@ public class Controller implements Initializable {
         steelButton.setOnMouseExited(event -> statusLabel.setText(""));
     }
 
-    public void drawOn(ActionEvent actionEvent) {
-        changeEventListener(drawButton, ControllerFactory.getDrawController(this));
-    }
-
-    public void reactionSupportOn(ActionEvent actionEvent) {
-        changeEventListener(reactionSupportButton, ControllerFactory.getReactionSupportController(this));
-    }
-
-    public void cutButtonOn(ActionEvent actionEvent) {
-        changeEventListener(cutButton, ControllerFactory.getCutController(this));
-    }
-
-    public void materialButtonOn(ActionEvent actionEvent) {
-        changeEventListener(materialButton, ControllerFactory.getMaterialController(this));
-    }
-
-    public void onForceButtonOn(ActionEvent actionEvent) {
-        changeEventListener(forceButton, ControllerFactory.getForceController(this));
-    }
-
-    public void clearEventListener() {
-        changeEventListener(null, ControllerFactory.getEmpty());
-    }
-
     private void changeEventListener(ToggleButton toggleButton, Controllable eventListener) {
         currentEventListener.disable();
         if (toggleButton != null && toggleButton.isSelected()) {
@@ -407,46 +394,6 @@ public class Controller implements Initializable {
             currentEventListener = ControllerFactory.getEmpty();
         }
         canvas.redraw();
-    }
-
-    public void onMouseEnteredDraw(MouseEvent mouseEvent) {
-        statusLabel.setText("Рисование");
-    }
-
-    public void onMouseExitedDraw(MouseEvent mouseEvent) {
-        statusLabel.setText("");
-    }
-
-    public void onMouseEnteredSupport(MouseEvent mouseEvent) {
-        statusLabel.setText("Опоры");
-    }
-
-    public void onMouseExitedSupport(MouseEvent mouseEvent) {
-        statusLabel.setText("");
-    }
-
-    public void onMouseEnteredMaterial(MouseEvent mouseEvent) {
-        statusLabel.setText("Материалы");
-    }
-
-    public void onMouseExitedMaterial(MouseEvent mouseEvent) {
-        statusLabel.setText("");
-    }
-
-    public void onMouseEnteredForce(MouseEvent mouseEvent) {
-        statusLabel.setText("Нагрузки");
-    }
-
-    public void onMouseExitedForce(MouseEvent mouseEvent) {
-        statusLabel.setText("");
-    }
-
-    public void onMouseEnteredSection(MouseEvent mouseEvent) {
-        statusLabel.setText("Поперечное сечение стержня");
-    }
-
-    public void onMouseExitedSection(MouseEvent mouseEvent) {
-        statusLabel.setText("");
     }
 
     public void onMouseClickedOverCanvas(MouseEvent mouseEvent) {
@@ -467,7 +414,7 @@ public class Controller implements Initializable {
         cutView.setLayoutX(statusBar.getWidth() - 361);
     }
 
-    public AnchorPane getCanvasPane() {
+    AnchorPane getCanvasPane() {
         return canvasPane;
     }
 
@@ -491,7 +438,7 @@ public class Controller implements Initializable {
         return coordinateUtils;
     }
 
-    public void onMouseDrag(MouseEvent mouseEvent) {
+    void onMouseDrag(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.PRIMARY
                 && currentEventListener != ControllerFactory.getDrawController(this)) {
             double x = Math.min(coordinateUtils.getX(), mouseEvent.getX());
@@ -512,24 +459,20 @@ public class Controller implements Initializable {
         }
     }
 
-    public void onMouseReleased(MouseEvent mouseEvent) {
+    void onMouseReleased(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.MIDDLE) {
             coordinateUtils.onMouseReleased();
         }
         canvas.redraw();
     }
 
-    public void onScroll(ScrollEvent scrollEvent) {
+    void onScroll(ScrollEvent scrollEvent) {
         if (scrollEvent.getDeltaY() < 0) {
             coordinateUtils.prevScale();
         } else {
             coordinateUtils.nextScale();
         }
         scaleLabel.setText(coordinateUtils.getScale());
-        canvas.redraw();
-    }
-
-    public void onNetAction(ActionEvent actionEvent) {
         canvas.redraw();
     }
 
@@ -557,10 +500,6 @@ public class Controller implements Initializable {
         statusLabel.setText(s);
     }
 
-    public Label getStatusLabel() {
-        return statusLabel;
-    }
-
     public Pane getMaterialPane() {
         return materialPane;
     }
@@ -573,7 +512,7 @@ public class Controller implements Initializable {
         return steelButton;
     }
 
-    public ComboBox getMaterialComboBox() {
+    public ComboBox<Material> getMaterialComboBox() {
         return materialComboBox;
     }
 
@@ -685,18 +624,6 @@ public class Controller implements Initializable {
         return passwordField;
     }
 
-    public ToggleButton getNewProjectButton() {
-        return newProjectButton;
-    }
-
-    public ToggleButton getSaveProjectButton() {
-        return saveProjectButton;
-    }
-
-    public ToggleButton getLoadProjectButton() {
-        return loadProjectButton;
-    }
-
     public void setCurrentUser(User pojo) {
         currentUser = pojo;
     }
@@ -717,7 +644,7 @@ public class Controller implements Initializable {
         return createProjectButton;
     }
 
-    public ComboBox getProjectsComboBox() {
+    public ComboBox<ProjectInfo> getProjectsComboBox() {
         return projectsComboBox;
     }
 
@@ -745,9 +672,12 @@ public class Controller implements Initializable {
         return loadLabel;
     }
 
-    public void setTabsDisable(boolean b) {
-        modelButton.setDisable(b);
-        calcButton.setDisable(b);
+    public ToggleButton getModelButton() {
+        return modelButton;
+    }
+
+    public ToggleButton getCalcButton() {
+        return calcButton;
     }
 
     public Label getLoginLabel() {
@@ -786,10 +716,6 @@ public class Controller implements Initializable {
         return checkReactionLabel;
     }
 
-    public ToggleGroup getCalcGroup() {
-        return calcGroup;
-    }
-
     public Button getCalculateButton() {
         return calculateButton;
     }
@@ -802,7 +728,7 @@ public class Controller implements Initializable {
         return tableView;
     }
 
-    public TableView getResultTable() {
+    public TableView<Result> getResultTable() {
         return resultTable;
     }
 

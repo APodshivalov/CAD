@@ -2,17 +2,13 @@ package app.controllers;
 
 import app.Controller;
 import app.interfaces.Controllable;
-import app.model.ArrayOfCut;
 import app.model.ArrayOfMaterial;
 import app.model.Material;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
@@ -29,13 +25,12 @@ public class MaterialController implements Controllable {
     private Controller controller;
     private ToggleButton wood;
     private ToggleButton steel;
-    private Button acceptMaterial;
     private ComboBox<Material> materialComboBox;
 
-    public MaterialController(Controller controller) {
+    MaterialController(Controller controller) {
         this.controller = controller;
 
-        acceptMaterial = controller.getAcceptMaterial();
+        Button acceptMaterial = controller.getAcceptMaterial();
         acceptMaterial.setOnAction(event -> setNewMaterial());
 
         wood = controller.getWoodButton();

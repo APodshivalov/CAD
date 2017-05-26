@@ -8,7 +8,6 @@ import app.model.Point;
 import app.utils.CoordinateUtils;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -26,7 +25,7 @@ public class DrawController implements Controllable {
     private Model model;
     private Point firstPoint;
 
-    public DrawController(Controller controller) {
+    DrawController(Controller controller) {
         this.controller = controller;
         gc = controller.getCanvas().getGraphicsContext2D();
         utils = controller.getCoordinateUtils();
@@ -86,7 +85,7 @@ public class DrawController implements Controllable {
             drawOrto(mouseEvent);
         }
         if (controller.getNet().isSelected()) {
-            drawNet(mouseEvent);
+            drawNet();
         }
         // Перерисовка модели
         controller.getCanvas().redraw();
@@ -105,14 +104,14 @@ public class DrawController implements Controllable {
             this.drawCursor();
     }
 
-    private void drawNet(MouseEvent mouseEvent) {
+    private void drawNet() {
         double x = utils.toRealX() % 100;
         double y = utils.toRealY() % 100;
         utils.setX(utils.fromRealX(utils.toRealX(utils.getX()) - x));
         utils.setY(utils.fromRealY(utils.toRealY(utils.getY()) - y));
     }
 
-    public void drawDots() {
+    private void drawDots() {
         gc.setStroke(Color.BLACK);
         double x = utils.toRealX(0);
         x = utils.fromRealX(x - x%100);
@@ -135,7 +134,7 @@ public class DrawController implements Controllable {
         }
     }
 
-    public void drawCursor() {
+    private void drawCursor() {
         double x = utils.getX();
         double y = utils.getY();
         gc.setStroke(Color.BLACK);

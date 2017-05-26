@@ -20,7 +20,7 @@ public class ForceController implements Controllable {
     private ToggleButton mForceButton;
     private Force currentForce;
 
-    public ForceController(Controller controller) {
+    ForceController(Controller controller) {
         this.controller = controller;
 
         textField = controller.getForceTextInput();

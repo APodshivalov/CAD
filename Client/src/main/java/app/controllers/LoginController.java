@@ -77,7 +77,8 @@ public class LoginController implements Controllable {
             loginLabel.setText("Вход выполнен");
         }
 
-        controller.setTabsDisable(false);
+        controller.getModelButton().setDisable(false);
+        controller.getCalcButton().setDisable(false);
         controller.getUserLabel().setText(pojo.getFirstName() + " " + pojo.getLastName());
         controller.setCurrentUser(pojo);
     }

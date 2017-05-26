@@ -7,12 +7,9 @@ import app.model.ArrayOfCut;
 import app.model.Cut;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +35,7 @@ public class CutController implements Controllable {
     private Label bProperty;
     private Label tProperty;
 
-    public CutController(Controller controller) {
+    CutController(Controller controller) {
         this.controller = controller;
         bigImage = controller.getBigBeamImage();
         cutComboBox = controller.getCutComboBox();

@@ -3,13 +3,10 @@ package app.controllers;
 import app.Controller;
 import app.interfaces.Controllable;
 import app.model.ProjectInfo;
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -27,7 +24,7 @@ public class CreateProjectController implements Controllable {
     private Button createProjectButton;
 
 
-    public CreateProjectController(Controller controller) {
+    CreateProjectController(Controller controller) {
         this.controller = controller;
         createProjectPane = controller.getNewProjectPane();
         createProjectButton = controller.getCreateProjectButton();

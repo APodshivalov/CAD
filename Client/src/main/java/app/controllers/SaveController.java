@@ -2,13 +2,10 @@ package app.controllers;
 
 import app.Controller;
 import app.interfaces.Controllable;
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -23,13 +20,12 @@ import javax.ws.rs.core.MediaType;
 public class SaveController implements Controllable {
     private Controller controller;
     private Pane savePane;
-    private Button saveButton;
     private Label saveLabel;
 
-    public SaveController(Controller controller){
+    SaveController(Controller controller){
         this.controller = controller;
         savePane = controller.getSavePane();
-        saveButton = controller.getSaveButton();
+        Button saveButton = controller.getSaveButton();
         saveLabel = controller.getSaveLabel();
         saveButton.setOnAction(event -> save());
     }

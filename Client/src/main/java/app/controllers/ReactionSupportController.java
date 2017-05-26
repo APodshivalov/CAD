@@ -1,14 +1,12 @@
 package app.controllers;
 
 import app.Controller;
-import app.ImageFactory;
 import app.ReactionHelper;
 import app.interfaces.Controllable;
 import app.model.Model;
 import app.model.Point;
 import app.model.Reaction;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -23,7 +21,7 @@ public class ReactionSupportController implements Controllable {
     private ToggleButton reac4;
     private Reaction currentReaction;
 
-    public ReactionSupportController(Controller controller) {
+    ReactionSupportController(Controller controller) {
         this.controller = controller;
         model = controller.getModel();
         reac1 = controller.getReac1();

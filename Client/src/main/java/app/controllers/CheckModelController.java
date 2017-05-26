@@ -4,10 +4,7 @@ import app.Controller;
 import app.interfaces.Controllable;
 import app.model.ArrayOfResult;
 import app.model.Model;
-import app.model.Project;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -29,7 +26,6 @@ import java.io.IOException;
 public class CheckModelController implements Controllable {
     private Controller controller;
     private Pane checkPane;
-    private Button checkModelRefreshButton;
     private ToggleButton calculationResultButton;
     private Label calculationResultLabel;
     private Label checkFreePointsLabel;
@@ -39,10 +35,10 @@ public class CheckModelController implements Controllable {
     private Label checkReactionLabel;
     private Button calculateButton;
 
-    public CheckModelController(Controller controller) {
+    CheckModelController(Controller controller) {
         this.controller = controller;
         checkPane = controller.getCheckPane();
-        checkModelRefreshButton = controller.getCheckModelRefreshButton();
+        Button checkModelRefreshButton = controller.getCheckModelRefreshButton();
         checkModelRefreshButton.setOnAction(event -> checkModel());
         checkFreePointsLabel = controller.getCheckFreePointsLabel();
         checkMaterialLabel = controller.getCheckMaterialLabel();

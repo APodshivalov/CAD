@@ -35,7 +35,7 @@ public class LoadProjectController implements Controllable {
     private Pane loadPane;
     private Label loadLabel;
 
-    public LoadProjectController(Controller controller) {
+    LoadProjectController(Controller controller) {
         this.controller = controller;
         projectInfoComboBox = controller.getProjectsComboBox();
         loadButton = controller.getLoadProjectInfoButton();
