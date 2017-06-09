@@ -1,7 +1,5 @@
 package domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,7 +13,7 @@ public class Point implements Serializable {
     private double x;
     private double y;
     @OneToOne(cascade = {CascadeType.ALL})
-    private Force force;
+    private DomainForce force;
     @OneToOne(cascade = {CascadeType.ALL})
     private Reaction reaction;
 
@@ -43,11 +41,11 @@ public class Point implements Serializable {
         this.y = y;
     }
 
-    public Force getForce() {
+    public DomainForce getForce() {
         return force;
     }
 
-    public void setForce(Force force) {
+    public void setForce(DomainForce force) {
         this.force = force;
     }
 

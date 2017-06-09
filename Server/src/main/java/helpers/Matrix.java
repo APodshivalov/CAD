@@ -63,6 +63,7 @@ public class Matrix {
         rISh.set(1, 1, 12 * E * I / Math.pow(length, 3));
         rISh.set(1, 2, 6 * E * I / Math.pow(length, 2));
         rISh.set(1, 4, -12 * E * I / Math.pow(length, 3));
+        rISh.set(1, 5, 6 * E * I / Math.pow(length, 2));
 
         rISh.set(2, 2, 4 * E * I / length);
         rISh.set(2, 4, -6 * E * I / Math.pow(length, 2));
@@ -71,7 +72,7 @@ public class Matrix {
         rISh.set(3, 3, E * F / length);
 
         rISh.set(4, 4, 12 * E * I / Math.pow(length, 3));
-        rISh.set(4, 5, 6 * E * I / Math.pow(length, 2));
+        rISh.set(4, 5, - 6 * E * I / Math.pow(length, 2));
 
         rISh.set(5, 5, 4 * E * I / length);
 
@@ -132,7 +133,9 @@ public class Matrix {
     public double[] gaoss(double[] P) {
         double[] Z = new double[elements.length];
 
+        System.out.println("Gaoss method forward");
         for (int i = 0; i < height; i++) {
+            System.out.println(i + " line");
             double tmp = elements[i][i];
             for (int j = width - 1; j >= i; j--) elements[i][j] /= tmp;
             P[i] /= tmp;
@@ -145,7 +148,7 @@ public class Matrix {
                 P[j] -= tmp * P[i];
             }
         }
-
+        System.out.println("Gaoss method backward");
         Z[height - 1] = P[height - 1];
         for (int i = height - 2; i >= 0; i--) {
             Z[i] = P[i];
@@ -159,7 +162,7 @@ public class Matrix {
         double[] result = new double[height];
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                result[row]+= elements[row][column] * vector[column];
+                result[row] += elements[row][column] * vector[column];
             }
         }
         return result;

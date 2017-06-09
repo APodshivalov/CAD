@@ -22,10 +22,10 @@ public class MatrixPrinter {
     }
 
     public MatrixPrinter(PrintStream out, String asNull) {
-        if ( out == null ) {
+        if (out == null) {
             throw new IllegalArgumentException("No print stream provided");
         }
-        if ( asNull == null ) {
+        if (asNull == null) {
             throw new IllegalArgumentException("No NULL-value placeholder provided");
         }
         this.out = out;
@@ -33,10 +33,10 @@ public class MatrixPrinter {
     }
 
     public void print(double[][] table) {
-        if ( table == null ) {
+        if (table == null) {
             throw new IllegalArgumentException("No tabular data provided");
         }
-        if ( table.length == 0 ) {
+        if (table.length == 0) {
             return;
         }
         final int[] widths = new int[getMaxColumns(table)];
@@ -47,8 +47,8 @@ public class MatrixPrinter {
     private void printPreparedTable(double[][] table, int widths[], String horizontalBorder) {
         final int lineLength = horizontalBorder.length();
         out.println(horizontalBorder);
-        for ( final double[] row : table ) {
-            if ( row != null ) {
+        for (final double[] row : table) {
+            if (row != null) {
                 out.println(getRow(row, widths, lineLength));
                 out.println(horizontalBorder);
             }
@@ -58,7 +58,7 @@ public class MatrixPrinter {
     private String getRow(double[] row, int[] widths, int lineLength) {
         final StringBuilder builder = new StringBuilder(lineLength).append(VERTICAL_BORDER);
         final int maxWidths = widths.length;
-        for ( int i = 0; i < maxWidths; i++ ) {
+        for (int i = 0; i < maxWidths; i++) {
             builder.append(padRight(getCellValue(safeGet(row, i, null)), widths[i])).append(VERTICAL_BORDER);
         }
         return builder.toString();
@@ -67,8 +67,8 @@ public class MatrixPrinter {
     private String getHorizontalBorder(int[] widths) {
         final StringBuilder builder = new StringBuilder(256);
         builder.append(BORDER_KNOT);
-        for ( final int w : widths ) {
-            for ( int i = 0; i < w; i++ ) {
+        for (final int w : widths) {
+            for (int i = 0; i < w; i++) {
                 builder.append(HORIZONTAL_BORDER);
             }
             builder.append(BORDER_KNOT);
@@ -78,8 +78,8 @@ public class MatrixPrinter {
 
     private int getMaxColumns(double[][] rows) {
         int max = 0;
-        for ( final double[] row : rows ) {
-            if ( row != null && row.length > max ) {
+        for (final double[] row : rows) {
+            if (row != null && row.length > max) {
                 max = row.length;
             }
         }
@@ -87,12 +87,12 @@ public class MatrixPrinter {
     }
 
     private void adjustColumnWidths(double[][] rows, int[] widths) {
-        for ( final double[] row : rows ) {
-            if ( row != null ) {
-                for ( int c = 0; c < widths.length; c++ ) {
+        for (final double[] row : rows) {
+            if (row != null) {
+                for (int c = 0; c < widths.length; c++) {
                     final String cv = getCellValue(safeGet(row, c, asNull));
                     final int l = cv.length();
-                    if ( widths[c] < l ) {
+                    if (widths[c] < l) {
                         widths[c] = l;
                     }
                 }
@@ -105,7 +105,7 @@ public class MatrixPrinter {
     }
 
     private static String safeGet(double[] array, int index, String defaultValue) {
-        return index < array.length ? String.valueOf(array[index]) : defaultValue;
+        return index < array.length ? String.valueOf(Math.round(array[index] * 100) / 100.0) : defaultValue;
     }
 
     private String getCellValue(Object value) {

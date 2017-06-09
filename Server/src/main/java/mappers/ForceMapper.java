@@ -1,5 +1,6 @@
 package mappers;
 
+import domain.DomainForce;
 import model.Force;
 
 /**
@@ -7,8 +8,8 @@ import model.Force;
  */
 public class ForceMapper {
 
-    public static domain.Force map(Force force) {
-        domain.Force serverForce = new domain.Force();
+    public static DomainForce map(Force force) {
+        DomainForce serverForce = new DomainForce();
         serverForce.setId(force.getId());
         serverForce.setM(force.getM());
         serverForce.setX(force.getX());
@@ -16,12 +17,12 @@ public class ForceMapper {
         return serverForce;
     }
 
-    public static Force map(domain.Force serverForce) {
+    public static Force map(DomainForce serverForce) {
         Force clientForce = new Force();
         clientForce.setId(serverForce.getId());
-        clientForce.setM(serverForce.getM());
-        clientForce.setX(serverForce.getX());
-        clientForce.setY(serverForce.getY());
+        clientForce.setM((int)serverForce.getM());
+        clientForce.setX((int)serverForce.getX());
+        clientForce.setY((int)serverForce.getY());
         return clientForce;
     }
 }

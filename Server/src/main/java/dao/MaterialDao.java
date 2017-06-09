@@ -27,4 +27,10 @@ public class MaterialDao {
 
         return material;
     }
+
+    public void save(Material material) {
+        Session session = SessionHelper.startTransaction();
+        session.save(material);
+        SessionHelper.endTransaction();
+    }
 }

@@ -12,6 +12,7 @@ import mappers.BarMapper;
 import mappers.ProjectInfoMapper;
 import model.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,26 +61,20 @@ public class ProjectFacade {
     }
 
     public ArrayOfResult calculate(Project project) {
-        save(project);
+        //save(project);
         return getResult(project.getBars());
     }
 
     private ArrayOfResult getResult(List<Bar> bars) {
+        long statrTime = System.currentTimeMillis();
         MatrixPrinter printer = new MatrixPrinter(System.out);
-        System.out.println("Getting model materials from server");
         List<domain.Material> materials = getMaterialsFromServer(bars);
-        System.out.println("And we get " + materials.size() + " materials");
-        System.out.println("Getting model cuts from server");
         List<domain.Cut> cuts = getCutsFromServer(bars);
-        System.out.println("And we get " + cuts.size() + " cuts");
 
         List<Point> points = projectHelper.getPoints(bars);
-        System.out.println("Calculation started");
-        System.out.println("model has: " + bars.size() + " bars and " + points.size() + " points.");
 
         Matrix RG = new Matrix(points.size() * 3, points.size() * 3);
         for (Bar bar : bars) {
-            System.out.println("Bar: " + bar);
 
             // Модуль Юнга
             double E = materials.stream()
@@ -100,19 +95,15 @@ public class ProjectFacade {
                     .getI();
 
             double length = bar.getLength();
-            System.out.println("Bar E: " + E + "");
-            System.out.println("Bar F: " + F);
-            System.out.println("Bar I: " + I);
-            System.out.println("Bar length: " + length);
 
             Matrix rISh = Matrix.getLocalStiffnessMatrix(E, F, I, length);
 
-            System.out.println("Local stiffness matrix: ");
+            System.out.println();
+            System.out.println(bars.indexOf(bar));
             printer.print(rISh);
+            System.out.println();
 
             Matrix v = Matrix.getRotationMatrix(bar);
-            System.out.println("Rotation matrix: ");
-            printer.print(v);
 
             Matrix ri = v.transponate().multiple(rISh).multiple(v);
 
@@ -178,10 +169,9 @@ public class ProjectFacade {
                 }
             }
         }
-        printer.print(RG);
+        System.out.println("RG size " + RG.getWidth() + "x" + RG.getHeight());
 
         double[] Z = RG.gaoss(P);
-
         ArrayOfResult arrayOfResult = new ArrayOfResult();
 
         for (Bar bar : bars) {
@@ -217,15 +207,19 @@ public class ProjectFacade {
 
             double[] Zish = Matrix.getRotationMatrix(bar).multiple(Zi);
 
+            System.out.println();
+            System.out.println(bars.indexOf(bar));
+            System.out.println();
+
             double[] rish = Matrix.getLocalStiffnessMatrix(E, F, I, length).multiple(Zish);
             Result result = new Result();
             result.setBarId(bar.getId());
-            result.setN1(Math.round(rish[0]*100)/100);
-            result.setQ1(Math.round(rish[1]*100)/100);
-            result.setM1(Math.round(-rish[2]*100)/100);
-            result.setN2(Math.round(rish[3]*100)/100);
-            result.setQ2(Math.round(-rish[4]*100)/100);
-            result.setM2(Math.round(rish[5]*100)/100);
+            result.setN1(Math.round(rish[0]*100)/100.0);
+            result.setQ1(Math.round(rish[1]*100)/100.0);
+            result.setM1(Math.round(-rish[2]*100)/100.0);
+            result.setN2(Math.round(rish[3]*100)/100.0);
+            result.setQ2(Math.round(-rish[4]*100)/100.0);
+            result.setM2(Math.round(rish[5]*100)/100.0);
 
             if (result.getN1() > 0 && result.getN2() < 0 || result.getN1() < 0 && result.getN2() > 0) {
                 result.setN1(-result.getN1());
@@ -233,6 +227,8 @@ public class ProjectFacade {
 
             arrayOfResult.add(result);
         }
+        long endTime = System.currentTimeMillis() - statrTime;
+        System.out.println("Total calc time: " + endTime);
         return arrayOfResult;
     }
 

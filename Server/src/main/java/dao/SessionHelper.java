@@ -9,10 +9,10 @@ import org.hibernate.cfg.Configuration;
  */
 public class SessionHelper {
     private static Session session;
+    private static SessionFactory  sessionFactory = new Configuration().configure()
+            .buildSessionFactory();
 
     public static Session startTransaction() {
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
         session = sessionFactory.openSession();
         session.beginTransaction();
         return session;

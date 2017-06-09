@@ -11,34 +11,34 @@ import java.io.Serializable;
  * Created by podsh on 07.05.2017.
  */
 @Entity
-public class Force implements Serializable {
+public class DomainForce implements Serializable {
     @Id
     private String id;
-    private int x;
-    private int y;
-    private int m;
+    private double x;
+    private double y;
+    private double m;
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getM() {
+    public double getM() {
         return m;
     }
 
-    public void setM(int m) {
+    public void setM(double m) {
         this.m = m;
     }
 

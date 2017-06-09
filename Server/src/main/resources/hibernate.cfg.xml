@@ -7,13 +7,13 @@
     <session-factory>
 
         <!-- Connection settings -->
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost/cad</property>
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">1</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cad</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1111</property>
 
         <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL91Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
 
         <!-- Print executed SQL to stdout -->
         <property name="show_sql">true</property>
@@ -27,7 +27,7 @@
         <mapping class="domain.Material"/>
         <mapping class="domain.Cut"/>
         <mapping class="domain.Bar"/>
-        <mapping class="domain.Force"/>
+        <mapping class="domain.DomainForce"/>
         <mapping class="domain.Point"/>
         <mapping class="domain.Reaction"/>
 

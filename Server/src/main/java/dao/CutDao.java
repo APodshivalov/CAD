@@ -12,7 +12,7 @@ import java.util.List;
 public class CutDao {
     public List<Cut> loadCutsByType(String type) {
         Session session = SessionHelper.startTransaction();
-        Query<Cut> query = session.createQuery("from Cut where type = :type", Cut.class);
+        Query<Cut> query = session.createQuery("from Cut where type = :type order by shortname", Cut.class);
         query.setParameter("type", type);
         List<Cut> list = query.list();
         SessionHelper.endTransaction();
@@ -25,5 +25,11 @@ public class CutDao {
         Cut cut = session.get(Cut.class, cutId);
         SessionHelper.endTransaction();
         return cut;
+    }
+
+    public void save(Cut cut) {
+        Session session = SessionHelper.startTransaction();
+        session.save(cut);
+        SessionHelper.endTransaction();
     }
 }

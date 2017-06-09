@@ -81,6 +81,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "(X: " + x + ", Y:" + y + " Reaction: " + reaction + " Force:" + force + ")" ;
+        return "(X: " + x + ", Y:" + y + " Reaction: " + reaction + " DomainForce:" + force + ")" ;
     }
 }

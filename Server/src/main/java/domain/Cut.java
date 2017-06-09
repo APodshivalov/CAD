@@ -107,7 +107,7 @@ public class Cut implements Serializable {
         this.i = i;
     }
 
-    public void setF(int f) {
+    public void setF(double f) {
         this.f = f;
     }
 
